@@ -11,7 +11,9 @@ class Mtnrwanda extends Controller {
 
             $request = file_get_contents('php://input');
             if (empty($request)) {
-                $this->view->render('index');
+              echo "Invalid Access";
+              echo "<br/>";
+              echo "<br/>";
             } else {
                 $standard_array = $this->model->InterpreteRequest($request);
                 $standard_array['operator'] = 'mtn_rw';
