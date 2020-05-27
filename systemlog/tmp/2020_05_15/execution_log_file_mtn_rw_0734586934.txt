@@ -1,0 +1,1974 @@
+[2020-05-15 17:50:10] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2020-05-15 17:50:10] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2020-05-15 17:50:10] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:50:10',
+  'session_id' => '124568010',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:50:10] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+    'text_fr' => '',
+    'text_kin' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+  ),
+)
+[2020-05-15 17:50:10] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2020-05-15 17:50:10] COREUSSD::External function call Call Result 1
+[2020-05-15 17:50:10] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:50:10] COREUSSD::ReplacePlaceHolders Fired for PK Platform
+1.Bus Booking
+2.My Account
+3.Exit With Data 1
+[2020-05-15 17:50:10] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568010</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>PK Platform&#13;
+1.Bus Booking&#13;
+2.My Account&#13;
+3.Exit</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:50:24] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:50:24] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '30',
+    'session_id' => '124568010',
+    'telephone_number' => '0734586934',
+    'previous_state' => NULL,
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:50:24] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 2
+[2020-05-15 17:50:24] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '12',
+    'ussd_state' => '1',
+    'ussd_choice' => '2',
+    'ussd_name' => 'Go to My Account Menu',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '11',
+  ),
+)
+[2020-05-15 17:50:24] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...11
+[2020-05-15 17:50:24] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => '11',
+)
+[2020-05-15 17:50:24] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:50:24',
+  'session_id' => '124568010',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:50:24] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '9',
+    'text_en' => 'My Account
+1. Change Language
+2. Go back',
+    'text_fr' => '',
+    'text_kin' => 'My Account
+1. Change Language
+2. Go back',
+  ),
+)
+[2020-05-15 17:50:24] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:50:24] COREUSSD::ReplacePlaceHolders Fired for My Account
+1. Change Language
+2. Go back With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568010',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 17:50:24] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568010</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>My Account&#13;
+1. Change Language&#13;
+2. Go back</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:51:48] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:51:48] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '30',
+    'session_id' => '124568010',
+    'telephone_number' => '0734586934',
+    'previous_state' => '1',
+    'current_state' => '11',
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:51:48] COREUSSD::MenuOptionHandler Serching For Option From 11 When User Choice Is 2
+[2020-05-15 17:51:48] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '11',
+    'ussd_state' => '11',
+    'ussd_choice' => '2',
+    'ussd_name' => 'Go back to Main Menu',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '1',
+  ),
+)
+[2020-05-15 17:51:48] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...1
+[2020-05-15 17:51:48] Model::SetCurrentState Post Data.array (
+  'previous_state' => '11',
+  'current_state' => '1',
+)
+[2020-05-15 17:51:48] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:51:48',
+  'session_id' => '124568010',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:51:48] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+    'text_fr' => '',
+    'text_kin' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+  ),
+)
+[2020-05-15 17:51:48] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2020-05-15 17:51:48] COREUSSD::External function call Call Result 1
+[2020-05-15 17:51:48] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:51:48] COREUSSD::ReplacePlaceHolders Fired for PK Platform
+1.Bus Booking
+2.My Account
+3.Exit With Data 1
+[2020-05-15 17:51:48] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568010</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>PK Platform&#13;
+1.Bus Booking&#13;
+2.My Account&#13;
+3.Exit</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:51:52] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:51:52] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '30',
+    'session_id' => '124568010',
+    'telephone_number' => '0734586934',
+    'previous_state' => '11',
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:51:52] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 2
+[2020-05-15 17:51:52] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '12',
+    'ussd_state' => '1',
+    'ussd_choice' => '2',
+    'ussd_name' => 'Go to My Account Menu',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '11',
+  ),
+)
+[2020-05-15 17:51:52] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...11
+[2020-05-15 17:51:52] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => '11',
+)
+[2020-05-15 17:51:52] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:51:52',
+  'session_id' => '124568010',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:51:52] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '9',
+    'text_en' => 'My Account
+1. Change Language
+2. Go back',
+    'text_fr' => '',
+    'text_kin' => 'My Account
+1. Change Language
+2. Go back',
+  ),
+)
+[2020-05-15 17:51:52] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:51:52] COREUSSD::ReplacePlaceHolders Fired for My Account
+1. Change Language
+2. Go back With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568010',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 17:51:52] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568010</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>My Account&#13;
+1. Change Language&#13;
+2. Go back</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:51:55] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:51:55] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '30',
+    'session_id' => '124568010',
+    'telephone_number' => '0734586934',
+    'previous_state' => '1',
+    'current_state' => '11',
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:51:55] COREUSSD::MenuOptionHandler Serching For Option From 11 When User Choice Is 1
+[2020-05-15 17:51:55] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '10',
+    'ussd_state' => '11',
+    'ussd_choice' => '1',
+    'ussd_name' => 'Go to Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '12',
+  ),
+)
+[2020-05-15 17:51:55] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...12
+[2020-05-15 17:51:55] Model::SetCurrentState Post Data.array (
+  'previous_state' => '11',
+  'current_state' => '12',
+)
+[2020-05-15 17:51:55] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:51:55',
+  'session_id' => '124568010',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:51:55] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '15',
+    'text_en' => 'Change Language
+1.Kinyarwanda
+2.English',
+    'text_fr' => '',
+    'text_kin' => 'Change Language
+1.Kinyarwanda
+2.English',
+  ),
+)
+[2020-05-15 17:51:55] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:51:55] COREUSSD::ReplacePlaceHolders Fired for Change Language
+1.Kinyarwanda
+2.English With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568010',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 17:51:55] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568010</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Change Language&#13;
+1.Kinyarwanda&#13;
+2.English</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:53:33] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:53:33] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '30',
+    'session_id' => '124568010',
+    'telephone_number' => '0734586934',
+    'previous_state' => '11',
+    'current_state' => '12',
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:53:33] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568010',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '30',
+  'session_id' => '124568010',
+  'telephone_number' => '0734586934',
+  'previous_state' => '11',
+  'current_state' => '12',
+  'state_id' => '12',
+  'state_type' => 'input',
+  'input_field_name' => 'laguange_select',
+  'state_title' => 'Change Language',
+  'fxn_call_flag' => '0',
+  'call_fxn_name' => '',
+  'state_indicator' => 'FC',
+)
+[2020-05-15 17:53:33] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-15 17:53:33',
+  'session_id' => '124568010',
+  'state_id' => '12',
+  'telephone_number' => '0734586934',
+  'input_name' => 'laguange_select',
+  'input_value' => '2',
+)
+[2020-05-15 17:53:34] COREUSSD::MenuOptionHandler Serching For Option From 12 When User Choice Is -1
+[2020-05-15 17:53:34] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '20',
+    'ussd_state' => '12',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Process Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '13',
+  ),
+)
+[2020-05-15 17:53:34] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...13
+[2020-05-15 17:53:34] Model::SetCurrentState Post Data.array (
+  'previous_state' => '12',
+  'current_state' => '13',
+)
+[2020-05-15 17:53:34] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:53:34',
+  'session_id' => '124568010',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:53:34] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '13',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Process Language Change Menu',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessLanguageChange ',
+    'state_indicator' => 'FC',
+    'record_id' => '16',
+    'text_en' => 'Language changed Successfully
+1. Continue
+2. Exit',
+    'text_fr' => '',
+    'text_kin' => 'Language changed Successfully
+1. Komeza
+2. Sokoka',
+  ),
+)
+[2020-05-15 17:53:34] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessLanguageChange 
+[2020-05-15 17:55:36] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2020-05-15 17:55:36] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2020-05-15 17:55:36] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:55:36',
+  'session_id' => '124568011',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:55:36] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+    'text_fr' => '',
+    'text_kin' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+  ),
+)
+[2020-05-15 17:55:36] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2020-05-15 17:55:36] COREUSSD::External function call Call Result 1
+[2020-05-15 17:55:36] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:55:36] COREUSSD::ReplacePlaceHolders Fired for PK Platform
+1.Bus Booking
+2.My Account
+3.Exit With Data 1
+[2020-05-15 17:55:36] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568011</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>PK Platform&#13;
+1.Bus Booking&#13;
+2.My Account&#13;
+3.Exit</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:55:39] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:55:39] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '31',
+    'session_id' => '124568011',
+    'telephone_number' => '0734586934',
+    'previous_state' => NULL,
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:55:39] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 2
+[2020-05-15 17:55:39] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '12',
+    'ussd_state' => '1',
+    'ussd_choice' => '2',
+    'ussd_name' => 'Go to My Account Menu',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '11',
+  ),
+)
+[2020-05-15 17:55:39] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...11
+[2020-05-15 17:55:39] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => '11',
+)
+[2020-05-15 17:55:40] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:55:40',
+  'session_id' => '124568011',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:55:40] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '9',
+    'text_en' => 'My Account
+1. Change Language
+2. Go back',
+    'text_fr' => '',
+    'text_kin' => 'My Account
+1. Change Language
+2. Go back',
+  ),
+)
+[2020-05-15 17:55:40] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:55:40] COREUSSD::ReplacePlaceHolders Fired for My Account
+1. Change Language
+2. Go back With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568011',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 17:55:40] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568011</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>My Account&#13;
+1. Change Language&#13;
+2. Go back</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:55:44] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:55:44] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '31',
+    'session_id' => '124568011',
+    'telephone_number' => '0734586934',
+    'previous_state' => '1',
+    'current_state' => '11',
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:55:44] COREUSSD::MenuOptionHandler Serching For Option From 11 When User Choice Is 1
+[2020-05-15 17:55:44] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '10',
+    'ussd_state' => '11',
+    'ussd_choice' => '1',
+    'ussd_name' => 'Go to Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '12',
+  ),
+)
+[2020-05-15 17:55:44] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...12
+[2020-05-15 17:55:44] Model::SetCurrentState Post Data.array (
+  'previous_state' => '11',
+  'current_state' => '12',
+)
+[2020-05-15 17:55:44] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:55:44',
+  'session_id' => '124568011',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:55:44] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '15',
+    'text_en' => 'Change Language
+1.Kinyarwanda
+2.English',
+    'text_fr' => '',
+    'text_kin' => 'Change Language
+1.Kinyarwanda
+2.English',
+  ),
+)
+[2020-05-15 17:55:44] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:55:44] COREUSSD::ReplacePlaceHolders Fired for Change Language
+1.Kinyarwanda
+2.English With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568011',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 17:55:44] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568011</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Change Language&#13;
+1.Kinyarwanda&#13;
+2.English</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:55:48] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:55:48] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '31',
+    'session_id' => '124568011',
+    'telephone_number' => '0734586934',
+    'previous_state' => '11',
+    'current_state' => '12',
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:55:48] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568011',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '31',
+  'session_id' => '124568011',
+  'telephone_number' => '0734586934',
+  'previous_state' => '11',
+  'current_state' => '12',
+  'state_id' => '12',
+  'state_type' => 'input',
+  'input_field_name' => 'laguange_select',
+  'state_title' => 'Change Language',
+  'fxn_call_flag' => '0',
+  'call_fxn_name' => '',
+  'state_indicator' => 'FC',
+)
+[2020-05-15 17:55:48] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-15 17:55:48',
+  'session_id' => '124568011',
+  'state_id' => '12',
+  'telephone_number' => '0734586934',
+  'input_name' => 'laguange_select',
+  'input_value' => '2',
+)
+[2020-05-15 17:55:48] COREUSSD::MenuOptionHandler Serching For Option From 12 When User Choice Is -1
+[2020-05-15 17:55:48] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '20',
+    'ussd_state' => '12',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Process Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '13',
+  ),
+)
+[2020-05-15 17:55:48] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...13
+[2020-05-15 17:55:48] Model::SetCurrentState Post Data.array (
+  'previous_state' => '12',
+  'current_state' => '13',
+)
+[2020-05-15 17:55:48] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:55:48',
+  'session_id' => '124568011',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:55:48] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '13',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Process Language Change Menu',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessLanguageChange',
+    'state_indicator' => 'FC',
+    'record_id' => '16',
+    'text_en' => 'Language changed Successfully
+1. Continue
+2. Exit',
+    'text_fr' => '',
+    'text_kin' => 'Language changed Successfully
+1. Komeza
+2. Sokoka',
+  ),
+)
+[2020-05-15 17:55:48] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessLanguageChange
+[2020-05-15 17:56:34] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2020-05-15 17:56:34] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2020-05-15 17:56:34] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:56:34',
+  'session_id' => '124568012',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:56:34] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+    'text_fr' => '',
+    'text_kin' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+  ),
+)
+[2020-05-15 17:56:34] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2020-05-15 17:56:34] COREUSSD::External function call Call Result 1
+[2020-05-15 17:56:34] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:56:34] COREUSSD::ReplacePlaceHolders Fired for PK Platform
+1.Bus Booking
+2.My Account
+3.Exit With Data 1
+[2020-05-15 17:56:34] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568012</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>PK Platform&#13;
+1.Bus Booking&#13;
+2.My Account&#13;
+3.Exit</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:56:42] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:56:42] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '32',
+    'session_id' => '124568012',
+    'telephone_number' => '0734586934',
+    'previous_state' => NULL,
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:56:42] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 2
+[2020-05-15 17:56:42] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '12',
+    'ussd_state' => '1',
+    'ussd_choice' => '2',
+    'ussd_name' => 'Go to My Account Menu',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '11',
+  ),
+)
+[2020-05-15 17:56:42] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...11
+[2020-05-15 17:56:42] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => '11',
+)
+[2020-05-15 17:56:43] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:56:43',
+  'session_id' => '124568012',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:56:43] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '9',
+    'text_en' => 'My Account
+1. Change Language
+2. Go back',
+    'text_fr' => '',
+    'text_kin' => 'My Account
+1. Change Language
+2. Go back',
+  ),
+)
+[2020-05-15 17:56:43] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:56:43] COREUSSD::ReplacePlaceHolders Fired for My Account
+1. Change Language
+2. Go back With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568012',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 17:56:43] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568012</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>My Account&#13;
+1. Change Language&#13;
+2. Go back</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:57:41] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:57:41] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '32',
+    'session_id' => '124568012',
+    'telephone_number' => '0734586934',
+    'previous_state' => '1',
+    'current_state' => '11',
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:57:41] COREUSSD::MenuOptionHandler Serching For Option From 11 When User Choice Is 1
+[2020-05-15 17:57:41] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '10',
+    'ussd_state' => '11',
+    'ussd_choice' => '1',
+    'ussd_name' => 'Go to Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '12',
+  ),
+)
+[2020-05-15 17:57:41] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...12
+[2020-05-15 17:57:41] Model::SetCurrentState Post Data.array (
+  'previous_state' => '11',
+  'current_state' => '12',
+)
+[2020-05-15 17:57:41] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:57:41',
+  'session_id' => '124568012',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:57:41] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '15',
+    'text_en' => 'Change Language
+1.Kinyarwanda
+2.English',
+    'text_fr' => '',
+    'text_kin' => 'Change Language
+1.Kinyarwanda
+2.English',
+  ),
+)
+[2020-05-15 17:57:41] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:57:41] COREUSSD::ReplacePlaceHolders Fired for Change Language
+1.Kinyarwanda
+2.English With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568012',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 17:57:41] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568012</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Change Language&#13;
+1.Kinyarwanda&#13;
+2.English</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:58:32] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:58:32] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '32',
+    'session_id' => '124568012',
+    'telephone_number' => '0734586934',
+    'previous_state' => '11',
+    'current_state' => '12',
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:58:32] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568012',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '32',
+  'session_id' => '124568012',
+  'telephone_number' => '0734586934',
+  'previous_state' => '11',
+  'current_state' => '12',
+  'state_id' => '12',
+  'state_type' => 'input',
+  'input_field_name' => 'laguange_select',
+  'state_title' => 'Change Language',
+  'fxn_call_flag' => '0',
+  'call_fxn_name' => '',
+  'state_indicator' => 'FC',
+)
+[2020-05-15 17:58:32] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-15 17:58:32',
+  'session_id' => '124568012',
+  'state_id' => '12',
+  'telephone_number' => '0734586934',
+  'input_name' => 'laguange_select',
+  'input_value' => '1',
+)
+[2020-05-15 17:58:32] COREUSSD::MenuOptionHandler Serching For Option From 12 When User Choice Is -1
+[2020-05-15 17:58:32] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '20',
+    'ussd_state' => '12',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Process Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '13',
+  ),
+)
+[2020-05-15 17:58:32] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...13
+[2020-05-15 17:58:32] Model::SetCurrentState Post Data.array (
+  'previous_state' => '12',
+  'current_state' => '13',
+)
+[2020-05-15 17:58:32] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:58:32',
+  'session_id' => '124568012',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:58:32] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '13',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Process Language Change Menu',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessLanguageChange',
+    'state_indicator' => 'FC',
+    'record_id' => '16',
+    'text_en' => 'Language changed Successfully
+1. Continue
+2. Exit',
+    'text_fr' => '',
+    'text_kin' => 'Language changed Successfully
+1. Komeza
+2. Sokoka',
+  ),
+)
+[2020-05-15 17:58:32] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessLanguageChange
+[2020-05-15 17:58:33] COREUSSD::External function call Call Result 1
+[2020-05-15 17:58:33] COREUSSD::MenuArray Session Language Is text_kin
+[2020-05-15 17:58:33] COREUSSD::ReplacePlaceHolders Fired for Language changed Successfully
+1. Komeza
+2. Sokoka With Data 1
+[2020-05-15 17:58:33] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568012</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Language changed Successfully&#13;
+1. Komeza&#13;
+2. Sokoka</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:59:50] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 17:59:50] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '32',
+    'session_id' => '124568012',
+    'telephone_number' => '0734586934',
+    'previous_state' => '12',
+    'current_state' => '13',
+    'state_id' => '13',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Process Language Change Menu',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessLanguageChange',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 17:59:50] COREUSSD::MenuOptionHandler Serching For Option From 13 When User Choice Is 2
+[2020-05-15 17:59:50] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '22',
+    'ussd_state' => '13',
+    'ussd_choice' => '2',
+    'ussd_name' => 'Exit from USSD',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '14',
+  ),
+)
+[2020-05-15 17:59:50] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...14
+[2020-05-15 17:59:50] Model::SetCurrentState Post Data.array (
+  'previous_state' => '13',
+  'current_state' => '14',
+)
+[2020-05-15 17:59:50] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:59:50',
+  'session_id' => '124568012',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:59:50] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '14',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Exit USSD',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FB',
+    'record_id' => '10',
+    'text_en' => 'Thank you for Being part of Palmkash Family',
+    'text_fr' => '',
+    'text_kin' => 'Murakoze gukoreshya Serevise ya Palmkash',
+  ),
+)
+[2020-05-15 17:59:50] COREUSSD::MenuArray Session Language Is text_kin
+[2020-05-15 17:59:50] COREUSSD::ReplacePlaceHolders Fired for Murakoze gukoreshya Serevise ya Palmkash With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568012',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 17:59:50] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568012</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FB</freeflowState></freeflow><applicationResponse>Murakoze gukoreshya Serevise ya Palmkash</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 17:59:59] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2020-05-15 17:59:59] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2020-05-15 17:59:59] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 17:59:59',
+  'session_id' => '124568013',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 17:59:59] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+    'text_fr' => '',
+    'text_kin' => 'PK Platform
+1.Bus Booking
+2.Konti Yanjye
+3.Sohoka',
+  ),
+)
+[2020-05-15 17:59:59] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2020-05-15 17:59:59] COREUSSD::External function call Call Result 1
+[2020-05-15 17:59:59] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 17:59:59] COREUSSD::ReplacePlaceHolders Fired for PK Platform
+1.Bus Booking
+2.My Account
+3.Exit With Data 1
+[2020-05-15 17:59:59] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568013</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>PK Platform&#13;
+1.Bus Booking&#13;
+2.My Account&#13;
+3.Exit</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:00:51] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 18:00:51] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '33',
+    'session_id' => '124568013',
+    'telephone_number' => '0734586934',
+    'previous_state' => NULL,
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 18:00:51] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 3
+[2020-05-15 18:00:51] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '13',
+    'ussd_state' => '1',
+    'ussd_choice' => '3',
+    'ussd_name' => 'Exit USSD',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '14',
+  ),
+)
+[2020-05-15 18:00:51] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...14
+[2020-05-15 18:00:51] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => '14',
+)
+[2020-05-15 18:00:51] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:00:51',
+  'session_id' => '124568013',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:00:51] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '14',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Exit USSD',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FB',
+    'record_id' => '10',
+    'text_en' => 'Thank you for Being part of Palmkash Family',
+    'text_fr' => '',
+    'text_kin' => 'Murakoze gukoreshya Serevise ya Palmkash',
+  ),
+)
+[2020-05-15 18:00:51] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 18:00:51] COREUSSD::ReplacePlaceHolders Fired for Thank you for Being part of Palmkash Family With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568013',
+  'subscriberInput' => '3',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 18:00:51] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568013</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FB</freeflowState></freeflow><applicationResponse>Thank you for Being part of Palmkash Family</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:09:16] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2020-05-15 18:09:16] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2020-05-15 18:09:16] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:09:16',
+  'session_id' => '124568014',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:09:16] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+    'text_fr' => '',
+    'text_kin' => 'PK Platform
+1.Bus Booking
+2.Konti Yanjye
+3.Sohoka',
+  ),
+)
+[2020-05-15 18:09:16] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2020-05-15 18:09:16] COREUSSD::External function call Call Result 1
+[2020-05-15 18:09:16] COREUSSD::MenuArray Session Language Is text_kin
+[2020-05-15 18:09:16] COREUSSD::ReplacePlaceHolders Fired for PK Platform
+1.Bus Booking
+2.Konti Yanjye
+3.Sohoka With Data 1
+[2020-05-15 18:09:16] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568014</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>PK Platform&#13;
+1.Bus Booking&#13;
+2.Konti Yanjye&#13;
+3.Sohoka</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:09:26] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 18:09:26] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '34',
+    'session_id' => '124568014',
+    'telephone_number' => '0734586934',
+    'previous_state' => NULL,
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 18:09:26] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 2
+[2020-05-15 18:09:26] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '12',
+    'ussd_state' => '1',
+    'ussd_choice' => '2',
+    'ussd_name' => 'Go to My Account Menu',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '11',
+  ),
+)
+[2020-05-15 18:09:26] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...11
+[2020-05-15 18:09:26] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => '11',
+)
+[2020-05-15 18:09:26] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:09:26',
+  'session_id' => '124568014',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:09:26] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '9',
+    'text_en' => 'My Account
+1. Change Language
+2. Go back',
+    'text_fr' => '',
+    'text_kin' => 'My Account
+1. Change Language
+2. Go back',
+  ),
+)
+[2020-05-15 18:09:26] COREUSSD::MenuArray Session Language Is text_kin
+[2020-05-15 18:09:26] COREUSSD::ReplacePlaceHolders Fired for My Account
+1. Change Language
+2. Go back With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568014',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 18:09:26] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568014</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>My Account&#13;
+1. Change Language&#13;
+2. Go back</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:09:30] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 18:09:30] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '34',
+    'session_id' => '124568014',
+    'telephone_number' => '0734586934',
+    'previous_state' => '1',
+    'current_state' => '11',
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 18:09:30] COREUSSD::MenuOptionHandler Serching For Option From 11 When User Choice Is 1
+[2020-05-15 18:09:30] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '10',
+    'ussd_state' => '11',
+    'ussd_choice' => '1',
+    'ussd_name' => 'Go to Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '12',
+  ),
+)
+[2020-05-15 18:09:30] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...12
+[2020-05-15 18:09:30] Model::SetCurrentState Post Data.array (
+  'previous_state' => '11',
+  'current_state' => '12',
+)
+[2020-05-15 18:09:30] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:09:30',
+  'session_id' => '124568014',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:09:30] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '15',
+    'text_en' => 'Change Language
+1.Kinyarwanda
+2.English',
+    'text_fr' => '',
+    'text_kin' => 'Guhindura Ururimi
+1.Kinyarwanda
+2.English',
+  ),
+)
+[2020-05-15 18:09:30] COREUSSD::MenuArray Session Language Is text_kin
+[2020-05-15 18:09:30] COREUSSD::ReplacePlaceHolders Fired for Guhindura Ururimi
+1.Kinyarwanda
+2.English With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568014',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 18:09:30] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568014</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Guhindura Ururimi&#13;
+1.Kinyarwanda&#13;
+2.English</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:09:33] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 18:09:33] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '34',
+    'session_id' => '124568014',
+    'telephone_number' => '0734586934',
+    'previous_state' => '11',
+    'current_state' => '12',
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 18:09:33] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568014',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '34',
+  'session_id' => '124568014',
+  'telephone_number' => '0734586934',
+  'previous_state' => '11',
+  'current_state' => '12',
+  'state_id' => '12',
+  'state_type' => 'input',
+  'input_field_name' => 'laguange_select',
+  'state_title' => 'Change Language',
+  'fxn_call_flag' => '0',
+  'call_fxn_name' => '',
+  'state_indicator' => 'FC',
+)
+[2020-05-15 18:09:33] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-15 18:09:33',
+  'session_id' => '124568014',
+  'state_id' => '12',
+  'telephone_number' => '0734586934',
+  'input_name' => 'laguange_select',
+  'input_value' => '2',
+)
+[2020-05-15 18:09:33] COREUSSD::MenuOptionHandler Serching For Option From 12 When User Choice Is -1
+[2020-05-15 18:09:33] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '20',
+    'ussd_state' => '12',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Process Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '13',
+  ),
+)
+[2020-05-15 18:09:33] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...13
+[2020-05-15 18:09:33] Model::SetCurrentState Post Data.array (
+  'previous_state' => '12',
+  'current_state' => '13',
+)
+[2020-05-15 18:09:33] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:09:33',
+  'session_id' => '124568014',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:09:33] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '13',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Process Language Change Menu',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessLanguageChange',
+    'state_indicator' => 'FC',
+    'record_id' => '16',
+    'text_en' => 'Language changed Successfully
+1. Continue
+2. Exit',
+    'text_fr' => '',
+    'text_kin' => 'Language changed Successfully
+1. Komeza
+2. Sokoka',
+  ),
+)
+[2020-05-15 18:09:33] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessLanguageChange
+[2020-05-15 18:11:33] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2020-05-15 18:11:33] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2020-05-15 18:11:33] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:11:33',
+  'session_id' => '124568015',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:11:34] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+    'text_fr' => '',
+    'text_kin' => 'PK Platform
+1.Bus Booking
+2.Konti Yanjye
+3.Sohoka',
+  ),
+)
+[2020-05-15 18:11:34] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2020-05-15 18:11:34] COREUSSD::External function call Call Result 1
+[2020-05-15 18:11:34] COREUSSD::MenuArray Session Language Is text_kin
+[2020-05-15 18:11:34] COREUSSD::ReplacePlaceHolders Fired for PK Platform
+1.Bus Booking
+2.Konti Yanjye
+3.Sohoka With Data 1
+[2020-05-15 18:11:34] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568015</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>PK Platform&#13;
+1.Bus Booking&#13;
+2.Konti Yanjye&#13;
+3.Sohoka</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:11:37] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 18:11:37] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '35',
+    'session_id' => '124568015',
+    'telephone_number' => '0734586934',
+    'previous_state' => NULL,
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 18:11:37] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 2
+[2020-05-15 18:11:37] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '12',
+    'ussd_state' => '1',
+    'ussd_choice' => '2',
+    'ussd_name' => 'Go to My Account Menu',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '11',
+  ),
+)
+[2020-05-15 18:11:37] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...11
+[2020-05-15 18:11:37] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => '11',
+)
+[2020-05-15 18:11:37] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:11:37',
+  'session_id' => '124568015',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:11:37] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '9',
+    'text_en' => 'My Account
+1. Change Language
+2. Go back',
+    'text_fr' => '',
+    'text_kin' => 'My Account
+1. Change Language
+2. Go back',
+  ),
+)
+[2020-05-15 18:11:37] COREUSSD::MenuArray Session Language Is text_kin
+[2020-05-15 18:11:37] COREUSSD::ReplacePlaceHolders Fired for My Account
+1. Change Language
+2. Go back With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568015',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 18:11:37] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568015</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>My Account&#13;
+1. Change Language&#13;
+2. Go back</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:11:43] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 18:11:43] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '35',
+    'session_id' => '124568015',
+    'telephone_number' => '0734586934',
+    'previous_state' => '1',
+    'current_state' => '11',
+    'state_id' => '11',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menuchoice',
+    'state_title' => 'My Account Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 18:11:43] COREUSSD::MenuOptionHandler Serching For Option From 11 When User Choice Is 1
+[2020-05-15 18:11:43] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '10',
+    'ussd_state' => '11',
+    'ussd_choice' => '1',
+    'ussd_name' => 'Go to Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '12',
+  ),
+)
+[2020-05-15 18:11:43] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...12
+[2020-05-15 18:11:43] Model::SetCurrentState Post Data.array (
+  'previous_state' => '11',
+  'current_state' => '12',
+)
+[2020-05-15 18:11:43] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:11:43',
+  'session_id' => '124568015',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:11:43] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '15',
+    'text_en' => 'Change Language
+1.Kinyarwanda
+2.English',
+    'text_fr' => '',
+    'text_kin' => 'Guhindura Ururimi
+1.Kinyarwanda
+2.English',
+  ),
+)
+[2020-05-15 18:11:43] COREUSSD::MenuArray Session Language Is text_kin
+[2020-05-15 18:11:43] COREUSSD::ReplacePlaceHolders Fired for Guhindura Ururimi
+1.Kinyarwanda
+2.English With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568015',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 18:11:43] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568015</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Guhindura Ururimi&#13;
+1.Kinyarwanda&#13;
+2.English</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:11:47] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 18:11:47] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '35',
+    'session_id' => '124568015',
+    'telephone_number' => '0734586934',
+    'previous_state' => '11',
+    'current_state' => '12',
+    'state_id' => '12',
+    'state_type' => 'input',
+    'input_field_name' => 'laguange_select',
+    'state_title' => 'Change Language',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 18:11:47] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568015',
+  'subscriberInput' => '2',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '35',
+  'session_id' => '124568015',
+  'telephone_number' => '0734586934',
+  'previous_state' => '11',
+  'current_state' => '12',
+  'state_id' => '12',
+  'state_type' => 'input',
+  'input_field_name' => 'laguange_select',
+  'state_title' => 'Change Language',
+  'fxn_call_flag' => '0',
+  'call_fxn_name' => '',
+  'state_indicator' => 'FC',
+)
+[2020-05-15 18:11:47] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-15 18:11:47',
+  'session_id' => '124568015',
+  'state_id' => '12',
+  'telephone_number' => '0734586934',
+  'input_name' => 'laguange_select',
+  'input_value' => '2',
+)
+[2020-05-15 18:11:47] COREUSSD::MenuOptionHandler Serching For Option From 12 When User Choice Is -1
+[2020-05-15 18:11:47] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '20',
+    'ussd_state' => '12',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Process Language Change',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '13',
+  ),
+)
+[2020-05-15 18:11:47] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...13
+[2020-05-15 18:11:47] Model::SetCurrentState Post Data.array (
+  'previous_state' => '12',
+  'current_state' => '13',
+)
+[2020-05-15 18:11:47] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:11:47',
+  'session_id' => '124568015',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:11:47] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '13',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Process Language Change Menu',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessLanguageChange',
+    'state_indicator' => 'FC',
+    'record_id' => '16',
+    'text_en' => 'Language changed Successfully
+1. Continue
+2. Exit',
+    'text_fr' => '',
+    'text_kin' => 'Language changed Successfully
+1. Komeza
+2. Sokoka',
+  ),
+)
+[2020-05-15 18:11:47] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessLanguageChange
+[2020-05-15 18:11:47] COREUSSD::External function call Call Result 1
+[2020-05-15 18:11:47] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 18:11:47] COREUSSD::ReplacePlaceHolders Fired for Language changed Successfully
+1. Continue
+2. Exit With Data 1
+[2020-05-15 18:11:47] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568015</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Language changed Successfully&#13;
+1. Continue&#13;
+2. Exit</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:11:54] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 18:11:54] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '35',
+    'session_id' => '124568015',
+    'telephone_number' => '0734586934',
+    'previous_state' => '12',
+    'current_state' => '13',
+    'state_id' => '13',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Process Language Change Menu',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessLanguageChange',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 18:11:54] COREUSSD::MenuOptionHandler Serching For Option From 13 When User Choice Is 1
+[2020-05-15 18:11:54] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '21',
+    'ussd_state' => '13',
+    'ussd_choice' => '1',
+    'ussd_name' => 'Go to Main Menu',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '1',
+  ),
+)
+[2020-05-15 18:11:54] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...1
+[2020-05-15 18:11:54] Model::SetCurrentState Post Data.array (
+  'previous_state' => '13',
+  'current_state' => '1',
+)
+[2020-05-15 18:11:54] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:11:54',
+  'session_id' => '124568015',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:11:54] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+    'text_fr' => '',
+    'text_kin' => 'PK Platform
+1.Bus Booking
+2.Konti Yanjye
+3.Sohoka',
+  ),
+)
+[2020-05-15 18:11:54] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2020-05-15 18:11:54] COREUSSD::External function call Call Result 1
+[2020-05-15 18:11:54] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 18:11:54] COREUSSD::ReplacePlaceHolders Fired for PK Platform
+1.Bus Booking
+2.My Account
+3.Exit With Data 1
+[2020-05-15 18:11:54] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568015</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>PK Platform&#13;
+1.Bus Booking&#13;
+2.My Account&#13;
+3.Exit</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-15 18:11:59] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-15 18:11:59] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '35',
+    'session_id' => '124568015',
+    'telephone_number' => '0734586934',
+    'previous_state' => '13',
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-15 18:11:59] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 3
+[2020-05-15 18:11:59] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '13',
+    'ussd_state' => '1',
+    'ussd_choice' => '3',
+    'ussd_name' => 'Exit USSD',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '14',
+  ),
+)
+[2020-05-15 18:11:59] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...14
+[2020-05-15 18:11:59] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => '14',
+)
+[2020-05-15 18:11:59] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-15 18:11:59',
+  'session_id' => '124568015',
+  'telephone_number' => '0734586934',
+)
+[2020-05-15 18:11:59] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '14',
+    'state_type' => 'menuchoice',
+    'input_field_name' => '',
+    'state_title' => 'Exit USSD',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FB',
+    'record_id' => '10',
+    'text_en' => 'Thank you for Being part of Palmkash Family',
+    'text_fr' => '',
+    'text_kin' => 'Murakoze gukoreshya Serevise ya Palmkash',
+  ),
+)
+[2020-05-15 18:11:59] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-15 18:11:59] COREUSSD::ReplacePlaceHolders Fired for Thank you for Being part of Palmkash Family With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568015',
+  'subscriberInput' => '3',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-15 18:11:59] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568015</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FB</freeflowState></freeflow><applicationResponse>Thank you for Being part of Palmkash Family</applicationResponse></response>
+
+[LOG STOP]

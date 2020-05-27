@@ -1,0 +1,737 @@
+[2020-05-14 20:13:45] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-14 20:13:45] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '28',
+    'session_id' => '124568008',
+    'telephone_number' => '0734586934',
+    'previous_state' => '3',
+    'current_state' => '4',
+    'state_id' => '4',
+    'state_type' => 'input',
+    'input_field_name' => 'destination_search',
+    'state_title' => 'Destination Search Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-14 20:13:45] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568008',
+  'subscriberInput' => 'Huy',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '28',
+  'session_id' => '124568008',
+  'telephone_number' => '0734586934',
+  'previous_state' => '3',
+  'current_state' => '4',
+  'state_id' => '4',
+  'state_type' => 'input',
+  'input_field_name' => 'destination_search',
+  'state_title' => 'Destination Search Menu',
+  'fxn_call_flag' => '0',
+  'call_fxn_name' => '',
+  'state_indicator' => 'FC',
+)
+[2020-05-14 20:13:45] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-14 20:13:45',
+  'session_id' => '124568008',
+  'state_id' => '4',
+  'telephone_number' => '0734586934',
+  'input_name' => 'destination_search',
+  'input_value' => 'Huy',
+)
+[2020-05-14 20:13:45] COREUSSD::MenuOptionHandler Serching For Option From 4 When User Choice Is -1
+[2020-05-14 20:13:45] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '4',
+    'ussd_state' => '4',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Destination Selection',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '5',
+  ),
+)
+[2020-05-14 20:13:45] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...5
+[2020-05-14 20:13:45] Model::SetCurrentState Post Data.array (
+  'previous_state' => '4',
+  'current_state' => '5',
+)
+[2020-05-14 20:13:45] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-14 20:13:45',
+  'session_id' => '124568008',
+  'telephone_number' => '0734586934',
+)
+[2020-05-14 20:13:45] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '5',
+    'state_type' => 'input',
+    'input_field_name' => 'destination',
+    'state_title' => 'Destination Selection',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessGetDestinationByName',
+    'state_indicator' => 'FC',
+    'record_id' => '5',
+    'text_en' => 'Select:
+[DESTINATION]',
+    'text_fr' => '',
+    'text_kin' => 'Hitamo:
+[DESTINATION]',
+  ),
+)
+[2020-05-14 20:13:45] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessGetDestinationByName
+[2020-05-14 20:13:45] CorePalmKash::CompleteRequest Fired For GetEndStationsByName With Data array (
+  'request_method' => 'GetEndStationsByName',
+  'from_station_id' => 'Huy',
+  'destination_station' => 'Huy',
+  'msisdn' => '0734586934',
+)
+[2020-05-14 20:13:45] CorePalmKash::CompleteRequest Preparing to send XML Request {"request_method":"GetEndStationsByName","from_station_id":"Huy","destination_station":"Huy","msisdn":"0734586934"} To https://transport.palmkash.com/ussd
+[2020-05-14 20:13:45] CorePalmKash::SendJSONByCURL Sending {"request_method":"GetEndStationsByName","from_station_id":"Huy","destination_station":"Huy","msisdn":"0734586934"} To https://transport.palmkash.com/ussd
+[2020-05-14 20:13:46] CorePalmKash::SendJSONByCURL Returning Took 0.193924 seconds to send a request to https://transport.palmkash.com/ussd
+[2020-05-14 20:13:46] CorePalmKash::SendJSONByCURL response content '{"status":"success","result":[{"id":4,"station":"HUYE"}]}'
+[2020-05-14 20:13:46] CorePalmKash::CompleteRequest SendByCURL Response XML {"status":"success","result":[{"id":4,"station":"HUYE"}]}
+[2020-05-14 20:13:46] CorePalmKash::ParseRequest response xml{"status":"success","result":[{"id":4,"station":"HUYE"}]}
+[2020-05-14 20:13:46] CorePalmKash::CompleteRequest Response From BETLION_CONNECT array (
+  'status' => 'success',
+  'result' => 
+  array (
+    0 => 
+    array (
+      'id' => 4,
+      'station' => 'HUYE',
+    ),
+  ),
+)
+[2020-05-14 20:13:46] COREUSSD::External function call Call Result array (
+  'start_station' => '1) HUYE
+',
+)
+[2020-05-14 20:13:46] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-14 20:13:46] COREUSSD::ReplacePlaceHolders Fired for Select:
+[DESTINATION] With Data array (
+  'start_station' => '1) HUYE
+',
+)
+[2020-05-14 20:13:46] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568008</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Select:&#13;
+[DESTINATION]</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-14 20:16:09] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2020-05-14 20:16:09] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2020-05-14 20:16:09] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-14 20:16:09',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+)
+[2020-05-14 20:16:09] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+    'text_fr' => '',
+    'text_kin' => 'PK Platform
+1.Bus Booking
+2.My Account
+3.Exit',
+  ),
+)
+[2020-05-14 20:16:09] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2020-05-14 20:16:09] COREUSSD::External function call Call Result 1
+[2020-05-14 20:16:09] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-14 20:16:09] COREUSSD::ReplacePlaceHolders Fired for PK Platform
+1.Bus Booking
+2.My Account
+3.Exit With Data 1
+[2020-05-14 20:16:09] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568009</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>PK Platform&#13;
+1.Bus Booking&#13;
+2.My Account&#13;
+3.Exit</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-14 20:16:13] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-14 20:16:13] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '29',
+    'session_id' => '124568009',
+    'telephone_number' => '0734586934',
+    'previous_state' => NULL,
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-14 20:16:13] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 1
+[2020-05-14 20:16:13] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '1',
+    'ussd_state' => '1',
+    'ussd_choice' => '1',
+    'ussd_name' => 'Go to Origin station Search',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '2',
+  ),
+)
+[2020-05-14 20:16:13] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...2
+[2020-05-14 20:16:13] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => '2',
+)
+[2020-05-14 20:16:13] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-14 20:16:13',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+)
+[2020-05-14 20:16:13] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '2',
+    'state_type' => 'input',
+    'input_field_name' => 'origin_station_search',
+    'state_title' => 'Routes Selection Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '2',
+    'text_en' => 'Enter the station',
+    'text_fr' => '',
+    'text_kin' => 'Enter the station',
+  ),
+)
+[2020-05-14 20:16:13] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-14 20:16:13] COREUSSD::ReplacePlaceHolders Fired for Enter the station With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568009',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-14 20:16:13] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568009</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Enter the station</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-14 20:16:20] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-14 20:16:20] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '29',
+    'session_id' => '124568009',
+    'telephone_number' => '0734586934',
+    'previous_state' => '1',
+    'current_state' => '2',
+    'state_id' => '2',
+    'state_type' => 'input',
+    'input_field_name' => 'origin_station_search',
+    'state_title' => 'Routes Selection Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-14 20:16:20] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568009',
+  'subscriberInput' => 'Kig',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '29',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+  'previous_state' => '1',
+  'current_state' => '2',
+  'state_id' => '2',
+  'state_type' => 'input',
+  'input_field_name' => 'origin_station_search',
+  'state_title' => 'Routes Selection Menu',
+  'fxn_call_flag' => '0',
+  'call_fxn_name' => '',
+  'state_indicator' => 'FC',
+)
+[2020-05-14 20:16:20] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-14 20:16:20',
+  'session_id' => '124568009',
+  'state_id' => '2',
+  'telephone_number' => '0734586934',
+  'input_name' => 'origin_station_search',
+  'input_value' => 'Kig',
+)
+[2020-05-14 20:16:21] COREUSSD::MenuOptionHandler Serching For Option From 2 When User Choice Is -1
+[2020-05-14 20:16:21] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '2',
+    'ussd_state' => '2',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Start Station Selection',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '3',
+  ),
+)
+[2020-05-14 20:16:21] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...3
+[2020-05-14 20:16:21] Model::SetCurrentState Post Data.array (
+  'previous_state' => '2',
+  'current_state' => '3',
+)
+[2020-05-14 20:16:21] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-14 20:16:21',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+)
+[2020-05-14 20:16:21] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '3',
+    'state_type' => 'input',
+    'input_field_name' => 'origin_station',
+    'state_title' => 'Select Origin station',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessGetOriginByName',
+    'state_indicator' => 'FC',
+    'record_id' => '3',
+    'text_en' => 'Select:
+[ORIGIN]',
+    'text_fr' => '',
+    'text_kin' => 'Hitamo:
+[ORIGIN]',
+  ),
+)
+[2020-05-14 20:16:21] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessGetOriginByName
+[2020-05-14 20:16:21] CorePalmKash::CompleteRequest Fired For GetStartStationsByName With Data array (
+  'request_method' => 'GetStartStationsByName',
+  'departure_station' => 'Kig',
+  'msisdn' => '0734586934',
+)
+[2020-05-14 20:16:21] CorePalmKash::CompleteRequest Preparing to send XML Request {"request_method":"GetStartStationsByName","departure_station":"Kig","msisdn":"0734586934"} To https://transport.palmkash.com/ussd
+[2020-05-14 20:16:21] CorePalmKash::SendJSONByCURL Sending {"request_method":"GetStartStationsByName","departure_station":"Kig","msisdn":"0734586934"} To https://transport.palmkash.com/ussd
+[2020-05-14 20:16:21] CorePalmKash::SendJSONByCURL Returning Took 0.214708 seconds to send a request to https://transport.palmkash.com/ussd
+[2020-05-14 20:16:21] CorePalmKash::SendJSONByCURL response content '{"status":"success","result":[{"id":1,"station":"KIGALI"}]}'
+[2020-05-14 20:16:21] CorePalmKash::CompleteRequest SendByCURL Response XML {"status":"success","result":[{"id":1,"station":"KIGALI"}]}
+[2020-05-14 20:16:21] CorePalmKash::ParseRequest response xml{"status":"success","result":[{"id":1,"station":"KIGALI"}]}
+[2020-05-14 20:16:21] CorePalmKash::CompleteRequest Response From BETLION_CONNECT array (
+  'status' => 'success',
+  'result' => 
+  array (
+    0 => 
+    array (
+      'id' => 1,
+      'station' => 'KIGALI',
+    ),
+  ),
+)
+[2020-05-14 20:16:21] COREUSSD::External function call Call Result array (
+  'start_station' => '1) KIGALI
+',
+)
+[2020-05-14 20:16:21] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-14 20:16:21] COREUSSD::ReplacePlaceHolders Fired for Select:
+[ORIGIN] With Data array (
+  'start_station' => '1) KIGALI
+',
+)
+[2020-05-14 20:16:21] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568009</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Select:&#13;
+1) KIGALI
+</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-14 20:16:26] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-14 20:16:26] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '29',
+    'session_id' => '124568009',
+    'telephone_number' => '0734586934',
+    'previous_state' => '2',
+    'current_state' => '3',
+    'state_id' => '3',
+    'state_type' => 'input',
+    'input_field_name' => 'origin_station',
+    'state_title' => 'Select Origin station',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessGetOriginByName',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-14 20:16:26] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568009',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '29',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+  'previous_state' => '2',
+  'current_state' => '3',
+  'state_id' => '3',
+  'state_type' => 'input',
+  'input_field_name' => 'origin_station',
+  'state_title' => 'Select Origin station',
+  'fxn_call_flag' => '1',
+  'call_fxn_name' => 'ProcessGetOriginByName',
+  'state_indicator' => 'FC',
+)
+[2020-05-14 20:16:26] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-14 20:16:26',
+  'session_id' => '124568009',
+  'state_id' => '3',
+  'telephone_number' => '0734586934',
+  'input_name' => 'origin_station',
+  'input_value' => '1',
+)
+[2020-05-14 20:16:26] COREUSSD::MenuOptionHandler Serching For Option From 3 When User Choice Is -1
+[2020-05-14 20:16:26] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '3',
+    'ussd_state' => '3',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Destination Search',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '4',
+  ),
+)
+[2020-05-14 20:16:26] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...4
+[2020-05-14 20:16:26] Model::SetCurrentState Post Data.array (
+  'previous_state' => '3',
+  'current_state' => '4',
+)
+[2020-05-14 20:16:26] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-14 20:16:26',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+)
+[2020-05-14 20:16:26] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '4',
+    'state_type' => 'input',
+    'input_field_name' => 'destination_search',
+    'state_title' => 'Destination Search Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+    'record_id' => '4',
+    'text_en' => 'Enter Destination Station',
+    'text_fr' => '',
+    'text_kin' => 'Enter Destination Station',
+  ),
+)
+[2020-05-14 20:16:26] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-14 20:16:26] COREUSSD::ReplacePlaceHolders Fired for Enter Destination Station With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568009',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+)
+[2020-05-14 20:16:26] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568009</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Enter Destination Station</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-14 20:16:31] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-14 20:16:31] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '29',
+    'session_id' => '124568009',
+    'telephone_number' => '0734586934',
+    'previous_state' => '3',
+    'current_state' => '4',
+    'state_id' => '4',
+    'state_type' => 'input',
+    'input_field_name' => 'destination_search',
+    'state_title' => 'Destination Search Menu',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-14 20:16:31] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568009',
+  'subscriberInput' => 'Hu',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '29',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+  'previous_state' => '3',
+  'current_state' => '4',
+  'state_id' => '4',
+  'state_type' => 'input',
+  'input_field_name' => 'destination_search',
+  'state_title' => 'Destination Search Menu',
+  'fxn_call_flag' => '0',
+  'call_fxn_name' => '',
+  'state_indicator' => 'FC',
+)
+[2020-05-14 20:16:31] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-14 20:16:31',
+  'session_id' => '124568009',
+  'state_id' => '4',
+  'telephone_number' => '0734586934',
+  'input_name' => 'destination_search',
+  'input_value' => 'Hu',
+)
+[2020-05-14 20:16:31] COREUSSD::MenuOptionHandler Serching For Option From 4 When User Choice Is -1
+[2020-05-14 20:16:31] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '4',
+    'ussd_state' => '4',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Destination Selection',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '5',
+  ),
+)
+[2020-05-14 20:16:31] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...5
+[2020-05-14 20:16:31] Model::SetCurrentState Post Data.array (
+  'previous_state' => '4',
+  'current_state' => '5',
+)
+[2020-05-14 20:16:31] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-14 20:16:31',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+)
+[2020-05-14 20:16:31] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '5',
+    'state_type' => 'input',
+    'input_field_name' => 'destination',
+    'state_title' => 'Destination Selection',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessGetDestinationByName',
+    'state_indicator' => 'FC',
+    'record_id' => '5',
+    'text_en' => 'Select:
+[DESTINATION]',
+    'text_fr' => '',
+    'text_kin' => 'Hitamo:
+[DESTINATION]',
+  ),
+)
+[2020-05-14 20:16:31] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessGetDestinationByName
+[2020-05-14 20:16:31] CorePalmKash::CompleteRequest Fired For GetEndStationsByName With Data array (
+  'request_method' => 'GetEndStationsByName',
+  'from_station_id' => 'Hu',
+  'destination_station' => 'Hu',
+  'msisdn' => '0734586934',
+)
+[2020-05-14 20:16:31] CorePalmKash::CompleteRequest Preparing to send XML Request {"request_method":"GetEndStationsByName","from_station_id":"Hu","destination_station":"Hu","msisdn":"0734586934"} To https://transport.palmkash.com/ussd
+[2020-05-14 20:16:31] CorePalmKash::SendJSONByCURL Sending {"request_method":"GetEndStationsByName","from_station_id":"Hu","destination_station":"Hu","msisdn":"0734586934"} To https://transport.palmkash.com/ussd
+[2020-05-14 20:16:32] CorePalmKash::SendJSONByCURL Returning Took 0.239121 seconds to send a request to https://transport.palmkash.com/ussd
+[2020-05-14 20:16:32] CorePalmKash::SendJSONByCURL response content '{"status":"success","result":[{"id":4,"station":"HUYE"}]}'
+[2020-05-14 20:16:32] CorePalmKash::CompleteRequest SendByCURL Response XML {"status":"success","result":[{"id":4,"station":"HUYE"}]}
+[2020-05-14 20:16:32] CorePalmKash::ParseRequest response xml{"status":"success","result":[{"id":4,"station":"HUYE"}]}
+[2020-05-14 20:16:32] CorePalmKash::CompleteRequest Response From BETLION_CONNECT array (
+  'status' => 'success',
+  'result' => 
+  array (
+    0 => 
+    array (
+      'id' => 4,
+      'station' => 'HUYE',
+    ),
+  ),
+)
+[2020-05-14 20:16:32] COREUSSD::External function call Call Result array (
+  'end_station' => '1) HUYE
+',
+)
+[2020-05-14 20:16:32] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-14 20:16:32] COREUSSD::ReplacePlaceHolders Fired for Select:
+[DESTINATION] With Data array (
+  'end_station' => '1) HUYE
+',
+)
+[2020-05-14 20:16:32] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568009</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Select:&#13;
+1) HUYE
+</applicationResponse></response>
+
+[LOG STOP]
+[2020-05-14 20:16:41] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2020-05-14 20:16:41] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '29',
+    'session_id' => '124568009',
+    'telephone_number' => '0734586934',
+    'previous_state' => '4',
+    'current_state' => '5',
+    'state_id' => '5',
+    'state_type' => 'input',
+    'input_field_name' => 'destination',
+    'state_title' => 'Destination Selection',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessGetDestinationByName',
+    'state_indicator' => 'FC',
+  ),
+)
+[2020-05-14 20:16:41] Model::StoreInputValues Called With Data array (
+  'requesttype' => 'pull',
+  'msisdn' => '0734586934',
+  'newRequest' => '1',
+  'status' => 'FC',
+  'sessionId' => '124568009',
+  'subscriberInput' => '1',
+  'transactionId' => '1oo',
+  'operator' => 'mtn_rw',
+) And array (
+  'record_id' => '29',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+  'previous_state' => '4',
+  'current_state' => '5',
+  'state_id' => '5',
+  'state_type' => 'input',
+  'input_field_name' => 'destination',
+  'state_title' => 'Destination Selection',
+  'fxn_call_flag' => '1',
+  'call_fxn_name' => 'ProcessGetDestinationByName',
+  'state_indicator' => 'FC',
+)
+[2020-05-14 20:16:41] Model::StoreInputValues preparing to post array (
+  'date' => '2020-05-14 20:16:41',
+  'session_id' => '124568009',
+  'state_id' => '5',
+  'telephone_number' => '0734586934',
+  'input_name' => 'destination',
+  'input_value' => '1',
+)
+[2020-05-14 20:16:41] COREUSSD::MenuOptionHandler Serching For Option From 5 When User Choice Is -1
+[2020-05-14 20:16:41] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '5',
+    'ussd_state' => '5',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to Time Selection Menu',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '7',
+  ),
+)
+[2020-05-14 20:16:41] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...7
+[2020-05-14 20:16:41] Model::SetCurrentState Post Data.array (
+  'previous_state' => '5',
+  'current_state' => '7',
+)
+[2020-05-14 20:16:41] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-14 20:16:41',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+)
+[2020-05-14 20:16:41] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '7',
+    'state_type' => 'input',
+    'input_field_name' => 'departure_time',
+    'state_title' => 'Departure Time Selection',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessGetTimeSelections',
+    'state_indicator' => 'FC',
+    'record_id' => '6',
+    'text_en' => 'Select:
+[TIMES]',
+    'text_fr' => '',
+    'text_kin' => 'Select:
+[TIMES]',
+  ),
+)
+[2020-05-14 20:16:41] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessGetTimeSelections
+[2020-05-14 20:16:41] CorePalmKash::CompleteRequest Fired For GetRouteTimes With Data array (
+  'request_method' => 'GetRouteTimes',
+  'from_station_id' => '1',
+  'to_station_id' => '4',
+  'msisdn' => '0734586934',
+)
+[2020-05-14 20:16:41] CorePalmKash::CompleteRequest Preparing to send XML Request {"request_method":"GetRouteTimes","from_station_id":"1","to_station_id":"4","msisdn":"0734586934"} To https://transport.palmkash.com/ussd
+[2020-05-14 20:16:41] CorePalmKash::SendJSONByCURL Sending {"request_method":"GetRouteTimes","from_station_id":"1","to_station_id":"4","msisdn":"0734586934"} To https://transport.palmkash.com/ussd
+[2020-05-14 20:16:41] CorePalmKash::SendJSONByCURL Returning Took 0.196022 seconds to send a request to https://transport.palmkash.com/ussd
+[2020-05-14 20:16:41] CorePalmKash::SendJSONByCURL response content '{"status":"failed","result":[]}'
+[2020-05-14 20:16:41] CorePalmKash::CompleteRequest SendByCURL Response XML {"status":"failed","result":[]}
+[2020-05-14 20:16:41] CorePalmKash::ParseRequest response xml{"status":"failed","result":[]}
+[2020-05-14 20:16:41] CorePalmKash::CompleteRequest Response From BETLION_CONNECT array (
+  'status' => 'failed',
+  'result' => 
+  array (
+  ),
+)
+[2020-05-14 20:16:41] Model::SetCurrentState Post Data.array (
+  'previous_state' => '7',
+  'current_state' => 4,
+)
+[2020-05-14 20:16:41] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2020-05-14 20:16:41',
+  'session_id' => '124568009',
+  'telephone_number' => '0734586934',
+)
+[2020-05-14 20:16:41] COREUSSD::External function call Call Result array (
+  'state' => 'FB',
+  'msg_response' => 'No Available routes
+No Available routes
+',
+)
+[2020-05-14 20:16:41] COREUSSD::MenuArray Session Language Is text_en
+[2020-05-14 20:16:41] COREUSSD::ReplacePlaceHolders Fired for Select:
+[TIMES] With Data array (
+  'state' => 'FB',
+  'msg_response' => 'No Available routes
+No Available routes
+',
+)
+[2020-05-14 20:16:41] Mtnrwanda_Model::Handler Returning XML Response <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response><msisdn>0734586934</msisdn><sessionid>124568009</sessionid><transactionid>1oo</transactionid><freeflow><freeflowState>FC</freeflowState></freeflow><applicationResponse>Select:&#13;
+[TIMES]</applicationResponse></response>
+
+[LOG STOP]
