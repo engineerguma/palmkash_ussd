@@ -17,6 +17,7 @@ class Formatclass {
         'sessionId' => 'sessionId',
         'session' => 'sessionId',
         'shortcode' => 'subscriberInput',
+        'mode' => 'mode',
         'response' => 'subscriberInput',
         'amount' => 'amount',
         'language' => 'language',
