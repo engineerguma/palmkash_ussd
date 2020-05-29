@@ -94,6 +94,7 @@ class CorePalmkash {
 
     function CompleteRequest($params, $request, $resp = false) {
         $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest Fired For ' . $request['request_method'] . ' With Data ' . var_export($request, true), 2);
+          $request['token']=WALLET_TOKEN;
          $json_request=json_encode($request);
         //   print_r($json_request);die();
         $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest Preparing to send XML Request ' . $json_request . ' To ' . PALMKASH_TRANSPORT, 2);
