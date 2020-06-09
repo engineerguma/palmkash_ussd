@@ -27,6 +27,7 @@ class Mtnrwanda_Model extends COREUSSD {
 
 
       function InterpreteRequest($xml_post) {
+      $this->log->LogXML('mtn_rw','pull' ,$xml_post);        
             $standard_array = $this->format->ParseXMLRequest($xml_post);
             return $standard_array;
       }

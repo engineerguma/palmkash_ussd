@@ -6,26 +6,27 @@ class Logs {
 
     }
 
-    function LogXML($sp, $sv, $type, $xml) {
-        $file_ext = microtime();
-        $todays_folder = 'systemlog/xml_depo/' . $sp . '/' . date('Y_m_d');
-        $sv_folder = $todays_folder . '/' . $sv;
-        $file_name = $sv_folder . '/' . $type . '_' . $file_ext . '.xml';
 
-        if (is_dir($todays_folder)) {
-            if (is_dir($sv_folder)) {
-                file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
+        function LogXML($sp, $sv,$xml) {
+            $file_ext = microtime();
+            $todays_folder = 'systemlog/xml_depo/'. date('Y_m_d');
+            $sv_folder = $todays_folder.'/'.$sp;
+            $file_name = $sv_folder . '/' . $sp . '_' . $file_ext . '.xml';
+           //print_r($file_name);die();
+            if (is_dir($todays_folder)) {
+                if (is_dir($sv_folder)) {
+                    file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
+                } else {
+                    mkdir($sv_folder);
+                    file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
+                }
             } else {
+                mkdir($todays_folder);
                 mkdir($sv_folder);
                 file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
             }
-        } else {
-            mkdir($todays_folder);
-            mkdir($sv_folder);
-            file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
+            return $file_name;
         }
-        return $file_name;
-    }
 
     function ExeLog($sa, $log, $id = false) {
 		//print_r($log);die();
