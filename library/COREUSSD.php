@@ -118,7 +118,7 @@ class COREUSSD extends Palmkash {
         $response_array = array(
             'msisdn' => $params['msisdn'],
             'sessionid' => $params['sessionId'],
-            'transactionid' => $params['transactionId'],
+          //  'transactionid' => $params['transactionId'],
             'freeflow' => array(
                 'freeflowState' => $resp['state']
             ),
@@ -149,10 +149,6 @@ class COREUSSD extends Palmkash {
 
 			if(isset($array['amount'])){
 	          $new_text = str_replace("[AMOUNT]", $array['amount'], $new_text);
-			}
-
-			if(isset($array['jackpot_prediction'])){
-	          $new_text = str_replace("[JACKPOT_PREDICTION]", $array['jackpot_prediction'], $new_text);
 			}
 
 

@@ -29,6 +29,7 @@ class Formatclass {
         'code'=>'resultcode',
         'response_code' => 'responsecode',
         'returncode' => 'responsecode',
+        'statusCode' => 'statusCode',
         'respmessage' => 'respmessage',
         'message' => 'respmessage',
         'status' => 'status',
