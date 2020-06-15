@@ -88,6 +88,9 @@ class COREUSSD extends Palmkash {
            if(isset($result['language'])){
             $menu = $this->GetStateFull(15);
             // $this->log->ExeLog($params, "COREUSSD::GetStateFull Normal Member language ".$ln_text." and Menu text " . var_export($menu, true), 2);
+          }else if(isset($result['error_code'])){
+            $menu = $result['error_code'];
+
           }
             //$prepared_response = $this->ReplacePlaceHolders($params, $menu[0][$ln_text], $result);
           //  $resp['state'] = $menu[0]['state_indicator'];
@@ -143,8 +146,16 @@ class COREUSSD extends Palmkash {
 	          $new_text = str_replace("[TIMES]", $array['time_available'], $new_text);
 			}
 
-			if(isset($array['booking_info'])){
-	          $new_text = str_replace("[BOOK_INFO]", $array['booking_info'], $new_text);
+			if(isset($array['route_name'])){
+	          $new_text = str_replace("[ROUTE_NAME]", $array['route_name'], $new_text);
+			}
+
+			if(isset($array['route_time'])){
+	          $new_text = str_replace("[ROUTE_TIME]", $array['route_time'], $new_text);
+			}
+
+			if(isset($array['tickets'])){
+	          $new_text = str_replace("[TICKETS]", $array['tickets'], $new_text);
 			}
 
 			if(isset($array['amount'])){

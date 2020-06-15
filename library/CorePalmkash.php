@@ -116,6 +116,11 @@ class CorePalmkash {
         if ($resp == 1) {
             $response = $this->ParseRequest($params, $result);
         }
+        if(empty($response)){
+          return $response;
+        }else{
+        return $response;
+        }
         $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest Response From BETLION_CONNECT ' . var_export($response, true), 2);
         return $response;
     }
@@ -169,11 +174,19 @@ class CorePalmkash {
 		//print_r($xml);die();
         $this->log->ExeLog($params, 'CorePalmKash::ParseRequest response xml' . $json, 2);
         try {
+
             $array=json_decode($json,true);
-            $standard_array = $this->format->Standardize($array,$params);
+            //$array='';
+            if(empty($array)){
+            $standard_array =array(
+               'error' =>'API ERROR, Notify Admin',
+            );
+            }else{
+              $standard_array = $this->format->Standardize($array,$params);
+            }
             return $standard_array;
         } catch (Exception $ex) {
-            $this->log->ExeLog($params, 'CorePalmKash::ParseRequest unable to parse XML. Throwing Exception ' . $ex, 2);
+            $this->log->ExeLog($params, 'CorePalmKash::ParseRequest unable to parse Response. Throwing Exception ' . $ex, 2);
         }
     }
 

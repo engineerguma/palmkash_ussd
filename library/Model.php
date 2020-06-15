@@ -36,9 +36,9 @@ class Model {
                 array('cs' => $cs, 'pc' => $pc));
     }
 
-    function GetResponseMsg($rc){
-        return $this->db->SelectData("SELECT * FROM palm_ussd_response_codes WHERE code=:cs",
-                array('cs' => $rc));
+    function GetResponseMsg($error){
+        return $this->db->SelectData("SELECT * FROM plam_ussd_response_codes WHERE error_code=:error",
+                array('error' => $error));
     }
 
     function GetStateFull($state){

@@ -132,14 +132,16 @@ function getRouteReference($msisdn,$map_id){
         //print_r($response);die();
         if(isset($response['status'])&&strtolower($response['status'])=='success'){
       	$return_response=$this->SaveStartEndStationsReference($params,$response,'start');
-      	}else{
+       }else if(isset($response['error'])){
+         $menu=null;
+         $menu['error_code'] = $this->GetResponseMsg(101);
+         $this->OperationWatch($params,2);
+         $return_response=$menu;
+       }else{
       	  $menu=null;
-          $menu['state']='FC';
-        	$msg_text ='Station Not found'.PHP_EOL;
-          $msg_text .='Enter Start Station'.PHP_EOL;
-          $menu['msg_response'] = $msg_text;
-      	 $this->OperationWatch($params,2);
-      	 $return_response=$menu;
+          $menu['error_code'] = $this->GetResponseMsg(100);
+      	  $this->OperationWatch($params,2);
+      	  $return_response=$menu;
       	}
         return $return_response;
     }
@@ -156,15 +158,18 @@ function getRouteReference($msisdn,$map_id){
         //print_r($response);die();
         if(isset($response['status'])&&strtolower($response['status'])=='success'){
       	$return_response=$this->SaveStartEndStationsReference($params,$response,'end');
-      	}else{
-      	  $menu=null;
-          $menu['state']='FC';
-        	$msg_text ='Station Not found'.PHP_EOL;
-          $msg_text .='Enter End Station'.PHP_EOL;
-          $menu['msg_response'] = $msg_text;
-      	 $this->OperationWatch($params,4);
-      	 $return_response=$menu;
-      	}
+       }else if(isset($response['error'])){
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(101);
+        $this->OperationWatch($params,4);
+        $return_response=$menu;
+        }else{
+         $menu=null;
+         $menu['error_code'] = $this->GetResponseMsg(102);
+         $this->OperationWatch($params,4);
+         $return_response=$menu;
+         }
+
         return $return_response;
 
         }
@@ -184,15 +189,17 @@ function getRouteReference($msisdn,$map_id){
         //print_r($response);die();
         if(isset($response['status'])&&strtolower($response['status'])=='success'){
       	$return_response=$this->SaveBookingTImesReference($params,$response,'end');
-      	}else{
-      	  $menu=null;
-          $menu['state']='FB';
-        	$msg_text ='No Available routes'.PHP_EOL;
-          $msg_text .='No Available routes'.PHP_EOL;
-          $menu['msg_response'] = $msg_text;
-      	 $this->OperationWatch($params,4);
+       }else if(isset($response['error'])){
+          $menu=null;
+          $menu['error_code'] = $this->GetResponseMsg(101);
+        	 $this->OperationWatch($params,5);
       	 $return_response=$menu;
-      	}
+        	}else{
+          $menu=null;
+          $menu['error_code'] = $this->GetResponseMsg(103);
+        	 $this->OperationWatch($params,5);
+      	 $return_response=$menu;
+         	}
         return $return_response;
 
         }
@@ -215,14 +222,13 @@ function getRouteReference($msisdn,$map_id){
 
         $route_time= $this->getRouteReference($params['msisdn'],$route[0]['input_value']);
         //$this->log->ExeLog($params, "Palmkash::ProcessGetConfirmationSummary getRouteReference ".var_export($route_time,true), 2);
+		     $response=array();
+         $response['route_name']=$start_id[0]['station_name'].'-'.$end_id[0]['station_name'];
+         $response['route_time']=$route_time[0]['time'];
+         $response['tickets']= $tickets[0]['input_value'];
+         $response['amount']= number_format($route_time[0]['price']);
+       	 //$this->OperationWatch($params,8);
 
-		     $response='';
-         $msg_text .=$start_id[0]['station_name'].'-'.$end_id[0]['station_name'].PHP_EOL;
-         $msg_text .=$route_time[0]['time'].PHP_EOL;
-         $msg_text .='Tickets: '.$tickets[0]['input_value'].PHP_EOL;
-         $msg_text .='Amount: '.number_format($route_time[0]['price']).PHP_EOL;
-
-	    	$response['booking_info'] = $msg_text;
         return $response;
     }
 
@@ -252,14 +258,18 @@ function getRouteReference($msisdn,$map_id){
             $msg_text .='Approve the payment on mobile money'.PHP_EOL;
             $menu['msg_response'] = $msg_text;
             $return_response=$menu;
-          	}else{
-       	  $menu=null;
-           $menu['state']='FB';
-           $msg_text .='No Available routes'.PHP_EOL;
-           $menu['msg_response'] = $msg_text;
-       	 $this->OperationWatch($params,4);
-       	 $return_response=$menu;
-       	}
+          }else if(isset($response['error'])){
+             $menu=null;
+             $menu['error_code'] = $this->GetResponseMsg(101);
+              $this->OperationWatch($params,1);
+            $return_response=$menu;
+             }else{
+             $menu=null;
+             $menu['error_code'] = $this->GetResponseMsg(104);
+              $this->OperationWatch($params,1);
+            $return_response=$menu;
+             }
+
         return $return_response;
     }
 
