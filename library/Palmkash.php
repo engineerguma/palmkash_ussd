@@ -226,7 +226,7 @@ function getRouteReference($msisdn,$map_id){
          $response['route_name']=$start_id[0]['station_name'].'-'.$end_id[0]['station_name'];
          $response['route_time']=$route_time[0]['time'];
          $response['tickets']= $tickets[0]['input_value'];
-         $response['amount']= number_format($route_time[0]['price']);
+         $response['amount']= number_format(($route_time[0]['price']*$tickets[0]['input_value']));
        	 //$this->OperationWatch($params,8);
 
         return $response;
