@@ -78,6 +78,7 @@ class CorePalmkash {
           "number_of_tickets" => $params['number_of_tickets'],
           "msisdn"=> $params['msisdn'],
           "name" => $params['names'],
+          "language" => $params['language'],
           "date_of_travel"=>$params['date_of_travel']
         );
         $response = $this->CompleteRequest($params, $req, 1);

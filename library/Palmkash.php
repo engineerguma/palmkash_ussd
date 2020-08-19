@@ -243,12 +243,19 @@ function getRouteReference($msisdn,$map_id){
         $route_time= $this->getRouteReference($params['msisdn'],$route[0]['input_value']);
         //$this->log->ExeLog($params, "Palmkash::ProcessGetConfirmationSummary getRouteReference ".var_export($route_time,true), 2);
 
-         $params['names']=$route_time[0]['route_id'];
+        $user = $this->getRegistration($params);
+         $params['names']=$user[0]['first_name'];
          $params['route_id']=$route_time[0]['route_id'];
          $params['route_type']=$route_time[0]['route_type'];
          $params['amount']=$route_time[0]['price'];
          $params['number_of_tickets']=$tickets[0]['input_value'];
+           $language ='kinyarwanda';
+           if($user[0]['language']=='en'){
+             $language ='english';
+           }
+         $params['language']=$language;
          $params['date_of_travel']=date('Y-m-d') ;
+     //$this->log->ExeLog($params, "Palmkash::Before CompleteBookingRequest ".var_export($params,true), 2);
 
          $response = $this->kash->CompleteBookingRequest($params);
          if(isset($response['status'])&&strtolower($response['status'])=='success'){
