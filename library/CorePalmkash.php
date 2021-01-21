@@ -10,11 +10,13 @@ class CorePalmkash {
     }
 
      function VerifyRegistration($params){
+       $routing =$this->mod->getMerchantRouting('transport');
+
         $req = array(
             'request_method' => 'CheckRegistrationRequest',
+            'token' => $routing[0]['merchant_token'],
             'msisdn' => $params['msisdn'],
         );
-        $routing =$this->mod->getMerchantRouting('transport');
            $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -24,11 +26,13 @@ class CorePalmkash {
     }
 
      function CompleteRegistrationRequest($params){
+       $routing =$this->mod->getMerchantRouting('transport');
+
         $req = array(
             'request_method' => 'RegistrationRequest',
+            'token' => $routing[0]['merchant_token'],
             'msisdn' => $params['msisdn'],
         );
-        $routing =$this->mod->getMerchantRouting('transport');
            $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -38,12 +42,14 @@ class CorePalmkash {
     }
 
       function GetStartStationsByName($params){
+        $routing =$this->mod->getMerchantRouting('transport');
+
         $req = array(
             'request_method' => 'GetStartStationsByName',
             'departure_station' => $params['departure_station'],
+            'token' => $routing[0]['merchant_token'],
             'msisdn' => $params['msisdn'],
         );
-        $routing =$this->mod->getMerchantRouting('transport');
            $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -53,13 +59,14 @@ class CorePalmkash {
         }
 
       function GetDestinationStationsByName($params){
+        $routing =$this->mod->getMerchantRouting('transport');
         $req = array(
             'request_method' => 'GetEndStationsByName',
             'from_station_id' => $params['start_station_id'],
             'destination_station' => $params['destination_station'],
+            'token' => $routing[0]['merchant_token'],
             'msisdn' => $params['msisdn'],
         );
-        $routing =$this->mod->getMerchantRouting('transport');
            $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -70,13 +77,14 @@ class CorePalmkash {
 
 
       function GetBookingTimes($params){
+        $routing =$this->mod->getMerchantRouting('transport');
         $req = array(
               'request_method' => 'GetRouteTimes',
               'from_station_id' => $params['start_station_id'],
               'to_station_id' => $params['end_station_id'],
+              'token' => $routing[0]['merchant_token'],
               'msisdn' => $params['msisdn'],
         );
-        $routing =$this->mod->getMerchantRouting('transport');
            $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -86,11 +94,12 @@ class CorePalmkash {
       }
 
       function GetAvailableBookingDays($params){
+        $routing =$this->mod->getMerchantRouting('transport');
         $req = array(
             'request_method' => 'GetBalanceRequest',
+            'token' => $routing[0]['merchant_token'],
             'msisdn' => $params['msisdn'],
         );
-        $routing =$this->mod->getMerchantRouting('transport');
            $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -100,18 +109,19 @@ class CorePalmkash {
         }
 
      function CompleteBookingRequest($params){
-        $req = array(
+       $routing =$this->mod->getMerchantRouting('transport');
+       $req = array(
           "request_method"=>"MakeBooking",
           "route_id" => $params['route_id'],
           "route_type" =>$params['route_type'],
           "amount" => $params['amount'],
           "number_of_tickets" => $params['number_of_tickets'],
-          "msisdn"=> $params['msisdn'],
+          'token' => $routing[0]['merchant_token'],
+          'msisdn' => $params['msisdn'],
           "name" => $params['names'],
           "language" => $params['language'],
           "date_of_travel"=>$params['date_of_travel']
         );
-     $routing =$this->mod->getMerchantRouting('transport');
         $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -124,11 +134,12 @@ class CorePalmkash {
 
 
       function GetEventCategories($params=false){
+        $routing =$this->mod->getMerchantRouting('events');
         $req = array(
               'request_method' => 'GetEventCategories',
-            //  'msisdn' => $params['msisdn'],
+              'token' => $routing[0]['merchant_token'],
+              'msisdn' => $params['msisdn'],
         );
-        $routing =$this->mod->getMerchantRouting('events');
            $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -138,12 +149,13 @@ class CorePalmkash {
       }
 
       function GetEventsByCategory($params){
+        $routing =$this->mod->getMerchantRouting('events');
         $req = array(
             'request_method' => 'GetEventsByCategory',
             'event_category_id' => $params['category_id'],
+            'token' => $routing[0]['merchant_token'],
             'msisdn' => $params['msisdn'],
         );
-        $routing =$this->mod->getMerchantRouting('events');
            $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -153,16 +165,17 @@ class CorePalmkash {
         }
 
      function CompleteEventsBookingRequest($params){
-        $req = array(
+       $routing =$this->mod->getMerchantRouting('events');
+       $req = array(
           "request_method"=>"MakeBooking",
           "amount" => $params['amount'],
           "number_of_tickets" => $params['number_of_tickets'],
-          "msisdn"=> $params['msisdn'],
+          'token' => $routing[0]['merchant_token'],
+          'msisdn' => $params['msisdn'],
           "name" => $params['names'],
           "language" => $params['language'],
           "price_id"=>$params['price_id']
         );
-     $routing =$this->mod->getMerchantRouting('events');
         $url_data = array(
           "url"=>$routing[0]['merchant_url'],
           "method" => 'POST',
@@ -177,7 +190,7 @@ class CorePalmkash {
 
 
 
-////////////SCHOOL
+////////////STUDENT TRANSPORT
 
      function ProcessGetStudentTransport($params){
 
