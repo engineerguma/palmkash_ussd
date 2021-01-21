@@ -19,7 +19,6 @@ function getUserInput($params,$inputvalue){
 
 
   $res = $this->db->SelectData("SELECT MAX(record_id) as record_id FROM palm_log_session_input_values WHERE session_id='".$params['sessionId']."' AND input_name='".$inputvalue."' ");
-
 return $res[0]['record_id'];
 }
 
@@ -365,6 +364,255 @@ function getRouteReference($msisdn,$map_id){
       //  print_r($menu);die();
   	 return $menu;
     }
+
+////////////SCHOOL
+
+  function ConfirmStudentTransport($params){
+
+    $amount = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'amount')."' ");
+    $student_account = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'student_account')."' ");
+
+    $params['account_number']=$student_account[0]['input_value'];
+    $response = $this->kash->ProcessGetStudentTransport($params);
+    if(isset($response['status'])&&strtolower($response['status'])=='success'){
+
+      $response['amount']=$amount[0]['input_value'];
+      $response['student_name']=$response['name'];
+      $return_response=$response;
+    }else if(isset($response['error'])){
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(106);
+        $menu['account_number'] = $params['account_number'];
+         $this->OperationWatch($params,20);
+      $return_response=$menu;
+        }else{
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(105);
+         $this->OperationWatch($params,1);
+       $return_response=$menu;
+        }
+
+   return $return_response;
+  }
+
+  function ProcessStudentTransportRequest($params){
+    $amount = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'amount')."' ");
+    $student_account = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'student_account')."' ");
+
+    $params['account_number']=$student_account[0]['input_value'];
+    $params['amount']=$amount[0]['input_value'];
+    $response = $this->kash->CompleteStudentTransportPayment($params);
+
+    if(isset($response['status'])&&strtolower($response['status'])=='pending'){
+     $return_response=$response;
+    }else{
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(107);
+       $return_response=$menu;
+     }
+
+   return $return_response;
+  }
+
+////Events
+
+      function CompleteEventBookingRequest($params) {
+
+        $event_ref = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'single_event')."' ");
+
+        $ticket_ref = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'ticket_class')."' ");
+      //print_r($ticket_ref);die();
+        $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref[0]['input_value']."' AND  event_ref='".$event_ref[0]['input_value']."' ");
+        $no_tickets = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'tickets_number')."' ");
+
+        $user = $this->getRegistration($params);
+         $params['names']=$user[0]['first_name'];
+         $params['price_id']=$ticket_class[0]['api_id'];
+         $params['amount']=$ticket_class[0]['amount'];
+         $params['number_of_tickets']=$no_tickets[0]['input_value'];
+           $language ='kinyarwanda';
+           if($user[0]['language']=='en'){
+             $language ='english';
+           }
+         $params['language']=$language;
+
+         $response = $this->kash->CompleteEventsBookingRequest($params);
+         if(isset($response['status'])&&strtolower($response['status'])=='success'){
+
+            $return_response=$response;
+          }else if(isset($response['error'])){
+             $menu=null;
+             $menu['error_code'] = $this->GetResponseMsg(101);
+              $this->OperationWatch($params,1);
+            $return_response=$menu;
+           }else{
+             $menu=null;
+             $menu['error_code'] = $this->GetResponseMsg(104);
+              $this->OperationWatch($params,1);
+            $return_response=$menu;
+          }
+
+        return $return_response;
+    }
+
+  function GetBookingConfirmationDetails($params){
+
+          $menu=null;
+          $event_ref = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'single_event')."' ");
+          $event = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event_ref[0]['input_value']."' ");
+          $menu['event']=$event[0]['name'];
+          $menu['venue']=$event[0]['venue'];
+          $ticket_ref = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'ticket_class')."' ");
+        //print_r($ticket_ref);die();
+          $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref[0]['input_value']."' AND  event_ref='".$event_ref[0]['input_value']."' ");
+          $menu['ticket_class']=$ticket_class[0]['name'];
+          $menu['amount']=number_format($ticket_class[0]['amount']);
+
+          $no_tickets = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'tickets_number')."' ");
+          $menu['no_tickets']=$no_tickets[0]['input_value'];
+          $menu['total_amount']=number_format($no_tickets[0]['input_value']*$ticket_class[0]['amount']);
+
+     return $menu;
+  }
+
+  function ProcessGetEventsCategories($params){
+    $response = $this->kash->GetEventCategories($params);
+
+    if(isset($response['status'])&&strtolower($response['status'])=='success'){
+         $ret =$this->SaveProductsReference($params,$response['result']);
+        $return_response=$ret;
+    }else if(isset($response['error'])){
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(106);
+        $menu['account_number'] = $params['account_number'];
+         $this->OperationWatch($params,20);
+      $return_response=$menu;
+    }else{
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(105);
+         $this->OperationWatch($params,1);
+       $return_response=$menu;
+     }
+
+   return $return_response;
+  }
+
+  function ProcessCategoryEvents($params){
+
+    $category = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'event_category')."' ");
+     $category_id = $this->db->SelectData("SELECT * FROM event_categories WHERE ref_id='".$category[0]['input_value']."' ");
+     $params['category_id']=$category_id[0]['api_id'];
+     //$tickets = $this->db->SelectData("SELECT * FROM event_tickets WHERE event_ref='".$event_id[0]['ref_id']."' ");
+     if(empty($category_id)==false){
+    $params['category_id']=$category_id[0]['api_id'];
+      //print_r($category_id);die();
+    $response = $this->kash->GetEventsByCategory($params);
+    if(isset($response['status'])&&strtolower($response['status'])=='success'){
+    $ret =$this->SaveEventsReferences($params,$response['result']);
+
+     $return_response=$ret;
+    }else{
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(107);
+       $return_response=$menu;
+     }
+   }else{
+      //invalid Entry
+
+   }
+   return $return_response;
+  }
+
+
+
+  function ProcessGetEventTicketClasses($params){
+
+    $event = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'single_event')."' ");
+     $event_id = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event[0]['input_value']."' ");
+     $xml=null;
+     $menu=null;
+     if(empty($event_id)==false){
+       $tickets = $this->db->SelectData("SELECT * FROM event_tickets WHERE event_ref='".$event_id[0]['ref_id']."' ");
+        $i=1;
+       foreach($tickets as $key=>$value){
+       $xml .=$value['ref_id'].') '.$value['name']." ".number_format($value['amount']).PHP_EOL;
+         $i++;
+         }
+    $menu['tickets'] = $xml;
+    return $menu;
+    }else{
+      //invalid Entry
+
+   }
+   return $return_response;
+  }
+
+
+
+
+      function SaveProductsReference($params,$array){
+
+        $sth = $this->db->prepare("DELETE FROM event_categories where msisdn='".$params['msisdn']."'");
+  		  $sth->execute();
+        $xml=null;
+        $menu=null;
+        $i=1;
+    	foreach($array as $key=>$value){
+        $postData[$i]['ref_id'] =$i;
+      	$postData[$i]['api_id'] =$value['id'];
+     	  $postData[$i]['name'] =$value['name'];
+        $postData[$i]['msisdn'] =$params['msisdn'];
+        $postData[$i]['session_id'] =$params['sessionId'];
+
+      $this->db->InsertData("event_categories", $postData[$i]);
+
+     	//$xml .=$i.') '.$value['name']." ".number_format($value['price']).PHP_EOL;
+     	$xml .=$i.') '.$value['name'].PHP_EOL;
+        $i++;
+    		}
+        $menu['events'] = $xml;
+        //  print_r($menu);die();
+    	 return $menu;
+      }
+
+      function SaveEventsReferences($params,$array){
+
+        $sth = $this->db->prepare("DELETE FROM events where msisdn='".$params['msisdn']."'");
+        $sth1 = $this->db->prepare("DELETE FROM event_tickets where msisdn='".$params['msisdn']."'");
+  		  $sth->execute();
+  		  $sth1->execute();
+        $xml=null;
+        $menu=null;
+        $i=1;
+    	foreach($array as $key=>$value){
+        $postData[$i]['ref_id'] =$i;
+     	  $postData[$i]['name'] =$value[$i-1]['name'];
+     	  $postData[$i]['venue'] =$value[$i-1]['venue'];
+     	  $postData[$i]['time'] =$value[$i-1]['time'];
+        $postData[$i]['msisdn'] =$params['msisdn'];
+        $postData[$i]['session_id'] =$params['sessionId'];
+
+      $this->db->InsertData("events", $postData[$i]);
+         $j=1;
+      	foreach($value[$i-1]['prices'] as $key1=>$prices){
+       $TicketData['event_ref'] =$i;
+       $TicketData['ref_id'] =$j;
+       $TicketData['api_id'] =$prices['price_id'];
+       $TicketData['name'] =$prices['ticket_category'];
+       $TicketData['amount'] =$prices['ticket_price'];
+       $TicketData['msisdn'] =$params['msisdn'];
+       $TicketData['session_id'] =$params['sessionId'];
+      $this->db->InsertData("event_tickets", $TicketData);
+        $j++;
+          }
+     	$xml .=$i.') '.$value[$i-1]['name']." - ".$value[$i-1]['venue'].PHP_EOL;
+        $i++;
+    		}
+        $menu['events'] = $xml;
+        //  print_r($menu);die();
+    	 return $menu;
+      }
+
 
 
 }

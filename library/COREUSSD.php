@@ -162,6 +162,36 @@ class COREUSSD extends Palmkash {
 	          $new_text = str_replace("[AMOUNT]", $array['amount'], $new_text);
 			}
 
+			if(isset($array['student_name'])){
+	          $new_text = str_replace("[NAME]", $array['student_name'], $new_text);
+			}
+
+			if(isset($array['school'])){
+	          $new_text = str_replace("[SCHOOL]", $array['school'], $new_text);
+			}
+
+			if(isset($array['account_number'])){
+	          $new_text = str_replace("[STUDENT_ACCOUNT]", $array['account_number'], $new_text);
+			}
+			if(isset($array['events'])){
+	          $new_text = str_replace("[EVENTS]", $array['events'], $new_text);
+			}
+			if(isset($array['event'])){
+	          $new_text = str_replace("[EVENT]", $array['event'], $new_text);
+			}
+			if(isset($array['no_tickets'])){
+	          $new_text = str_replace("[TICKETS]", $array['no_tickets'], $new_text);
+			}
+			if(isset($array['ticket_class'])){
+	          $new_text = str_replace("[TICKET_CLASS]", $array['ticket_class'], $new_text);
+			}
+			if(isset($array['venue'])){
+	          $new_text = str_replace("[VENUE]", $array['venue'], $new_text);
+			}
+			if(isset($array['total_amount'])){
+	          $new_text = str_replace("[TOTAL]", $array['total_amount'], $new_text);
+			}
+
 
         return $new_text;
     }

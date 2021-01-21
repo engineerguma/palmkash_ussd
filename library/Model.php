@@ -10,6 +10,10 @@ class Model {
         Session::start();
     }
 
+        function getMerchantRouting($key){
+            return $this->db->SelectData("SELECT * FROM palm_ussd_merchant WHERE search_key=:search_key", array('search_key' => $key));
+        }
+
 
     function CheckSessionID($params){
         return $this->db->SelectData("SELECT * FROM palm_log_session_data WHERE session_status='active'
@@ -37,7 +41,7 @@ class Model {
     }
 
     function GetResponseMsg($error){
-        return $this->db->SelectData("SELECT * FROM plam_ussd_response_codes WHERE error_code=:error",
+        return $this->db->SelectData("SELECT * FROM palm_ussd_response_codes WHERE error_code=:error",
                 array('error' => $error));
     }
 
@@ -188,6 +192,33 @@ class Model {
             }
         }
     }
+
+
+    function SendGetByCURL($url,$params,$extra_headers=array()) {
+
+         $this->log->ExeLog($params,'Model::SendGetByCURL Sending  To ' . $url, 2);
+         $ch = curl_init();
+         if(!empty($extra_headers)){
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $extra_headers);
+         }
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+         curl_setopt($ch, CURLOPT_URL, $url);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+         $content = curl_exec($ch);
+         if (!curl_errno($ch)) {
+             $info = curl_getinfo($ch);
+             $log = 'Took ' . $info['total_time'] . ' seconds to send a request to ' . $info['url'];
+         } else {
+             $log = 'Curl error: ' . curl_error($ch);
+         }
+        //$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+         $this->log->ExeLog($params,'Model::SendGetByCURL Returning ' . $log, 2);
+
+ 	  $this->log->ExeLog($params,'Model::SendGetByCURL response content '. var_export($content, true), 2);
+         return $content;
+     }
 
 }
 ?>

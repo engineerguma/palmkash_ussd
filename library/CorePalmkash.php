@@ -14,7 +14,12 @@ class CorePalmkash {
             'request_method' => 'CheckRegistrationRequest',
             'msisdn' => $params['msisdn'],
         );
-        $response = $this->CompleteRequest($params, $req, 1);
+        $routing =$this->mod->getMerchantRouting('transport');
+           $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
         return $response;
     }
 
@@ -23,7 +28,12 @@ class CorePalmkash {
             'request_method' => 'RegistrationRequest',
             'msisdn' => $params['msisdn'],
         );
-        $response = $this->CompleteRequest($params, $req, 1);
+        $routing =$this->mod->getMerchantRouting('transport');
+           $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
         return $response;
     }
 
@@ -33,7 +43,12 @@ class CorePalmkash {
             'departure_station' => $params['departure_station'],
             'msisdn' => $params['msisdn'],
         );
-        $response = $this->CompleteRequest($params, $req, 1);
+        $routing =$this->mod->getMerchantRouting('transport');
+           $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
         return $response;
         }
 
@@ -44,7 +59,12 @@ class CorePalmkash {
             'destination_station' => $params['destination_station'],
             'msisdn' => $params['msisdn'],
         );
-        $response = $this->CompleteRequest($params, $req, 1);
+        $routing =$this->mod->getMerchantRouting('transport');
+           $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
         return $response;
         }
 
@@ -56,7 +76,12 @@ class CorePalmkash {
               'to_station_id' => $params['end_station_id'],
               'msisdn' => $params['msisdn'],
         );
-      $response = $this->CompleteRequest($params, $req, 1);
+        $routing =$this->mod->getMerchantRouting('transport');
+           $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
       return $response;
       }
 
@@ -65,7 +90,12 @@ class CorePalmkash {
             'request_method' => 'GetBalanceRequest',
             'msisdn' => $params['msisdn'],
         );
-        $response = $this->CompleteRequest($params, $req, 1);
+        $routing =$this->mod->getMerchantRouting('transport');
+           $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
         return $response;
         }
 
@@ -81,10 +111,126 @@ class CorePalmkash {
           "language" => $params['language'],
           "date_of_travel"=>$params['date_of_travel']
         );
-        $response = $this->CompleteRequest($params, $req, 1);
+     $routing =$this->mod->getMerchantRouting('transport');
+        $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
         return $response;
     }
 
+///Events
+
+
+      function GetEventCategories($params=false){
+        $req = array(
+              'request_method' => 'GetEventCategories',
+            //  'msisdn' => $params['msisdn'],
+        );
+        $routing =$this->mod->getMerchantRouting('events');
+           $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+      return $response;
+      }
+
+      function GetEventsByCategory($params){
+        $req = array(
+            'request_method' => 'GetEventsByCategory',
+            'event_category_id' => $params['category_id'],
+            'msisdn' => $params['msisdn'],
+        );
+        $routing =$this->mod->getMerchantRouting('events');
+           $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+        return $response;
+        }
+
+     function CompleteEventsBookingRequest($params){
+        $req = array(
+          "request_method"=>"MakeBooking",
+          "amount" => $params['amount'],
+          "number_of_tickets" => $params['number_of_tickets'],
+          "msisdn"=> $params['msisdn'],
+          "name" => $params['names'],
+          "language" => $params['language'],
+          "price_id"=>$params['price_id']
+        );
+     $routing =$this->mod->getMerchantRouting('events');
+        $url_data = array(
+          "url"=>$routing[0]['merchant_url'],
+          "method" => 'POST',
+        );
+        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+        return $response;
+    }
+
+////////////SCHOOL
+
+
+
+
+
+////////////SCHOOL
+
+     function ProcessGetStudentTransport($params){
+
+     $routing =$this->mod->getMerchantRouting('student_transport');
+       //print_r($routing);die();
+        $url_data = array(
+          "url"=>$routing[0]['merchant_url'].'api/student/'.$params['account_number'],
+          "method" => 'GET',
+        );
+
+      //  $header_extras = ['Content-Type: application/json'];
+        $header_extras = ['Authorization: Bearer '.$routing[0]['merchant_token']];
+      $response = $this->CompleteRequest($params, $req=array(),$url_data,$header_extras);
+        return $response;
+    }
+
+     function CompleteStudentTransportPayment($params){
+
+     $routing =$this->mod->getMerchantRouting('student_transport');
+       //print_r($routing);die();
+        $req_data = array(
+          "token" => $routing[0]['gateway_token'],
+          "transaction_amount" => $params['amount'],
+          "account_number" => $params['account_number'],
+          "transaction_account" => $params['msisdn'],
+          "merchant_account" => $routing[0]['gateway_account'],
+          "transaction_source" => 'ussd',
+          "transaction_reference_number" => 'ussd'.$this->genRandStr(),
+          "transaction_reason" => 'Payment',
+          "currency" => 'RWF',
+        );
+
+        $url_data = array(
+          "url"=>$routing[0]['gateway_url'],
+          "method" => 'POST',
+        );
+
+        //removed
+//payment_operator,transaction_destination
+
+      $response = $this->CompleteRequest($params, $req_data,$url_data,$header_extras = []);
+        return $response;
+    }
+
+    function genRandStr(){
+      $a = $b = '';
+
+      for($i = 0; $i < 3; $i++){
+        $a .= chr(mt_rand(65, 90)); // see the ascii table why 65 to 90.
+        $b .= mt_rand(0, 99);
+      }
+      return $a . $b;
+    }
 
 
     /*     * *************************************************************************
@@ -93,32 +239,25 @@ class CorePalmkash {
      *
      * ************************************************************************* */
 
-    function CompleteRequest($params, $request, $resp = false) {
-        $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest Fired For ' . $request['request_method'] . ' With Data ' . var_export($request, true), 2);
-          $request['token']=WALLET_TOKEN;
-         $json_request=json_encode($request);
+    function CompleteRequest($params, $request,$url_data,$header_extras) {
+      if($url_data['method']=='POST'){
+       $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest  Request Data ' . var_export($request, true), 2);
+        //  $request['token']=WALLET_TOKEN;
+        $json_request=json_encode($request);
         //   print_r($json_request);die();
-        $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest Preparing to send XML Request ' . $json_request . ' To ' . PALMKASH_TRANSPORT, 2);
-        $result = $this->SendJSONByCURL(PALMKASH_TRANSPORT,$params, $json_request);
-      /*
-        $result =array(
-        "status"=>"success",
-        "result" =>array(
-        array("id"=>13,
-    "station"=>"Rusumo",
-         ),
-      array(
-        "id"=>17,
-        "station"=>"Rusizi",
-        )
-          ));
-  $result =json_encode($result);*/
+        $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest Preparing to send XML Request ' . $json_request . ' To ' . $url_data['url'], 2);
+        $result = $this->SendJSONByCURL($url_data['url'],$params, $json_request,$header_extras);
+      }else{
+        $result = $this->mod->SendGetByCURL($url_data['url'],$params,$header_extras);
+      }
         $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest SendByCURL Response XML ' . $result, 2);
-        if ($resp == 1) {
+
             $response = $this->ParseRequest($params, $result);
-        }
+
         if(empty($response)){
-          return $response;
+          return  array(
+                       'error' =>'API ERROR, Notify Admin',
+                    );
         }else{
         return $response;
         }
@@ -126,35 +265,25 @@ class CorePalmkash {
         return $response;
     }
 
-    function TimeStampPWEnc($pw) {
-        $ts = date('YmdGis');
-        $data['ts'] = $ts;
-        $data['enc_pw'] = hash_hmac('MD5', $pw, $ts);
-        return $data;
-    }
 
-    function WriteGeneralXMLFile($params,$temp, $trans_data) {
+   function SendJSONByCURL($url,$params,$post_,$extra_headers) {
+        $this->log->ExeLog($params,'CorePalmKash::SendJSONByCURL Sending ' . $post_ . ' To ' . $url, 2);
+        $cont_len = strlen($post_);
 
-       // $this->log->ExeLog($params, 'CorePalmKash::WriteGeneralXMLFile Data to write XML'. var_export($trans_data, true), 2);
+          $header=['Content-Type: application/json',
+          'cache-control: no-cache',
+          'Content-Length: ' . $cont_len];
+          if(!empty($extra_headers)){
+          $header = array_merge($header,$extra_headers);
+          }
 
-        $f_template = $temp;
-        $template = 'templates/' . $temp . '.php';
-        require($template);
-        $trans_xml = ${$f_template};
-        //$this->log->ExeLog($params, 'CorePalmKash::WriteGeneralXMLFile File For ' . $params['requesttype'] . ' Saved Under ' . $trans_xml, 2);
-        return $trans_xml;
-    }
-
-   function SendJSONByCURL($url,$params,$xml) {
-        $this->log->ExeLog($params,'CorePalmKash::SendJSONByCURL Sending ' . $xml . ' To ' . $url, 2);
-        $cont_len = strlen($xml);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'cache-control: no-cache', 'Content-Length: ' . $cont_len));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
@@ -188,6 +317,10 @@ class CorePalmkash {
             return $standard_array;
         } catch (Exception $ex) {
             $this->log->ExeLog($params, 'CorePalmKash::ParseRequest unable to parse Response. Throwing Exception ' . $ex, 2);
+            $standard_array =array(
+               'error' =>'API ERROR, Notify Admin',
+            );
+          return $standard_array;
         }
     }
 
