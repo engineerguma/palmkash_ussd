@@ -197,7 +197,7 @@ class CorePalmkash {
      $routing =$this->mod->getMerchantRouting('student_transport');
        //print_r($routing);die();
         $url_data = array(
-          "url"=>$routing[0]['merchant_url'].'api/student/'.$params['account_number'],
+          "url"=>$routing[0]['merchant_url'].'api/v1/student/'.$params['account_number'],
           "method" => 'GET',
         );
 
