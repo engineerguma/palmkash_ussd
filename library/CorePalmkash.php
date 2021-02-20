@@ -190,11 +190,11 @@ class CorePalmkash {
 
 
 
-////////////STUDENT TRANSPORT
+////////////STUDENT SCHOOL FEES TRANSPORT
 
-     function ProcessGetStudentTransport($params){
+     function ProcessGetStudentDetails($params){
 
-     $routing =$this->mod->getMerchantRouting('student_transport');
+     $routing =$this->mod->getMerchantRouting($params['merchant']);
        //print_r($routing);die();
         $url_data = array(
           "url"=>$routing[0]['merchant_url'].'api/v1/student/'.$params['account_number'],
@@ -207,9 +207,9 @@ class CorePalmkash {
         return $response;
     }
 
-     function CompleteStudentTransportPayment($params){
+     function CompleteSchoolfeesTransportPayment($params){
 
-     $routing =$this->mod->getMerchantRouting('student_transport');
+     $routing =$this->mod->getMerchantRouting($params['merchant']);
        //print_r($routing);die();
         $req_data = array(
           "token" => $routing[0]['gateway_token'],
@@ -219,7 +219,7 @@ class CorePalmkash {
           "merchant_account" => $routing[0]['gateway_account'],
           "transaction_source" => 'ussd',
           "transaction_reference_number" => 'ussd'.$this->genRandStr(),
-          "transaction_reason" => 'Payment',
+          "transaction_reason" => $params['reason'],
           "currency" => 'RWF',
         );
 
