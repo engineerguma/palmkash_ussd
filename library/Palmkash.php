@@ -473,7 +473,65 @@ function getRouteReference($msisdn,$map_id){
    return $return_response;
   }
 
-////Events
+
+        function ConfirmPocketMoneyPayment($params){
+
+          $amount = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'amount')."' ");
+          $student_account = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'student_account')."' ");
+
+          $params['account_number']=$student_account[0]['input_value'];
+          $response = $this->kash->ProcessGetPMStudentDetails($params);
+          if(isset($response['status'])&&strtolower($response['status'])=='success'){
+
+            $response['amount']=$amount[0]['input_value'];
+            $response['student_name']=$response['result']['last_name']." ".$response['result']['first_name'];
+            $return_response=$response;
+          }else if(isset($response['error'])){
+              $menu=null;
+              $menu['error_code'] = $this->GetResponseMsg(106);
+              $menu['account_number'] = $params['account_number'];
+               $this->OperationWatch($params,24);
+            $return_response=$menu;
+              }else{
+              $menu=null;
+              $menu['error_code'] = $this->GetResponseMsg(105);
+               $this->OperationWatch($params,1);
+             $return_response=$menu;
+              }
+
+         return $return_response;
+        }
+
+
+
+      function ProcessPocketMoneyPaymentRequest($params){
+        $amount = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'amount')."' ");
+        $student_account = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'student_account')."' ");
+
+        $params['account_number']=$student_account[0]['input_value'];
+        $params['amount']=$amount[0]['input_value'];
+        $params['merchant']= 'pocket_money';
+        $params['reason']= 'Pocket Money Payment';
+        $user = $this->getRegistration($params);
+        $language ='kinyarwanda';
+        if($user[0]['language']=='en'){
+          $language ='english';
+        }
+       $params['language']=$language;
+        $response = $this->kash->CompletePocketMoneyPayment($params);
+
+        if(isset($response['status'])&&strtolower($response['status'])=='success'){
+         $return_response=$response;
+        }else{
+            $menu=null;
+            $menu['error_code'] = $this->GetResponseMsg(107);
+           $return_response=$menu;
+         }
+
+       return $return_response;
+      }
+
+  ////Events
 
       function CompleteEventBookingRequest($params) {
 

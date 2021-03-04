@@ -185,8 +185,40 @@ class CorePalmkash {
     }
 
 ////////////SCHOOL
+  ///Pocket Money
+function ProcessGetPMStudentDetails($params){
+  $routing =$this->mod->getMerchantRouting('pocket_money');
+  $req = array(
+      'request_method' => 'GetStudent',
+      'student_id' => $params['account_number'],
+      'token' => $routing[0]['merchant_token'],
+      'msisdn' => $params['msisdn'],
+  );
+     $url_data = array(
+    "url"=>$routing[0]['merchant_url'],
+    "method" => 'POST',
+  );
+  $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+  return $response;
+  }
 
-
+function CompletePocketMoneyPayment($params){
+ $routing =$this->mod->getMerchantRouting('pocket_money');
+ $req = array(
+    "request_method"=>"MakePayment",
+    "amount" => $params['amount'],
+    'msisdn' => $params['msisdn'],
+    "student_id" => $params['account_number'],
+    "language" => $params['language'],
+    'token' => $routing[0]['merchant_token'],
+  );
+  $url_data = array(
+    "url"=>$routing[0]['merchant_url'],
+    "method" => 'POST',
+  );
+  $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+  return $response;
+}
 
 
 

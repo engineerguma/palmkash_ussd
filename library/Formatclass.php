@@ -22,6 +22,8 @@ class Formatclass {
         'amount' => 'amount',
         'language' => 'language',
         'name' => 'name',
+        'last_name' => 'last_name',
+        'first_name' => 'first_name',
         'string' => 'string',
         'newRequest' => 'newRequest',
         'subscriberInput' => 'subscriberInput',
