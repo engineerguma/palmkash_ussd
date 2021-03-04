@@ -486,7 +486,7 @@ function getRouteReference($msisdn,$map_id){
             $response['amount']=$amount[0]['input_value'];
             $response['student_name']=$response['result']['last_name']." ".$response['result']['first_name'];
             $return_response=$response;
-          }else if(isset($response['error'])){
+          }else if(isset($response['status'])&&$response['result']==''){
               $menu=null;
               $menu['error_code'] = $this->GetResponseMsg(106);
               $menu['account_number'] = $params['account_number'];
