@@ -295,7 +295,7 @@ function CompletePocketMoneyPayment($params){
       }else{
         $result = $this->mod->SendGetByCURL($url_data['url'],$params,$header_extras);
       }
-        $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest SendByCURL Response XML ' . $result, 2);
+    //    $this->log->ExeLog($params, 'CorePalmKash::CompleteRequest SendByCURL Response XML ' . $result, 2);
 
             $response = $this->ParseRequest($params, $result);
 
