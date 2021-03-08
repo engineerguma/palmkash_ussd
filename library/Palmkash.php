@@ -481,10 +481,12 @@ function getRouteReference($msisdn,$map_id){
 
           $params['account_number']=$student_account[0]['input_value'];
           $response = $this->kash->ProcessGetPMStudentDetails($params);
+          //print_r($response);die();
           if(isset($response['status'])&&strtolower($response['status'])=='success'){
 
             $response['amount']=$amount[0]['input_value'];
             $response['student_name']=$response['result']['last_name']." ".$response['result']['first_name'];
+            $response['school']=$response['result']['school'];
             $return_response=$response;
           }else if(isset($response['status'])&&$response['result']==''){
               $menu=null;
