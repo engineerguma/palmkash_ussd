@@ -9,6 +9,7 @@ define('DB_USER'  ,$conf['datastore']['duser']);
 define('DB_PASS'  ,$conf['datastore']['dpass']);
 define('DB_NAME'  ,$conf['datastore']['dname']);
 
+define('ENVIRONMENT'  ,$conf['datastore']['env']);
 /*
  * Encryption Algo
  */

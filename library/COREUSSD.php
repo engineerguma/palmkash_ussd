@@ -28,8 +28,15 @@ class COREUSSD extends Palmkash {
     }
 
     function MenuOptionHandler($params, $status) {
-       $access = $this->VerifyMobile($params);
-       if (empty($access)==false) {
+      if(ENVIRONMENT=='dev'){
+     $access = $this->VerifyMobile($params);
+       if (empty($access)==true) {
+         $call_fxn[0]['ussd_new_state'] =  35;
+
+        $response = $this->DisplayMenu($params, $call_fxn);
+        return $response;
+       }
+        }
         if ($status == 0) {
             //No State Exists
 
@@ -66,9 +73,6 @@ class COREUSSD extends Palmkash {
             $this->log->ExeLog($params, "COREUSSD::MenuOptionHandler Continued Session Returned Function To Call..." . $call_fxn[0]['ussd_new_state'], 2);
         }
 
-      } else{ //not allowed access
-                   $call_fxn[0]['ussd_new_state'] =  35;
-      }
         $response = $this->DisplayMenu($params, $call_fxn);
         return $response;
     }
