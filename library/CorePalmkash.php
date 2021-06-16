@@ -229,7 +229,7 @@ function CompletePocketMoneyPayment($params){
      $routing =$this->mod->getMerchantRouting($params['merchant']);
        //print_r($routing);die();
         $url_data = array(
-          "url"=>$routing[0]['merchant_url'].'api/v1/student/'.$params['account_number'],
+          "url"=>$routing[0]['merchant_url'].'api/v1/student/'.$params['account_number'].'/'.$routing[0]['search_key'],
           "method" => 'GET',
         );
 

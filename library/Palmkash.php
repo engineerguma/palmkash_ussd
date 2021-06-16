@@ -23,15 +23,6 @@ return $res[0]['record_id'];
 }
 
 
-function GetSavedSelections($params){
-
-
-  $res = $this->db->SelectData("SELECT * FROM betting_selection_store WHERE session_id='".$params['sessionId']."' AND msisdn='".$params['msisdn']."' ");
-
-return $res;
-}
-
-
 
 
 function getReference($msisdn,$map_id){
