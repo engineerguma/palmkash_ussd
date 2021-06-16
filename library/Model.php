@@ -45,6 +45,11 @@ class Model {
                 array('error' => $error));
     }
 
+    function GetResponseMsgByStatus($error){
+      return $this->db->SelectData("SELECT * FROM palm_ussd_response_codes WHERE status_code=:status_code",
+                    array('status_code' => $error));
+    }
+
     function GetStateFull($state){
         return $this->db->SelectData("SELECT * FROM palm_ussd_states s LEFT OUTER JOIN palm_ussd_states_text t
                 ON s.state_id=t.state_id WHERE s.state_id=:id", array('id' => $state));

@@ -371,13 +371,19 @@ function getRouteReference($msisdn,$map_id){
       $response['amount']=$amount[0]['input_value'];
       $response['student_name']=$response['name'];
       $return_response=$response;
-    }else if(isset($response['error'])){
+    }else if(isset($response['error'])&&isset($response['status_code'])){
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsgByStatus($response['status_code']);
+        $menu['account_number'] = $params['account_number'];
+         $this->OperationWatch($params,20);
+      $return_response=$menu;
+       }else if(isset($response['error'])){
         $menu=null;
         $menu['error_code'] = $this->GetResponseMsg(106);
         $menu['account_number'] = $params['account_number'];
          $this->OperationWatch($params,20);
       $return_response=$menu;
-        }else{
+      }else{
         $menu=null;
         $menu['error_code'] = $this->GetResponseMsg(105);
          $this->OperationWatch($params,1);
