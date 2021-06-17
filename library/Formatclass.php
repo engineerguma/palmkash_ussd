@@ -39,6 +39,7 @@ class Formatclass {
         'message' => 'respmessage',
         'description' => 'respmessage',
         'status' => 'status',
+        'status_code' => 'status_code',
         'error' => 'error',
         'transaction_status' => 'status',
         'result' => 'result',
