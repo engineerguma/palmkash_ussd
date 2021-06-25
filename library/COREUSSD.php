@@ -201,6 +201,9 @@ class COREUSSD extends Palmkash {
 			if(isset($array['total_amount'])){
 	          $new_text = str_replace("[TOTAL]", $array['total_amount'], $new_text);
 			}
+			if(isset($array['charge'])){
+	          $new_text = str_replace("[CHARGE]", $array['charge'], $new_text);
+			}
 
 
         return $new_text;

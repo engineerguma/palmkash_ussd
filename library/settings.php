@@ -10,6 +10,8 @@ define('DB_PASS'  ,$conf['datastore']['dpass']);
 define('DB_NAME'  ,$conf['datastore']['dname']);
 
 define('ENVIRONMENT'  ,$conf['datastore']['env']);
+
+define('SCHOOL_CHARGE'  ,$conf['CHARGES']['school_fee_charge']);
 /*
  * Encryption Algo
  */

@@ -461,6 +461,7 @@ function getRouteReference($msisdn,$map_id){
 
     if(isset($response['status'])&&strtolower($response['status'])=='pending'){
      $return_response=$response;
+     $return_response['charge'] = SCHOOL_CHARGE;
     }else{
         $menu=null;
         $menu['error_code'] = $this->GetResponseMsg(107);
