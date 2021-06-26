@@ -370,6 +370,7 @@ function getRouteReference($msisdn,$map_id){
 
       $response['amount']=$amount[0]['input_value'];
       $response['student_name']=$response['name'];
+      $response['charge']=SCHOOL_CHARGE;
       $return_response=$response;
     }else if(isset($response['error'])&&isset($response['status_code'])){
         $menu=null;
@@ -430,6 +431,7 @@ function getRouteReference($msisdn,$map_id){
 
         $response['amount']=$amount[0]['input_value'];
         $response['student_name']=$response['name'];
+        $response['charge']=SCHOOL_CHARGE;
         $return_response=$response;
       }else if(isset($response['error'])){
           $menu=null;
@@ -461,7 +463,6 @@ function getRouteReference($msisdn,$map_id){
 
     if(isset($response['status'])&&strtolower($response['status'])=='pending'){
      $return_response=$response;
-     $return_response['charge'] = SCHOOL_CHARGE;
     }else{
         $menu=null;
         $menu['error_code'] = $this->GetResponseMsg(107);
@@ -485,6 +486,7 @@ function getRouteReference($msisdn,$map_id){
             $response['amount']=$amount[0]['input_value'];
             $response['student_name']=$response['result']['last_name']." ".$response['result']['first_name'];
             $response['school']=$response['result']['school'];
+            $response['charge']=SCHOOL_CHARGE;
             $return_response=$response;
           }else if(isset($response['status'])&&$response['result']==''){
               $menu=null;
