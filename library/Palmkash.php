@@ -547,7 +547,7 @@ function getRouteReference($msisdn,$map_id){
 
         $ticket_ref = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'ticket_class')."' ");
       //print_r($ticket_ref);die();
-        $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref[0]['input_value']."' AND  event_ref='".$event_ref[0]['input_value']."' ");
+        $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref[0]['input_value']."' AND  event_ref='".$event_ref[0]['input_value']."' AND session_id='".$params['sessionId']."' ");
         $no_tickets = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'tickets_number')."' ");
 
         $user = $this->getRegistration($params);
@@ -584,12 +584,12 @@ function getRouteReference($msisdn,$map_id){
 
           $menu=null;
           $event_ref = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'single_event')."' ");
-          $event = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event_ref[0]['input_value']."' ");
+          $event = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event_ref[0]['input_value']."' AND session_id='".$params['sessionId']."' ");
           $menu['event']=$event[0]['name'];
           $menu['venue']=$event[0]['venue'];
           $ticket_ref = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'ticket_class')."' ");
         //print_r($ticket_ref);die();
-          $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref[0]['input_value']."' AND  event_ref='".$event_ref[0]['input_value']."' ");
+        $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref[0]['input_value']."' AND  event_ref='".$event_ref[0]['input_value']."' AND session_id='".$params['sessionId']."' ");
           $menu['ticket_class']=$ticket_class[0]['name'];
           $menu['amount']=number_format($ticket_class[0]['amount']);
 
@@ -625,7 +625,7 @@ function getRouteReference($msisdn,$map_id){
   function ProcessCategoryEvents($params){
 
     $category = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'event_category')."' ");
-     $category_id = $this->db->SelectData("SELECT * FROM event_categories WHERE ref_id='".$category[0]['input_value']."' ");
+    $category_id = $this->db->SelectData("SELECT * FROM event_categories WHERE ref_id='".$category[0]['input_value']."' AND session_id='".$params['sessionId']."' ");
      $params['category_id']=$category_id[0]['api_id'];
      //$tickets = $this->db->SelectData("SELECT * FROM event_tickets WHERE event_ref='".$event_id[0]['ref_id']."' ");
      if(empty($category_id)==false){
@@ -653,11 +653,11 @@ function getRouteReference($msisdn,$map_id){
   function ProcessGetEventTicketClasses($params){
 
     $event = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'single_event')."' ");
-     $event_id = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event[0]['input_value']."' ");
+     $event_id = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event[0]['input_value']."' AND session_id='".$params['sessionId']."' ");
      $xml=null;
      $menu=null;
      if(empty($event_id)==false){
-       $tickets = $this->db->SelectData("SELECT * FROM event_tickets WHERE event_ref='".$event_id[0]['ref_id']."' ");
+       $tickets = $this->db->SelectData("SELECT * FROM event_tickets WHERE event_ref='".$event_id[0]['ref_id']."' AND session_id='".$params['sessionId']."' ");
         $i=1;
        foreach($tickets as $key=>$value){
        $xml .=$value['ref_id'].') '.$value['name']." ".number_format($value['amount']).PHP_EOL;
