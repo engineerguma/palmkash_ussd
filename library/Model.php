@@ -193,7 +193,7 @@ class Model {
                     $this->ArrayToXML($value, $xml);
                 }
             } else {
-                $xml->addChild("$key", "$value");
+              $xml->addChild("$key",htmlspecialchars($value));
             }
         }
     }
