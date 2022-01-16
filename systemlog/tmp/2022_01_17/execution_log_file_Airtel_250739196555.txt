@@ -1,0 +1,681 @@
+[LOG START]
+[2022-01-17 00:13:44] Airtel::Index Function decoded input=939&sessionid=1573331239&msisdn=250739196555&new_request=1?input=939&sessionid=1573331239&msisdn=250739196555&new_request=1 and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331239',
+  'msisdn' => '250739196555',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-17 00:13:44] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2022-01-17 00:13:44] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2022-01-17 00:13:45] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-17 0:13:45',
+  'session_id' => '1573331239',
+  'telephone_number' => '250739196555',
+)
+[2022-01-17 00:13:45] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-17 00:13:45] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-17 00:13:45] COREUSSD::External function call Call Result 1
+[2022-01-17 00:13:45] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-17 00:13:45] COREUSSD::ReplacePlaceHolders Fired for Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit With Data 1
+[2022-01-17 00:13:45] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196555',
+  'sessionid' => '1573331239',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+  'sessionId' => '1573331239',
+)
+[LOG STOP]
+[LOG START]
+[2022-01-17 00:15:14] Airtel::Index Function decoded input=939&sessionid=1573331240&msisdn=250739196555&new_request=1?input=939&sessionid=1573331240&msisdn=250739196555&new_request=1 and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331240',
+  'msisdn' => '250739196555',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-17 00:15:14] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2022-01-17 00:15:14] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2022-01-17 00:15:14] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-17 0:15:14',
+  'session_id' => '1573331240',
+  'telephone_number' => '250739196555',
+)
+[2022-01-17 00:15:15] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-17 00:15:15] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-17 00:15:15] COREUSSD::External function call Call Result 1
+[2022-01-17 00:15:15] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-17 00:15:15] COREUSSD::ReplacePlaceHolders Fired for Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit With Data 1
+[2022-01-17 00:15:15] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196555',
+  'sessionid' => '1573331240',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+  'sessionId' => '1573331240',
+)
+[LOG STOP]
+[LOG START]
+[2022-01-17 00:42:23] Airtel::Index Function decoded input=939&sessionid=1573331241&msisdn=250739196555&new_request=1?input=939&sessionid=1573331241&msisdn=250739196555&new_request=1 and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331241',
+  'msisdn' => '250739196555',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-17 00:42:23] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2022-01-17 00:42:23] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2022-01-17 00:42:23] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-17 0:42:23',
+  'session_id' => '1573331241',
+  'telephone_number' => '250739196555',
+)
+[2022-01-17 00:42:23] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-17 00:42:23] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-17 00:42:23] COREUSSD::External function call Call Result 1
+[2022-01-17 00:42:23] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-17 00:42:23] COREUSSD::ReplacePlaceHolders Fired for Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit With Data 1
+[2022-01-17 00:42:23] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196555',
+  'sessionid' => '1573331241',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+  'sessionId' => '1573331241',
+)
+[LOG STOP]
+[LOG START]
+[2022-01-17 00:44:51] Airtel::Index Function decoded input=939&sessionid=1573331242&msisdn=250739196555&new_request=1?input=939&sessionid=1573331242&msisdn=250739196555&new_request=1 and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331242',
+  'msisdn' => '250739196555',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-17 00:44:51] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2022-01-17 00:44:51] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2022-01-17 00:44:51] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-17 0:44:51',
+  'session_id' => '1573331242',
+  'telephone_number' => '250739196555',
+)
+[2022-01-17 00:44:51] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-17 00:44:51] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-17 00:44:52] COREUSSD::External function call Call Result 1
+[2022-01-17 00:44:52] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-17 00:44:52] COREUSSD::ReplacePlaceHolders Fired for Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit With Data 1
+[2022-01-17 00:44:52] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196555',
+  'sessionid' => '1573331242',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+  'sessionId' => '1573331242',
+)
+[LOG STOP]
+[LOG START]
+[2022-01-17 00:45:59] Airtel::Index Function decoded input=939&sessionid=1573331242&msisdn=250739196555&new_request=1&clean-session?input=939&sessionid=1573331242&msisdn=250739196555&new_request=1&clean-session and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331242',
+  'msisdn' => '250739196555',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-17 00:45:59] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2022-01-17 00:45:59] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '104209',
+    'session_id' => '1573331242',
+    'telephone_number' => '250739196555',
+    'previous_state' => NULL,
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2022-01-17 00:45:59] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 939
+[2022-01-17 00:45:59] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+)
+[2022-01-17 00:45:59] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...1
+[2022-01-17 00:45:59] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => 1,
+)
+[2022-01-17 00:45:59] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-17 0:45:59',
+  'session_id' => '1573331242',
+  'telephone_number' => '250739196555',
+)
+[2022-01-17 00:45:59] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-17 00:45:59] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-17 00:45:59] COREUSSD::External function call Call Result 1
+[2022-01-17 00:45:59] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-17 00:45:59] COREUSSD::ReplacePlaceHolders Fired for Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit With Data 1
+[2022-01-17 00:45:59] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196555',
+  'sessionid' => '1573331242',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+  'sessionId' => '1573331242',
+)
+[LOG STOP]
+[LOG START]
+[2022-01-17 00:46:20] Airtel::Index Function decoded input=939&sessionid=1573331242&msisdn=250739196555&new_request=1&clean=clean-session?input=939&sessionid=1573331242&msisdn=250739196555&new_request=1&clean=clean-session and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331242',
+  'msisdn' => '250739196555',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-17 00:46:20] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2022-01-17 00:46:20] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '104209',
+    'session_id' => '1573331242',
+    'telephone_number' => '250739196555',
+    'previous_state' => '1',
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2022-01-17 00:46:20] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 939
+[2022-01-17 00:46:20] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+)
+[2022-01-17 00:46:20] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...1
+[2022-01-17 00:46:20] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => 1,
+)
+[2022-01-17 00:46:20] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-17 0:46:20',
+  'session_id' => '1573331242',
+  'telephone_number' => '250739196555',
+)
+[2022-01-17 00:46:20] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-17 00:46:20] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-17 00:46:20] COREUSSD::External function call Call Result 1
+[2022-01-17 00:46:20] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-17 00:46:20] COREUSSD::ReplacePlaceHolders Fired for Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit With Data 1
+[2022-01-17 00:46:20] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196555',
+  'sessionid' => '1573331242',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+  'sessionId' => '1573331242',
+)
+[LOG STOP]
+[LOG START]
+[2022-01-17 00:47:41] Airtel::Index Function decoded input=939&sessionid=1573331242&msisdn=250739196555&new_request=1&clean=clean-session?input=939&sessionid=1573331242&msisdn=250739196555&new_request=1&clean=clean-session and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331242',
+  'msisdn' => '250739196555',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-17 00:47:41] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2022-01-17 00:47:41] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '104209',
+    'session_id' => '1573331242',
+    'telephone_number' => '250739196555',
+    'previous_state' => '1',
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2022-01-17 00:47:41] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 939
+[2022-01-17 00:47:41] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+)
+[2022-01-17 00:47:41] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...1
+[2022-01-17 00:47:41] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => 1,
+)
+[2022-01-17 00:47:41] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-17 0:47:41',
+  'session_id' => '1573331242',
+  'telephone_number' => '250739196555',
+)
+[2022-01-17 00:47:41] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-17 00:47:41] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-17 00:47:41] COREUSSD::External function call Call Result 1
+[2022-01-17 00:47:41] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-17 00:47:41] COREUSSD::ReplacePlaceHolders Fired for Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit With Data 1
+[2022-01-17 00:47:41] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196555',
+  'sessionid' => '1573331242',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+  'sessionId' => '1573331242',
+)
+[LOG STOP]
+[LOG START]
+[2022-01-17 00:51:15] Airtel::Index Function decoded input=939&sessionid=1573331243&msisdn=250739196555&new_request=1?input=939&sessionid=1573331243&msisdn=250739196555&new_request=1 and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331243',
+  'msisdn' => '250739196555',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-17 00:51:15] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2022-01-17 00:51:15] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2022-01-17 00:51:15] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-17 0:51:15',
+  'session_id' => '1573331243',
+  'telephone_number' => '250739196555',
+)
+[2022-01-17 00:51:15] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-17 00:51:15] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-17 00:51:15] COREUSSD::External function call Call Result 1
+[2022-01-17 00:51:15] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-17 00:51:15] COREUSSD::ReplacePlaceHolders Fired for Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit With Data 1
+[2022-01-17 00:51:15] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196555',
+  'sessionid' => '1573331243',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+  'sessionId' => '1573331243',
+)
+[LOG STOP]
+[LOG START]
+[2022-01-17 00:51:40] Airtel::Index Function decoded input=939&sessionid=1573331243&msisdn=250739196555&new_request=1?input=939&sessionid=1573331243&msisdn=250739196555&new_request=1 and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331243',
+  'msisdn' => '250739196555',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-17 00:51:40] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2022-01-17 00:51:40] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '104210',
+    'session_id' => '1573331243',
+    'telephone_number' => '250739196555',
+    'previous_state' => NULL,
+    'current_state' => '1',
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+  ),
+)
+[2022-01-17 00:51:40] COREUSSD::MenuOptionHandler Serching For Option From 1 When User Choice Is 939
+[2022-01-17 00:51:40] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+)
+[2022-01-17 00:51:40] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...1
+[2022-01-17 00:51:41] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => 1,
+)
+[2022-01-17 00:51:41] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-17 0:51:41',
+  'session_id' => '1573331243',
+  'telephone_number' => '250739196555',
+)
+[2022-01-17 00:51:41] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-17 00:51:41] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-17 00:51:41] COREUSSD::External function call Call Result 1
+[2022-01-17 00:51:41] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-17 00:51:41] COREUSSD::ReplacePlaceHolders Fired for Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit With Data 1
+[2022-01-17 00:51:41] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196555',
+  'sessionid' => '1573331243',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+  'sessionId' => '1573331243',
+)
+[LOG STOP]

@@ -1,0 +1,164 @@
+[LOG START]
+[2022-01-16 23:37:04] Airtel::Index Function decoded input=939&sessionid=1573331231&msisdn=250739196556&new_request=1?input=939&sessionid=1573331231&msisdn=250739196556&new_request=1 and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331231',
+  'msisdn' => '250739196556',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-16 23:37:04] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 0
+[2022-01-16 23:37:04] COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ...1
+[2022-01-16 23:37:05] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-16 23:37:05',
+  'session_id' => '1573331231',
+  'telephone_number' => '250739196556',
+)
+[2022-01-16 23:37:05] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '1',
+    'state_type' => 'menuchoice',
+    'input_field_name' => 'menu_choice',
+    'state_title' => 'Welcome Screen',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'CheckRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '1',
+    'text_en' => 'Palmkash Platform
+1.School
+2.Bus Booking
+3.Sports/Events
+4.My Account
+5.Exit',
+    'text_kin' => 'Palmkash Platform
+1.Ikigo cy\'amashuri
+2.Itike ya bisi
+3.Itike y\'umupira
+4.Konti Yanjye
+5.Sohoka',
+  ),
+)
+[2022-01-16 23:37:05] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to CheckRegistration
+[2022-01-16 23:37:05] Model::SetCurrentState Post Data.array (
+  'previous_state' => '1',
+  'current_state' => 15,
+)
+[2022-01-16 23:37:05] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-16 23:37:05',
+  'session_id' => '1573331231',
+  'telephone_number' => '250739196556',
+)
+[2022-01-16 23:37:05] COREUSSD::External function call Call Result array (
+  'language' => 1,
+)
+[2022-01-16 23:37:05] COREUSSD::MenuArray Session Language Is text_en
+[2022-01-16 23:37:05] COREUSSD::ReplacePlaceHolders Fired for Select Language
+1. Kinyarwanda
+2. English With Data array (
+  'language' => 1,
+)
+[2022-01-16 23:37:05] Mtnrwanda_Model::Handler Returning XML Response array (
+  'msisdn' => '250739196556',
+  'sessionid' => '1573331231',
+  'freeflow' => 
+  array (
+    'freeflowState' => 'FC',
+  ),
+  'applicationResponse' => 'Select Language
+1. Kinyarwanda
+2. English',
+  'sessionId' => '1573331231',
+)
+[LOG STOP]
+[LOG START]
+[2022-01-16 23:37:05] Airtel::Index Function decoded input=939&sessionid=1573331231&msisdn=250739196556&new_request=1?input=939&sessionid=1573331231&msisdn=250739196556&new_request=1 and Standard Array array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331231',
+  'msisdn' => '250739196556',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+)
+[2022-01-16 23:37:05] Mtnrwanda_Model::Handler ManageRequestSession Returning Status 1
+[2022-01-16 23:37:05] COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...array (
+  0 => 
+  array (
+    'record_id' => '104201',
+    'session_id' => '1573331231',
+    'telephone_number' => '250739196556',
+    'previous_state' => '1',
+    'current_state' => '15',
+    'state_id' => '15',
+    'state_type' => 'input',
+    'input_field_name' => 'reg_language',
+    'state_title' => 'Registration Menu Language Registration',
+    'fxn_call_flag' => '0',
+    'call_fxn_name' => '',
+    'state_indicator' => 'FC',
+  ),
+)
+[2022-01-16 23:37:05] Model::StoreInputValues Called With Data array (
+  'subscriberInput' => '939',
+  'sessionId' => '1573331231',
+  'msisdn' => '250739196556',
+  'new_request' => '1',
+  'operator' => 'Airtel',
+) And array (
+  'record_id' => '104201',
+  'session_id' => '1573331231',
+  'telephone_number' => '250739196556',
+  'previous_state' => '1',
+  'current_state' => '15',
+  'state_id' => '15',
+  'state_type' => 'input',
+  'input_field_name' => 'reg_language',
+  'state_title' => 'Registration Menu Language Registration',
+  'fxn_call_flag' => '0',
+  'call_fxn_name' => '',
+  'state_indicator' => 'FC',
+)
+[2022-01-16 23:37:05] Model::StoreInputValues preparing to post array (
+  'date' => '2022-01-16 23:37:05',
+  'session_id' => '1573331231',
+  'state_id' => '15',
+  'telephone_number' => '250739196556',
+  'input_name' => 'reg_language',
+  'input_value' => '939',
+)
+[2022-01-16 23:37:05] COREUSSD::MenuOptionHandler Serching For Option From 15 When User Choice Is -1
+[2022-01-16 23:37:05] COREUSSD::MenuOptionHandler::GetNextState Returned state array (
+  0 => 
+  array (
+    'record_id' => '16',
+    'ussd_state' => '15',
+    'ussd_choice' => '-1',
+    'ussd_name' => 'Go to First name Registration',
+    'ussd_docode' => NULL,
+    'ussd_new_state' => '16',
+  ),
+)
+[2022-01-16 23:37:05] COREUSSD::MenuOptionHandler Continued Session Returned Function To Call...16
+[2022-01-16 23:37:06] Model::SetCurrentState Post Data.array (
+  'previous_state' => '15',
+  'current_state' => '16',
+)
+[2022-01-16 23:37:06] Model::LogPickedOptionsPost Data.array (
+  'request_time' => '2022-01-16 23:37:06',
+  'session_id' => '1573331231',
+  'telephone_number' => '250739196556',
+)
+[2022-01-16 23:37:06] COREUSSD::DisplayMenu GetStateFull Returning Array for the menu array (
+  0 => 
+  array (
+    'state_id' => '16',
+    'state_type' => 'input',
+    'input_field_name' => 'first_name',
+    'state_title' => 'Registration Menu FIrstname',
+    'fxn_call_flag' => '1',
+    'call_fxn_name' => 'ProcessLanguageRegistration',
+    'state_indicator' => 'FC',
+    'record_id' => '12',
+    'text_en' => 'Enter first name',
+    'text_kin' => 'Shyiramo Izina rya mbere',
+  ),
+)
+[2022-01-16 23:37:06] COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to ProcessLanguageRegistration

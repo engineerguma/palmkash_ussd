@@ -16,6 +16,7 @@ class Formatclass {
         'msisdn' => 'msisdn',
         'sessionId' => 'sessionId',
         'session' => 'sessionId',
+        'sessionid' => 'sessionId',
         'shortcode' => 'subscriberInput',
         'mode' => 'mode',
         'response' => 'subscriberInput',
@@ -27,6 +28,7 @@ class Formatclass {
         'string' => 'string',
         'newRequest' => 'newRequest',
         'subscriberInput' => 'subscriberInput',
+        'input' => 'subscriberInput',
         'transactionId' => 'transactionId',
         'transaction_reference_number' => 'sent_ref',
         'gateway_reference' => 'gateway_ref',
@@ -52,6 +54,7 @@ class Formatclass {
         'outstanding_balance'=>'outstanding_balance',
         'class'=>'class',
         'school'=>'school',
+        'new_request' => 'new_request',  //Airtel ussed        
     );
 
 
