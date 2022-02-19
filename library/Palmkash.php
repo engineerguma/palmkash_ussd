@@ -25,6 +25,20 @@ return $res[0]['record_id'];
 
 
 
+function getPaymentTextMsg($params){
+
+  $ln = $this->GetSessionLanguage($params);
+  $network = $params['operator'];
+  $message_param= strtoupper($params['operator']).'_PAYMENT_MESSAGE_'.strtoupper($ln[0]['session_language_pref']);
+  $message =PAYMENT_SUBMITTED_MSG[$message_param];
+  $msg_array =array();
+  $msg_array[0]['text_'.$ln[0]['session_language_pref']]=$message;
+  return $msg_array;
+}
+
+
+
+
 function getReference($msisdn,$map_id){
 
        $res = $this->db->SelectData("SELECT * FROM data_mapper WHERE map_id='".$map_id."'
@@ -563,8 +577,11 @@ function getRouteReference($msisdn,$map_id){
 
          $response = $this->kash->CompleteEventsBookingRequest($params);
          if(isset($response['status'])&&strtolower($response['status'])=='success'){
-
-            $return_response=$response;
+            //$return_response=$response;
+            //added these below to change message
+            $menu=null;
+            $menu['error_code'] = getPaymentTextMsg($params);
+            $return_response=$menu;
           }else if(isset($response['error'])){
              $menu=null;
              $menu['error_code'] = $this->GetResponseMsg(101);

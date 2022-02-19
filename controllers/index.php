@@ -40,16 +40,17 @@ class Index extends Controller {
 
                 $params=array (
           'requesttype' => 'pull',
-          'sessionId' => '12456781',
+          'sessionId' => '16154464772256971',
           'transactionId' => '0734586934',
-          'msisdn' => '256778591026',
+          'msisdn' => '250788351739',
           'newRequest' => '1',
           'flowState' => 'FD',
           'subscriberInput' => '737',
           'operator' => 'mtnrwanda',
         );
                $this->palm = new Palmkash();
-               $response= $this->palm->ProcessGetOriginByName($params);
+            //   $response= $this->palm->ProcessGetOriginByName($params);
+               $response= $this->palm->getPaymentTextMsg($params);
 
               print_r($response);
                die();
