@@ -17,3 +17,5 @@ define('SCHOOL_CHARGE'  ,$conf['CHARGES']['school_fee_charge']);
  */
 define('PALMKASH_TRANSPORT'  ,$conf['api_connect']['access_url']);
 define('WALLET_TOKEN'  ,$conf['api_connect']['token']);
+
+define('PAYMENT_SUBMITTED_MSG'  ,$conf['PAYMENT_MESSAGES']);

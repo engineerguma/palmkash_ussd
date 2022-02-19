@@ -608,13 +608,13 @@ function getRouteReference($msisdn,$map_id){
         $return_response=$ret;
     }else if(isset($response['error'])){
         $menu=null;
-        $menu['error_code'] = $this->GetResponseMsg(106);
+        $menu['error_code'] = $this->GetResponseMsg(109);
         $menu['account_number'] = $params['account_number'];
          $this->OperationWatch($params,20);
       $return_response=$menu;
     }else{
         $menu=null;
-        $menu['error_code'] = $this->GetResponseMsg(105);
+        $menu['error_code'] = $this->GetResponseMsg(109);
          $this->OperationWatch($params,1);
        $return_response=$menu;
      }
@@ -638,7 +638,7 @@ function getRouteReference($msisdn,$map_id){
      $return_response=$ret;
     }else{
         $menu=null;
-        $menu['error_code'] = $this->GetResponseMsg(107);
+        $menu['error_code'] = $this->GetResponseMsg(109);
        $return_response=$menu;
      }
    }else{
