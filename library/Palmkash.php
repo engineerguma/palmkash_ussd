@@ -106,7 +106,7 @@ function getRouteReference($msisdn,$map_id){
        $lang= $res[0]['input_value'];
         $this->kash->mod->SetLanguagePref($params,$lang);
         $this->kash->mod->UpdateLanguagePref($params,$lang);
-         $response=1;
+        $response=1;
         return $response;
     }
 
@@ -406,7 +406,7 @@ function getRouteReference($msisdn,$map_id){
         }
 
    return $return_response;
-  }
+      }
 
 
 
@@ -747,7 +747,8 @@ function getRouteReference($msisdn,$map_id){
       $this->db->InsertData("event_tickets", $TicketData);
         $j++;
           }
-     	$xml .=$i.') '.$value[$i-1]['name']." - ".$value[$i-1]['venue'].PHP_EOL;
+     //	$xml .=$i.') '.$value[$i-1]['name']." - ".$value[$i-1]['venue'].PHP_EOL;
+     	$xml .=$i.') '.$value[$i-1]['name'].PHP_EOL;
         $i++;
     		}
         $menu['events'] = $xml;
