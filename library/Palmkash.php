@@ -580,7 +580,7 @@ function getRouteReference($msisdn,$map_id){
             //$return_response=$response;
             //added these below to change message
             $menu=null;
-            $menu['error_code'] = getPaymentTextMsg($params);
+            $menu['error_code'] = $this->getPaymentTextMsg($params);
             $return_response=$menu;
           }else if(isset($response['error'])){
              $menu=null;
