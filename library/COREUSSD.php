@@ -115,9 +115,9 @@ class COREUSSD extends Palmkash {
         } else {
             $ln_text = 'text_' . $ln[0]['session_language_pref'];
         }
-        $this->log->ExeLog($params, "COREUSSD::MenuArray Session Language Is " . $ln_text, 2);
+      //  $this->log->ExeLog($params, "COREUSSD::MenuArray Session Language Is " . $ln_text, 2);
 
-        //$this->log->ExeLog($params, "COREUSSD::DisplayMenu PrepareMenu No Remote Function Call Required", 2);
+        $this->log->ExeLog($params, "COREUSSD::DisplayMenu PrepareMenu Menu data ".var_export( $menu,true), 2);
         $prepared_response = $this->ReplacePlaceHolders($params, $menu[0][$ln_text], $result);
         $resp['state'] = $menu[0]['state_indicator'];
         $resp['msg_response'] = $prepared_response;

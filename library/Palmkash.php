@@ -33,6 +33,8 @@ function getPaymentTextMsg($params){
   $message =PAYMENT_SUBMITTED_MSG[$message_param];
   $msg_array =array();
   $msg_array[0]['text_'.$ln[0]['session_language_pref']]=$message;
+  $msg_array[0]['state_indicator']='FB';
+
   return $msg_array;
 }
 
@@ -74,6 +76,16 @@ function getRouteReference($msisdn,$map_id){
 
 
 
+    function IsRegistered($params) {
+        $response = $this->kash->mod->getRegistration($params);
+        if(empty($response)){
+         return 0;
+        }else{
+         return 1;
+
+        }
+    }
+
     function CheckRegistration($params) {
         $response = $this->kash->mod->getRegistration($params);
         if(empty($response)){
@@ -114,7 +126,7 @@ function getRouteReference($msisdn,$map_id){
     function ProcessUserRegistration($params) {
       $lang = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'reg_language')."' ");
       $fname = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'first_name')."' ");
-      $onames = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'first_name')."' ");
+      $onames = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'other_names')."' ");
        if($lang[0]['input_value']==1){
          $lang ='kin';
        }else{
@@ -626,8 +638,7 @@ function getRouteReference($msisdn,$map_id){
     }else if(isset($response['error'])){
         $menu=null;
         $menu['error_code'] = $this->GetResponseMsg(109);
-        $menu['account_number'] = $params['account_number'];
-         $this->OperationWatch($params,20);
+         $this->OperationWatch($params,1);
       $return_response=$menu;
     }else{
         $menu=null;

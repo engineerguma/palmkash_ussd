@@ -23,8 +23,8 @@ class Mtnrwanda extends Controller {
                     echo $response_xml;
 
                 }
-                if ($standard_array['requesttype'] == 'cleanup') {
-                    $this->model->SessionCleanUp($standard_array);
+                if (strtolower($standard_array['requesttype']) == 'cleanup') {
+                    $this->model->SessionCleanUp($request,$standard_array);
                 }
             }
         }
