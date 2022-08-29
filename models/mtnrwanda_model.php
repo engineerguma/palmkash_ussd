@@ -70,10 +70,16 @@ class Mtnrwanda_Model extends COREUSSD {
        $call_fxn = $this->GetNextState($state[0]['current_state'], -1);
        //print_r($call_fxn);die();
         $result = $this->ProcessCategoryEvents($params);
-      $this->log->ExeLog($params, 'Mtnrwanda_Model::Inside Option 3 categories ' . var_export($result, true), 2);
+
+      $this->log->ExeLog($params, 'Mtnrwanda_Model::ProcessCategoryEvents Inside Option 3 categories ' . var_export($result, true), 2);
 //////////////////////////////////////////////////////////////////////////////////////////
           $this->OperationWatch($params, $call_fxn[0]['ussd_new_state']);
-          $menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);
+          if(isset($result['error_code'])){
+            $menu = $result['error_code'];
+
+          }else{
+            $menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);    
+          }
           $ln = $this->GetSessionLanguage($params);
           if ($ln[0]['session_language_pref'] == '') {
               $ln_text = 'text_en';
