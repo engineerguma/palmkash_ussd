@@ -153,7 +153,7 @@ class Model {
         }
     }
 
-    function SessionCleanUp($params) {
+    function SessionCleanUp($request,$params) {
         $res = $this->db->SelectData("SELECT * FROM palm_log_session_data WHERE telephone_number=:tn AND session_id=:sid",
                 array('tn' => $params['msisdn'], 'sid' => $params['sessionId']));
         $postCS['session_status'] = 'closed';
