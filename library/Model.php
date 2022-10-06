@@ -156,9 +156,12 @@ class Model {
     function SessionCleanUp($request,$params) {
         $res = $this->db->SelectData("SELECT * FROM palm_log_session_data WHERE telephone_number=:tn AND session_id=:sid",
                 array('tn' => $params['msisdn'], 'sid' => $params['sessionId']));
+       if(empty($res)==false){
+        $postCS = array();
         $postCS['session_status'] = 'closed';
         $postCS['session_close_date'] = date('Y-m-d G:i:s');
         $this->db->UpdateData('palm_log_session_data', $postCS, "record_id = {$res[0]['record_id']}");
+      }
     }
 
     function StoreInputValues($params, $curr_state) {

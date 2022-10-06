@@ -30,7 +30,7 @@ class Mtnrwanda_Model extends COREUSSD {
 
           $response = $this->WriteResponseXML($response);
         //$response = $this->lion->WriteGeneralXMLFile($params,'uganda_response',$response);
-        $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler Returning XML Response ' . $response, 3);
+        $this->model->log->ExeLog($params, 'Mtnrwanda_Model::Handler Returning XML Response ' . $response, 3);
 
         return $response;
     }
@@ -78,7 +78,7 @@ class Mtnrwanda_Model extends COREUSSD {
             $menu = $result['error_code'];
 
           }else{
-            $menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);    
+            $menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);
           }
           $ln = $this->GetSessionLanguage($params);
           if ($ln[0]['session_language_pref'] == '') {
