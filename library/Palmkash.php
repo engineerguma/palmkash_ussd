@@ -10,19 +10,19 @@ class Palmkash extends Model {
 
 
     function GetBookingErrorCode($response){
-      $codes =array();
-  	  if(strpos(strtolower($response['respmessage']),'fully bought') !== false){
+          $codes =array();
+      	  if(strpos(strtolower($response),'fully bought') !== false){
 
-  		$codes['response_code']=110;
-  	  }else if(strpos(strtolower($response['respmessage']),'booked') !== false){
+      			$codes =110;
+      	  }else if(strpos(strtolower($response),'booked') !== false){
 
-  		$codes['response_code']=110;
-           }else{
+      			$codes =110;
+               }else{
 
-  		$codes['response_code']=104;
-  	  }
-  	 return $codes;
-    }
+      		$codes =104;
+      	  }
+      	 return $codes;
+         }
 
 
 
