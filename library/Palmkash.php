@@ -615,7 +615,7 @@ function getRouteReference($msisdn,$map_id){
              $menu['error_code'] = $this->GetResponseMsg(101);
               $this->OperationWatch($params,1);
             $return_response=$menu;
-           }else{
+          }else{
              $menu=null;
              $code = $this->GetBookingErrorCode($response['result']);
              $menu['error_code'] = $this->GetResponseMsg($code);
