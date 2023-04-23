@@ -176,6 +176,8 @@ class Model {
         );
         $this->log->ExeLog($params, "Model::StoreInputValues preparing to post " . var_export($postData, true), 2);
         $this->db->InsertData("palm_log_session_input_values", $postData);
+        $this->redis->StoreArrayRecords('log_session_input_values:'$params['sessionId'],$postData);
+        $this->redis->ExpireRecords('log_session_input_values:'$params['sessionId'],200);
     }
 
 

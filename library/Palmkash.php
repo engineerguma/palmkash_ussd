@@ -9,6 +9,22 @@ class Palmkash extends Model {
     }
 
 
+    function GetBookingErrorCode($response){
+      $codes =array();
+  	  if(strpos(strtolower($response['respmessage']),'fully bought') !== false){
+
+  		$codes['response_code']=110;
+  	  }else if(strpos(strtolower($response['respmessage']),'booked') !== false){
+
+  		$codes['response_code']=110;
+           }else{
+
+  		$codes['response_code']=104;
+  	  }
+  	 return $codes;
+    }
+
+
 
     function CheckMsidn($params) {
                  return $this->db->SelectData("SELECT * FROM palm_user_account WHERE msisdn='".$params['msisdn']."' AND status='active' ");
@@ -259,16 +275,16 @@ function getRouteReference($msisdn,$map_id){
         $route_time= $this->getRouteReference($params['msisdn'],$route[0]['input_value']);
         //$this->log->ExeLog($params, "Palmkash::ProcessGetConfirmationSummary getRouteReference ".var_export($route_time,true), 2);
 
-        $user = $this->getRegistration($params);
+         $user = $this->getRegistration($params);
          $params['names']=$user[0]['first_name'];
          $params['route_id']=$route_time[0]['route_id'];
          $params['route_type']=$route_time[0]['route_type'];
          $params['amount']=$route_time[0]['price'];
          $params['number_of_tickets']=$tickets[0]['input_value'];
            $language ='kinyarwanda';
-           if($user[0]['language']=='en'){
+         if($user[0]['language']=='en'){
              $language ='english';
-           }
+          }
          $params['language']=$language;
          $params['date_of_travel']=date('Y-m-d') ;
      //$this->log->ExeLog($params, "Palmkash::Before CompleteBookingRequest ".var_export($params,true), 2);
@@ -601,7 +617,9 @@ function getRouteReference($msisdn,$map_id){
             $return_response=$menu;
            }else{
              $menu=null;
-             $menu['error_code'] = $this->GetResponseMsg(104);
+             $code = $this->GetBookingErrorCode($response['result']);
+             $menu['error_code'] = $this->GetResponseMsg($code);
+            $menu['ticket_class']=$ticket_class[0]['name'];
               $this->OperationWatch($params,1);
             $return_response=$menu;
           }
