@@ -30,7 +30,7 @@ class Mtnrwanda_Model extends COREUSSD {
 
           $response = $this->WriteResponseXML($response);
         //$response = $this->lion->WriteGeneralXMLFile($params,'uganda_response',$response);
-        $this->model->ExeLog($params, 'Mtnrwanda_Model::Handler Returning XML Response ' . $response, 3);
+        $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler Returning XML Response ' . $response, 3);
 
         return $response;
     }
