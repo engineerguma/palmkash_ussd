@@ -21,7 +21,7 @@ $cleared =array();
     array_push($cleared,$value);
 
     }
-  print_r($cleared);die();
+
 return  $cleared;
 }
 
