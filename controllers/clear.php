@@ -10,7 +10,8 @@ class Clear extends Controller {
     function Index() {
 
 
-          return $this->model->ProcessClearTables();
+          $return = $this->model->ProcessClearTables();
+          exit();
 
         }
 
