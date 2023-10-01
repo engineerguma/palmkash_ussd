@@ -100,6 +100,13 @@ class Database extends PDO {
         $this->DBOperationLog($logdata);
     }
 
+
+    public function TruncateData($table) {
+        $sql_statement = "TRUNCATE TABLE $table";
+        return $this->exec($sql_statement);
+    }
+
+
     public function DBOperationLog($data) {
         $fieldNames = implode(', ', array_keys($data));
         $fieldInputs = ':' . implode(', :', array_keys($data));
