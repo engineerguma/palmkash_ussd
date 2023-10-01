@@ -11,6 +11,7 @@ class Clear extends Controller {
 
 
           $return = $this->model->ProcessClearTables();
+        //  print_r($return);die();          
           exit();
 
         }

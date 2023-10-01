@@ -2,6 +2,7 @@
 
 $conf = parse_ini_file("conf/config.ini",true);
 
+define('DOMAIN', $conf['urconnect']['ussd_domain']);
 define('DB_TYPE', $conf['datastore']['dtype']);
 /* PDN  */
 define('DB_HOST'  ,$conf['datastore']['dhost']);

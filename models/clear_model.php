@@ -10,12 +10,9 @@ class Clear_Model {
 
 function ProcessClearTables(){
 
-//  print_r(TO_CLEAR);die();
-
 $cleared =array();
   $tables =  explode(",", TO_CLEAR['list']);
 
-  //  $cleared = $this->db->TruncateData();
     foreach ($tables as $key => $value){
        $this->cldb->TruncateData($value);
     array_push($cleared,$value);
