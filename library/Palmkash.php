@@ -159,13 +159,16 @@ function getRouteReference($msisdn,$map_id){
 
     function SaveGasSelectionType($params){
       $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'menu_choice')."' ");
+      $states = $this->db->SelectData("SELECT previous_state,current_state FROM palm_log_current_state WHERE session_id='".$params['sessionId']."' ORDER BY record_id DESC LIMIT 1");
       $curr_state = array();
+      $curr_state['current_state'] = $states[0]['previous_state'];
       $curr_state['input_field_name'] = 'order_type';
+
       $temp_params  =$params;
       if($res[0]['input_value']==1){
       $temp_params['subscriberInput'] = 'refill';
       }else{
-        $temp_params['input_field_name'] = 'new';
+        $temp_params['subscriberInput'] = 'new';
       }
 
       $this->StoreInputValues($temp_params, $curr_state);
