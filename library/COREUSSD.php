@@ -51,6 +51,7 @@ class COREUSSD extends Palmkash {
                 $this->StoreInputValues($params, $state[0]);
                 $choice = '-1';
             } else {
+              $this->StoreInputValues($params, $state[0]);            
                 $choice = $params['subscriberInput'];
             }
             $this->log->ExeLog($params, "COREUSSD::MenuOptionHandler Serching For Option From " .

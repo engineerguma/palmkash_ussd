@@ -220,6 +220,62 @@ function CompletePocketMoneyPayment($params){
   return $response;
 }
 
+##################HOME GAS
+
+function HomegasVerifyRegistration($params){
+  $routing =$this->mod->getMerchantRouting('homegas');
+
+   $req = array(
+       'request_method' => 'CheckIfRegistered',
+       'token' => $routing[0]['merchant_token'],
+       'msisdn' => $params['msisdn'],
+   );
+      $url_data = array(
+     "url"=>$routing[0]['merchant_url'],
+     "method" => 'POST',
+   );
+   $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+   return $response;
+}
+
+function HomegasCompleteRegistration($params){
+  $routing =$this->mod->getMerchantRouting('homegas');
+
+   $req = array(
+       'request_method' => 'Register',
+       'token' => $routing[0]['merchant_token'],
+       'name' => $params['name'],
+       'address' => $params['address'],
+       'msisdn' => $params['msisdn']
+   );
+      $url_data = array(
+     "url"=>$routing[0]['merchant_url'],
+     "method" => 'POST',
+   );
+   $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+   return $response;
+}
+
+function HomegasCompleteGetProducts($params){
+  $routing =$this->mod->getMerchantRouting('homegas');
+
+   $req = array(
+       'request_method' => 'GetProducts',
+       'token' => $routing[0]['merchant_token'],
+       'order_type' => $params['msisdn'],
+       'cylinder_size' => $params['msisdn'],
+       'msisdn' => $params['msisdn']
+   );
+      $url_data = array(
+     "url"=>$routing[0]['merchant_url'],
+     "method" => 'POST',
+   );
+   $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+   return $response;
+}
+
+
+##############END Home Gas##############
 
 
 ////////////STUDENT SCHOOL FEES TRANSPORT

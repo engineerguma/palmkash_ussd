@@ -155,6 +155,58 @@ function getRouteReference($msisdn,$map_id){
       $response =1;
       return $response;
     }
+ ##################Home Gas #############################
+
+    function SaveGasSelectionType($params){
+      $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'menu_choice')."' ");
+      $curr_state = array();
+      $curr_state['input_field_name'] = 'order_type';
+      $temp_params  =$params;
+      if($res[0]['input_value']==1){
+      $temp_params['subscriberInput'] = 'refill';
+      }else{
+        $temp_params['input_field_name'] = 'new';
+      }
+
+      $this->StoreInputValues($temp_params, $curr_state);
+    }
+
+    function HomeGaSProcessGetProducts($params){
+      $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'menu_choice')."' ");
+      $curr_state = array();
+      if($res[0]['input_value']==1){
+      $curr_state['input_field_name'] = 'refill';
+      }else{
+        $curr_state['input_field_name'] = 'new';
+      }
+
+      $response = $this->kash->HomegasCompleteGetProducts($params);
+
+    }
+
+    function HomeGasCheckRegistration($params){
+      $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'menu_choice')."' ");
+          $response = $this->kash->HomegasVerifyRegistration($params);
+    }
+
+    Function HomeGasRegister(){
+
+$response = $this->kash->HomegasCompleteRegistration($params);
+
+    }
+
+    Function HomeGasGetProducts(){
+
+      $response = $this->kash->HomegasCompleteGetProducts($params);
+
+    }
+
+    Function HomeGasMakeOrder(){
+
+
+    }
+
+    ##############END of Home Gas
 
     function ProcessGetOriginByName($params) {
 
