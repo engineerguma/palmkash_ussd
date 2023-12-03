@@ -158,12 +158,11 @@ function getRouteReference($msisdn,$map_id){
  ##################Home Gas #############################
 
     function SaveGasSelectionType($params){
-      $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'menu_choice')."' ");
+      $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'menuchoice')."' ");
       $states = $this->db->SelectData("SELECT previous_state,current_state FROM palm_log_current_state WHERE session_id='".$params['sessionId']."' ORDER BY record_id DESC LIMIT 1");
       $curr_state = array();
       $curr_state['current_state'] = $states[0]['previous_state'];
       $curr_state['input_field_name'] = 'order_type';
-
       $temp_params  =$params;
       if($res[0]['input_value']==1){
       $temp_params['subscriberInput'] = 'refill';
@@ -172,42 +171,177 @@ function getRouteReference($msisdn,$map_id){
       }
 
       $this->StoreInputValues($temp_params, $curr_state);
+      $request = file_get_contents('conf/config_data.json');
+      $cylinder_sizes = json_decode($request,true);
+      $xml = null;
+      foreach ($cylinder_sizes['gas']['cylinders']['sizes'] as $key => $value) {
+         	$xml .=$value['id'].') '.$value['size'].$value['unit'].PHP_EOL;
+      }
+      $menu['options'] = $xml;
+      //  print_r($menu);die();
+     return $menu;
+
     }
 
     function HomeGaSProcessGetProducts($params){
-      $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'menu_choice')."' ");
+      $sizes = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'cylinder_size')."' ");
+      $order_type = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'order_type')."' ");
       $curr_state = array();
-      if($res[0]['input_value']==1){
-      $curr_state['input_field_name'] = 'refill';
+      $request = file_get_contents('conf/config_data.json');
+      $cylinder_sizes = json_decode($request,true);
+      $xml = null;
+      $search_key = array_search($sizes[0]['input_value'], array_column($cylinder_sizes['gas']['cylinders']['sizes'], 'id'));
+      $response = array();
+      if($search_key!=''){
+        $params['order_type'] = $order_type[0]['input_value'];
+        $params['cylinder_size'] = $cylinder_sizes['gas']['cylinders']['sizes'][$search_key]['size'];
+        $response_array = $this->kash->HomegasCompleteGetProducts($params);
+        if(isset($response_array['status'])&&$response_array['status']=='success'){
+        $products_array = $response_array['result'][2];
+        $response =  $this->SaveGasProductsReference($params,$products_array,$params['order_type']);
+        }
+        //$response = json_decode($response,true);
       }else{
-        $curr_state['input_field_name'] = 'new';
+
+        // Request failed try again
       }
 
-      $response = $this->kash->HomegasCompleteGetProducts($params);
+    return $response;
 
     }
 
     function HomeGasCheckRegistration($params){
-      $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'menu_choice')."' ");
-          $response = $this->kash->HomegasVerifyRegistration($params);
+
+    $response = $this->kash->HomegasVerifyRegistration($params);
+    $return_response = "";
+    if(isset($response['status'])&&strtolower($response['status'])=='success'){
+       $return_response=$response;
+     }else if(isset($response['status'])&&strtolower($response['status'])=='failed'&&strtolower($response['result']==false)){
+       //46
+       $menu=null;
+       $menu['error_code'] = $this->GetResponseMsg(111);
+       $this->OperationWatch($params,46);
+       $return_response=$menu;
+     }else{
+       $menu=null;
+       $menu['error_code'] = $this->GetResponseMsg(105);
+       $this->OperationWatch($params,14);
+       $return_response=$menu;
+      }
+
+      return $return_response;
     }
 
-    Function HomeGasRegister(){
+    Function HomeGasProcessRegistration($params){
 
-$response = $this->kash->HomegasCompleteRegistration($params);
+      $address = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'home_address')."' ");
+      $names = $this->kash->mod->getRegistration($params);
+      $params['address'] =  $address[0]['input_value'];
+      $this->kash->mod->SaveAddress($params,$names[0]['account_id']);
+      $params['name'] =  $names[0]['first_name']." ".$names[0]['last_name'];
+      $response = $this->kash->HomegasCompleteRegistration($params);
+      $return_response = "";
+      if(isset($response['status'])&&strtolower($response['status'])=='success'){
+         $return_response=$response;
+       }else{
+         $menu=null;
+         $menu['error_code'] = $this->GetResponseMsg(112);
+         $this->OperationWatch($params,14);
+         $return_response=$menu;
+         }
 
+    return $return_response;
     }
 
-    Function HomeGasGetProducts(){
+    Function ProcessOrderGasConfirmationSummary($params){
+      $chosen_gas = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'gas_type')."' ");
+      $gas_ref= $this->getGasTyypeReference($params['msisdn'],$chosen_gas[0]['input_value']);
+      $response = array();
+      if(!empty($gas_ref)){
+        $response['total_amount'] = $gas_ref[0]['gas_price'];
+        $response['size'] =  $gas_ref[0]['gas_size'];
+        $response['name'] =  $gas_ref[0]['gas_name'];
 
-      $response = $this->kash->HomegasCompleteGetProducts($params);
 
+      }else{
+      //Wrong input
+
+
+      }
+
+     return   $response;
     }
 
-    Function HomeGasMakeOrder(){
 
 
+        Function HomeGasCompleteorderRequest($params){
+          $chosen_gas = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'gas_type')."' ");
+          $gas_ref= $this->getGasTyypeReference($params['msisdn'],$chosen_gas[0]['input_value']);
+
+          $menu=null;
+          //$response['total_amount'] = $gas_ref[0]['gas_price'];
+          $params['size_id'] =  $gas_ref[0]['size_id'];
+          $params['order_type'] =  $gas_ref[0]['order_type'];
+          $params['actualgas_id'] =  $gas_ref[0]['gas_id'];
+          $response_array = $this->kash->HomegasCompleteOrder($params);
+          if(isset($response_array['status'])&&strtolower($response_array['status'])=='successfull'){
+             //$return_response=$response;
+             //added these below to change message
+             $menu['error_code'] = $this->getPaymentTextMsg($params);
+             $return_response=$menu;
+           }else if(isset($response['error'])){
+          $return_response=$menu;
+            }
+          return $return_response;
+          }
+
+
+    function getGasTyypeReference($msisdn,$map_id){
+           $res = $this->db->SelectData("SELECT * FROM palm_log_gas_reference WHERE ref_id='".$map_id."'
+                    AND msisdn=:msisdn", array('msisdn' => $msisdn));
+     return  $res;
     }
+
+
+    function SaveGasProductsReference($params,$array,$order_type){
+
+      $xml=null;
+      $menu=null;
+      $i=1;
+  	foreach($array['types'] as $key=>$value){
+      $postData[$i]['ref_id'] =$i;
+    	$postData[$i]['order_type'] = $order_type;
+   	  $postData[$i]['gas_size'] =$array['size'];
+   	  $postData[$i]['size_id'] =$array['id'];
+   	  $postData[$i]['gas_id'] =$value['id'];
+   	  $postData[$i]['gas_name'] =$value['name'];
+   	  $postData[$i]['gas_price'] =$value['price'];
+   	  $postData[$i]['gas_currency'] =$value['currency'];
+      $postData[$i]['msisdn'] =$params['msisdn'];
+      $postData[$i]['session_id'] =$params['sessionId'];
+
+   	$xml .=$i.') '.$value['name']."-".$value['currency']." ".number_format($value['price']).PHP_EOL;
+      $i++;
+  		}
+     $this->StoreGasProductsReferences($params,$postData);
+      //  print_r($menu);die();
+            $menu['options'] = $xml;
+  	 return $menu;
+    }
+
+
+
+    function StoreGasProductsReferences($params,$array){
+
+  		  $sth = $this->db->prepare("DELETE FROM palm_log_gas_reference where msisdn='".$params['msisdn']."'");
+  		  $sth->execute();
+     // $this->log->ExeLog($params, "Palmkash::StoreGasProductsReferences Before storage " .var_export($array,true), 2);
+  		foreach($array as $key=>$value){
+
+          $this->db->InsertData("palm_log_gas_reference", $value);
+  	  }
+
+  	}
 
     ##############END of Home Gas
 

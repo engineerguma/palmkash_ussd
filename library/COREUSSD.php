@@ -51,7 +51,7 @@ class COREUSSD extends Palmkash {
                 $this->StoreInputValues($params, $state[0]);
                 $choice = '-1';
             } else {
-              $this->StoreInputValues($params, $state[0]);            
+              $this->StoreInputValues($params, $state[0]);
                 $choice = $params['subscriberInput'];
             }
             $this->log->ExeLog($params, "COREUSSD::MenuOptionHandler Serching For Option From " .
@@ -204,6 +204,15 @@ class COREUSSD extends Palmkash {
 			}
 			if(isset($array['charge'])){
 	          $new_text = str_replace("[CHARGE]", $array['charge'], $new_text);
+			}
+      if(isset($array['options'])){
+	          $new_text = str_replace("[OPTIONS]", $array['options'], $new_text);
+			}
+      if(isset($array['name'])){
+	          $new_text = str_replace("[NAME]", $array['name'], $new_text);
+			}
+      if(isset($array['size'])){
+	          $new_text = str_replace("[SIZE]", $array['size'], $new_text);
 			}
 
 

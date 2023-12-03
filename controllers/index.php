@@ -39,18 +39,17 @@ class Index extends Controller {
              function simulator(){
 
                 $params=array (
-          'requesttype' => 'pull',
-          'sessionId' => '16154464772256971',
-          'transactionId' => '0734586934',
-          'msisdn' => '250788351739',
-          'newRequest' => '1',
-          'flowState' => 'FD',
-          'subscriberInput' => '737',
-          'operator' => 'mtnrwanda',
+                  'requesttype' => 'pull',
+                  'subscriberInput' => '1',
+                  'sessionId' => '1642234858455',
+                  'msisdn' => '2507802446031',
+                  'newRequest' => '1',
+                  'mode' => 'FD',
+                  'operator' => 'mtnrwanda',
         );
                $this->palm = new Palmkash();
             //   $response= $this->palm->ProcessGetOriginByName($params);
-               $response= $this->palm->getPaymentTextMsg($params);
+               $response= $this->palm->HomeGasCheckRegistration($params);
 
               print_r($response);
                die();

@@ -262,10 +262,29 @@ function HomegasCompleteGetProducts($params){
    $req = array(
        'request_method' => 'GetProducts',
        'token' => $routing[0]['merchant_token'],
-       'order_type' => $params['msisdn'],
-       'cylinder_size' => $params['msisdn'],
+       'order_type' => $params['order_type'],
+       'cylinder_size' => $params['cylinder_size'],
        'msisdn' => $params['msisdn']
    );
+      $url_data = array(
+     "url"=>$routing[0]['merchant_url'],
+     "method" => 'POST',
+   );
+   $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+   return $response;
+}
+
+
+function HomegasCompleteOrder($params){
+  $routing =$this->mod->getMerchantRouting('homegas');
+
+   $req = array(
+       'request_method' => 'MakeOrder',
+       'token' => $routing[0]['merchant_token'],
+       'order_type' => $params['order_type'],
+       'cylinder_type' => $params['actualgas_id'], //cylinder type ID
+       'product_id' => $params['size_id'], //Gas size ID
+       'msisdn' => $params['msisdn']);
       $url_data = array(
      "url"=>$routing[0]['merchant_url'],
      "method" => 'POST',
@@ -403,7 +422,7 @@ function HomegasCompleteGetProducts($params){
 
     function ParseRequest($params, $json) {
 		//print_r($xml);die();
-        $this->log->ExeLog($params, 'CorePalmKash::ParseRequest response xml' . $json, 2);
+        //$this->log->ExeLog($params, 'CorePalmKash::ParseRequest response xml' . $json, 2);
         try {
 
             $array=json_decode($json,true);

@@ -60,6 +60,7 @@ class Model {
         return $this->db->SelectData("SELECT * FROM palm_user_account WHERE msisdn=:msisdn", array('msisdn' => $params['msisdn']));
     }
 
+
     function OperationWatch($params, $stateid = false) {
         //Check If this is the first Request
 
@@ -103,6 +104,13 @@ class Model {
             $save['msisdn'] = $params['msisdn'];
             $save['language'] = $params['language'];
             $this->db->InsertData('palm_user_account', $save);
+    }
+
+    function SaveAddress($params, $stateid) {
+
+            $postCS['address'] = $params['address'];
+            $this->db->UpdateData('palm_user_account', $postCS, "account_id = {$stateid}");
+
     }
 
     function SetLanguagePref($params,$lang){
