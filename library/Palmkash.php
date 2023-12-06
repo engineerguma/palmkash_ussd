@@ -119,7 +119,7 @@ function getRouteReference($msisdn,$map_id){
 
 
     function ProcessLanguageRegistration($params) {
-
+            //Language Registration issue
         $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'reg_language')."' ");
        $lang= $res[0]['input_value'];
         $this->kash->mod->SetLanguagePref($params,$lang);
@@ -129,7 +129,7 @@ function getRouteReference($msisdn,$map_id){
 
 
     function ProcessLanguageChange($params) {
-
+//Language change issue
         $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'laguange_select')."' ");
        $lang= $res[0]['input_value'];
         $this->kash->mod->SetLanguagePref($params,$lang);

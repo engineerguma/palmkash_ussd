@@ -54,7 +54,7 @@ class Formatclass {
         'outstanding_balance'=>'outstanding_balance',
         'class'=>'class',
         'school'=>'school',
-        'new_request' => 'new_request',  //Airtel ussed        
+        'new_request' => 'new_request',  //Airtel ussed
     );
 
 
@@ -89,10 +89,12 @@ class Formatclass {
         //Convert to Single
         $result_array = array();
         foreach ($data_array as $key => $value) {
+          if(array_key_exists($key,$this->_match_up_array)){
             $standard_key = $this->_match_up_array[$key];
             if (!empty($standard_key)) {
                 $result_array[$standard_key] = $value;
             }
+          }
         }
         return $result_array;
     }
