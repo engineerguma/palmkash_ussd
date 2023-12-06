@@ -6,22 +6,11 @@ class Index extends Controller {
         parent::__construct();
     }
 
-    public $_match_up_array = array(
-        'type' => 'requesttype',
-        'methodName' => 'requesttype',
-        'username' => 'username',
-        'password' => 'password',
-        'timestamp' => 'timestamp',
-        'msisdn' => 'msisdn',
-        'sessionId' => 'sessionId',
-        'session' => 'sessionId');
 
 
     function Index() {
 
-       print_r(array_key_exists('username',$this->_match_up_array));die();
             echo "Invalid Access"; die();
-
         }
 
         public function sim() {

@@ -35,7 +35,7 @@ class Mtnrwanda_Model extends COREUSSD {
     }
 
 
-      function BreakDownCodes($params,$inputString){
+      function BreakDownCodes($params,$inputString, $status){
 
         if($inputString[1]==1){ //shool
 
