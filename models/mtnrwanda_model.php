@@ -15,7 +15,7 @@ class Mtnrwanda_Model extends COREUSSD {
             $registered = $this->IsRegistered($params);   // Added temporariry
             if(count($param_array)>1&&$registered==1){
           $this->CheckRegistration($params);   // Added temporariry
-          $response = $this->BreakDownCodes($params,$param_array);
+          $response = $this->BreakDownCodes($params,$param_array,$status);
          //print_r(count($return));die();
             }else{
             //   print_r("No long code");die();
