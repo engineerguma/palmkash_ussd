@@ -105,7 +105,6 @@ function getRouteReference($msisdn,$map_id){
         $response = $this->kash->mod->getRegistration($params);
         if(empty($response)){
     	 $this->OperationWatch($params,15);
-
         $response['language']=1;
         }else{
           //save languege
@@ -120,20 +119,36 @@ function getRouteReference($msisdn,$map_id){
     function ProcessLanguageRegistration($params) {
             //Language Registration issue
         $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'reg_language')."' ");
-       $lang= $res[0]['input_value'];
+         $lang= $res[0]['input_value'];
+         if($lang==1||$lang==2){
         $this->kash->mod->SetLanguagePref($params,$lang);
          $response=1;
+       }else{
+         $menu=null;
+         $menu['error_code'] = $this->GetResponseMsg(113);
+         $this->OperationWatch($params,15);
+         $return_response=$menu;
+
+       }
         return $response;
     }
 
 
     function ProcessLanguageChange($params) {
-//Language change issue
+
         $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'laguange_select')."' ");
-       $lang= $res[0]['input_value'];
+        $lang= $res[0]['input_value'];
+         if($lang==1||$lang==2){
         $this->kash->mod->SetLanguagePref($params,$lang);
         $this->kash->mod->UpdateLanguagePref($params,$lang);
         $response=1;
+      }else{
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(113);
+        $this->OperationWatch($params,12);
+        $return_response=$menu;
+
+      }
         return $response;
     }
 
@@ -216,6 +231,7 @@ function getRouteReference($msisdn,$map_id){
 
     $response = $this->kash->HomegasVerifyRegistration($params);
     $return_response = "";
+      print_r($response);die();
     if(isset($response['status'])&&strtolower($response['status'])=='success'){
        $return_response=$response;
      }else if(isset($response['status'])&&strtolower($response['status'])=='failed'&&strtolower($response['result']==false)){

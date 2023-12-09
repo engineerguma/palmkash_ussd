@@ -235,11 +235,8 @@ function HomegasVerifyRegistration($params){
      "method" => 'POST',
    );
 
-   $//response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
-   $response = array(
-    'status'=>'failed',
-    'result'=>'false',
-   );
+   $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+
    return $response;
 }
 

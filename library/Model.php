@@ -115,7 +115,7 @@ class Model {
 
     function SetLanguagePref($params,$lang){
          $postLang = array();
-         if(isset($lang['language'])){
+          if(isset($lang['language'])){
         $postLang['session_language_pref']  = $lang['language'];
           }else{
 

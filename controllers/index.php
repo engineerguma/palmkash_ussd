@@ -9,67 +9,7 @@ class Index extends Controller {
 
 
     function Index() {
-    $array = array (
-  'status' => 'success',
-  'result' =>
-  array (
-    2 =>
-    array (
-      'id' => 44,
-      'size' => 6,
-      'types' =>
-      array (
-        0 =>
-        array (
-          'id' => 34,
-          'name' => 'URUGARA',
-          'image' => 'https://res.cloudinary.com/iwacu-heza/image/upload/v1654373698/rkxhlwashx5onghwvm7g.png',
-          'currency' => 'RFW',
-          'price' => 10000,
-          'created_at' => '2021-06-01T07:39:54.000000Z',
-          'updated_at' => '2023-10-12T10:08:38.000000Z',
-          'purchase_price' => 45000,
-        ),
-        1 =>
-        array (
-          'id' => 44,
-          'name' => 'RISANZWE',
-          'image' => 'https://res.cloudinary.com/iwacu-heza/image/upload/v1654373701/gpyfptkngodyingeiplr.jpg',
-                    'currency' => 'RFW',
-          'price' => 12000,
-          'created_at' => '2021-11-22T06:29:47.000000Z',
-          'updated_at' => '2023-09-18T10:36:19.000000Z',
-          'purchase_price' => 55000,
-        ),
-        3 =>
-        array (
-          'id' => 194,
-          'name' => 'VAN_CYLINDER',
-          'image' => 'https://res.cloudinary.com/iwacu-heza/image/upload/v1654374662/fltv3o7rinspbfhsspn4.jpg',
-          'currency' => 'RFW',
-          'price' => 12000,
-          'created_at' => '2022-06-04T20:31:03.000000Z',
-          'updated_at' => '2023-12-06T19:14:26.000000Z',
-          'purchase_price' => 45000,
-        ),
-      ),
-      'accessories' =>
-      array (
-      ),
-      'price' => 45000,
-      'currency' => 'RWF',
-      'deleted_at' => NULL,
-      'created_at' => '2021-06-01T07:39:54.000000Z',
-      'updated_at' => '2023-10-12T10:08:38.000000Z',
-      'slug' => '21061563',
-      'refill_price' => '10000',
-      'bottle_image' => NULL,
-  ),
-  ),
-);
- $keys = array_keys($array['result']);
-$products_array = $array['result'][$keys[0]];
- print_r($products_array);
+
             echo "Invalid Access"; die();
         }
 
@@ -110,7 +50,7 @@ $products_array = $array['result'][$keys[0]];
                 );
                $this->palm = new Palmkash();
             //   $response= $this->palm->ProcessGetOriginByName($params);
-               $response= $this->palm->HomeGaSProcessGetProducts($params);
+               $response= $this->palm->HomeGasCheckRegistration($params);
 
               print_r($response);
                die();
