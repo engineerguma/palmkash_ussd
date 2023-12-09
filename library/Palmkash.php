@@ -308,7 +308,10 @@ function getRouteReference($msisdn,$map_id){
            }else if(isset($response['error'])){
              $menu['error_code'] = $this->GetResponseMsg(114);
             $return_response=$menu;
-            }
+          }else{
+            $menu['error_code'] = $this->GetResponseMsg(114);
+           $return_response=$menu;
+          }
           return $return_response;
           }
 
