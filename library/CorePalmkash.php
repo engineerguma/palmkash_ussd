@@ -234,7 +234,12 @@ function HomegasVerifyRegistration($params){
      "url"=>$routing[0]['merchant_url'],
      "method" => 'POST',
    );
-   $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+
+   $//response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+   $response = array(
+    'status'=>'failed',
+    'result'=>'false',
+   );
    return $response;
 }
 
