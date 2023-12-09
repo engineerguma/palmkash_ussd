@@ -146,7 +146,7 @@ function getRouteReference($msisdn,$map_id){
         $menu=null;
         $menu['error_code'] = $this->GetResponseMsg(113);
         $this->OperationWatch($params,12);
-        $return_response=$menu;
+        $response=$menu;
 
       }
         return $response;
