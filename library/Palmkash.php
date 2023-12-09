@@ -33,7 +33,6 @@ class Palmkash extends Model {
 
 function getUserInput($params,$inputvalue){
 
-
   $res = $this->db->SelectData("SELECT MAX(record_id) as record_id FROM palm_log_session_input_values WHERE session_id='".$params['sessionId']."' AND input_name='".$inputvalue."' ");
 return $res[0]['record_id'];
 }
@@ -184,6 +183,7 @@ function getRouteReference($msisdn,$map_id){
     }
 
     function HomeGaSProcessGetProducts($params){
+    //  $this->log->ExeLog($params, "Palmkash::HomeGaSProcessGetProducts params " .var_export($params,true), 2);
       $sizes = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'cylinder_size')."' ");
       $order_type = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'order_type')."' ");
       $curr_state = array();
@@ -192,17 +192,19 @@ function getRouteReference($msisdn,$map_id){
       $xml = null;
       $search_key = array_search($sizes[0]['input_value'], array_column($cylinder_sizes['gas']['cylinders']['sizes'], 'id'));
       $response = array();
-      if($search_key!=''){
+      if($search_key!== false){
         $params['order_type'] = $order_type[0]['input_value'];
         $params['cylinder_size'] = $cylinder_sizes['gas']['cylinders']['sizes'][$search_key]['size'];
         $response_array = $this->kash->HomegasCompleteGetProducts($params);
+      //  $this->log->ExeLog($params, "Palmkash::HomeGaSProcessGetProducts HomegasCompleteGetProducts response " .var_export($response_array,true), 2);
         if(isset($response_array['status'])&&$response_array['status']=='success'){
-        $products_array = $response_array['result'][2];
+        $keys = array_keys($response_array['result']);
+        $products_array = $response_array['result'][$keys[0]];
         $response =  $this->SaveGasProductsReference($params,$products_array,$params['order_type']);
         }
         //$response = json_decode($response,true);
       }else{
-
+        $this->log->ExeLog($params, "Palmkash::HomeGaSProcessGetProducts Else loop failing to call external system " .$search_key, 2);
         // Request failed try again
       }
 
@@ -261,7 +263,6 @@ function getRouteReference($msisdn,$map_id){
         $response['total_amount'] = $gas_ref[0]['gas_price'];
         $response['size'] =  $gas_ref[0]['gas_size'];
         $response['name'] =  $gas_ref[0]['gas_name'];
-
 
       }else{
       //Wrong input
@@ -377,6 +378,7 @@ function getRouteReference($msisdn,$map_id){
         $params['destination_station']=$result1[0]['input_value'];
         $response = $this->kash->GetDestinationStationsByName($params);
         //print_r($response);die();
+        $return_response = '';
         if(isset($response['status'])&&strtolower($response['status'])=='success'){
       	$return_response=$this->SaveStartEndStationsReference($params,$response,'end');
        }else if(isset($response['error'])){
@@ -408,6 +410,7 @@ function getRouteReference($msisdn,$map_id){
         $params['end_station_id']=$end_id[0]['station_id'];
         $response = $this->kash->GetBookingTimes($params);
         //print_r($response);die();
+          $return_response = '';
         if(isset($response['status'])&&strtolower($response['status'])=='success'){
       	$return_response=$this->SaveBookingTImesReference($params,$response,'end');
        }else if(isset($response['error'])){
@@ -477,7 +480,7 @@ function getRouteReference($msisdn,$map_id){
          $params['language']=$language;
          $params['date_of_travel']=date('Y-m-d') ;
      //$this->log->ExeLog($params, "Palmkash::Before CompleteBookingRequest ".var_export($params,true), 2);
-
+            $return_response = '';
          $response = $this->kash->CompleteBookingRequest($params);
          if(isset($response['status'])&&strtolower($response['status'])=='success'){
            $menu=null;
@@ -597,6 +600,7 @@ function getRouteReference($msisdn,$map_id){
     $params['account_number']=$student_account[0]['input_value'];
     $params['merchant']= 'student_transport';
     $response = $this->kash->ProcessGetStudentDetails($params);
+      $return_response = '';
     if(isset($response['status'])&&strtolower($response['status'])=='success'){
 
       $response['amount']=$amount[0]['input_value'];
@@ -636,7 +640,7 @@ function getRouteReference($msisdn,$map_id){
     $params['merchant']= 'student_transport';
     $params['reason']= 'Student Transport Payment';
     $response = $this->kash->CompleteSchoolfeesTransportPayment($params);
-
+      $return_response = '';
     if(isset($response['status'])&&strtolower($response['status'])=='pending'){
      $return_response=$response;
     }else{
@@ -658,6 +662,7 @@ function getRouteReference($msisdn,$map_id){
       $params['account_number']=$student_account[0]['input_value'];
       $params['merchant']= 'school_fees';
       $response = $this->kash->ProcessGetStudentDetails($params);
+        $return_response = '';
       if(isset($response['status'])&&strtolower($response['status'])=='success'){
 
         $response['amount']=$amount[0]['input_value'];
@@ -697,7 +702,7 @@ function getRouteReference($msisdn,$map_id){
     $params['merchant']= 'school_fees';
     $params['reason']= 'School fees Payment';
     $response = $this->kash->CompleteSchoolfeesTransportPayment($params);
-
+      $return_response = '';
     if(isset($response['status'])&&strtolower($response['status'])=='pending'){
      $return_response=$response;
     }else{
@@ -718,6 +723,7 @@ function getRouteReference($msisdn,$map_id){
           $params['account_number']=$student_account[0]['input_value'];
           $response = $this->kash->ProcessGetPMStudentDetails($params);
           //print_r($response);die();
+            $return_response = '';
           if(isset($response['status'])&&strtolower($response['status'])=='success'){
 
             $response['amount']=$amount[0]['input_value'];
@@ -757,6 +763,7 @@ function getRouteReference($msisdn,$map_id){
           $language ='english';
         }
        $params['language']=$language;
+         $return_response = '';
         $response = $this->kash->CompletePocketMoneyPayment($params);
 
         if(isset($response['status'])&&strtolower($response['status'])=='success'){
@@ -791,7 +798,7 @@ function getRouteReference($msisdn,$map_id){
              $language ='english';
            }
          $params['language']=$language;
-
+          $return_response = '';
          $response = $this->kash->CompleteEventsBookingRequest($params);
          if(isset($response['status'])&&strtolower($response['status'])=='success'){
             //$return_response=$response;
@@ -828,7 +835,7 @@ function getRouteReference($msisdn,$map_id){
         $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref[0]['input_value']."' AND  event_ref='".$event_ref[0]['input_value']."' AND session_id='".$params['sessionId']."' ");
           $menu['ticket_class']=$ticket_class[0]['name'];
           $menu['amount']=number_format($ticket_class[0]['amount']);
-
+         //This Needs Validation.
           $no_tickets = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'tickets_number')."' ");
           $menu['no_tickets']=$no_tickets[0]['input_value'];
           $menu['total_amount']=number_format($no_tickets[0]['input_value']*$ticket_class[0]['amount']);
@@ -838,7 +845,7 @@ function getRouteReference($msisdn,$map_id){
 
   function ProcessGetEventsCategories($params){
     $response = $this->kash->GetEventCategories($params);
-
+       $return_response = '';
     if(isset($response['status'])&&strtolower($response['status'])=='success'){
          $ret =$this->SaveProductsReference($params,$response['result']);
         $return_response=$ret;
@@ -866,6 +873,7 @@ function getRouteReference($msisdn,$map_id){
      if(empty($category_id)==false){
     $params['category_id']=$category_id[0]['api_id'];
       //print_r($category_id);die();
+        $return_response = '';
     $response = $this->kash->GetEventsByCategory($params);
     if(isset($response['status'])&&strtolower($response['status'])=='success'){
     $ret =$this->SaveEventsReferences($params,$response['result']);
