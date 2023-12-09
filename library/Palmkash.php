@@ -231,7 +231,6 @@ function getRouteReference($msisdn,$map_id){
 
     $response = $this->kash->HomegasVerifyRegistration($params);
     $return_response = "";
-      print_r($response);die();
     if(isset($response['status'])&&strtolower($response['status'])=='success'){
        $return_response=$response;
      }else if(isset($response['status'])&&strtolower($response['status'])=='failed'&&strtolower($response['result']==false)){
