@@ -215,8 +215,16 @@ function getRouteReference($msisdn,$map_id){
         if(isset($response_array['status'])&&$response_array['status']=='success'){
         $keys = array_keys($response_array['result']);
         $products_array = $response_array['result'][$keys[0]];
-        $response =  $this->SaveGasProductsReference($params,$products_array,$params['order_type']);
+        if(!empty($products_array)){
+          $response =  $this->SaveGasProductsReference($params,$products_array,$params['order_type']);
+        }else{
+          $menu=null;
+          $menu['error_code'] = $this->GetResponseMsg(115);
+          $menu['size'] = $params['cylinder_size'];
+          $response=$menu;
         }
+        }
+
         //$response = json_decode($response,true);
       }else{
         $this->log->ExeLog($params, "Palmkash::HomeGaSProcessGetProducts Else loop failing to call external system " .$search_key, 2);
@@ -308,7 +316,7 @@ function getRouteReference($msisdn,$map_id){
            }else if(isset($response['error'])){
              $menu['error_code'] = $this->GetResponseMsg(114);
             $return_response=$menu;
-          }else{
+            }else{
             $menu['error_code'] = $this->GetResponseMsg(114);
            $return_response=$menu;
           }

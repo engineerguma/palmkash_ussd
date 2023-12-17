@@ -446,4 +446,38 @@ function HomegasCompleteOrder($params){
         }
     }
 
+
+
+
+          function ReleaseClient($response){
+
+               while(ob_get_level())ob_end_clean();
+               ignore_user_abort(true);
+                     ob_start();
+                     // do initial processing here
+                     // Send the response
+                     echo $response;
+                     $size = ob_get_length();
+                     // Disable compression (in case content length is compressed).
+                     header("Content-Encoding: none");
+                     header("Content-Length: {$size}");
+                     header("Connection: close");
+                     // Flush all output.
+                     ob_end_flush();
+                     if (ob_get_level() > 0) {ob_flush();}
+                     flush();
+
+               if (is_callable('fastcgi_finish_request')) {
+               /*
+                * This works in Nginx
+                */
+               fastcgi_finish_request();// important when using php-fpm!
+               }
+                 // Close current session (if it exists).
+                 if (session_id()) {
+                   session_write_close();
+                 }
+             }
+
+
 }
