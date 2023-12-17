@@ -215,7 +215,7 @@ function getRouteReference($msisdn,$map_id){
         if(isset($response_array['status'])&&$response_array['status']=='success'){
         $keys = array_keys($response_array['result']);
         $products_array = $response_array['result'][$keys[0]];
-        if(!empty($products_array)){
+        if(isset($products_array['types'])&&!empty($products_array['types'])){
           $response =  $this->SaveGasProductsReference($params,$products_array,$params['order_type']);
         }else{
           $menu=null;

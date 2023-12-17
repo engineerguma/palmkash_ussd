@@ -41,16 +41,16 @@ class Index extends Controller {
  //Number of tickets  (tickets_number) needs Validation.
                 $params=array (
                   'requesttype' => 'pull',
-                  'subscriberInput' => '2',
-                  'sessionId' => '17019017722521595',
+                  'subscriberInput' => '6',
+                  'sessionId' => '1642234858470',
                   'msisdn' => '250781301110',
-                  'newRequest' => '0',
-                  'mode' => 'FE',
-                  'operator' => 'mtnrwanda'
+                  'newRequest' => '1',
+                  'mode' => 'FD',
+                  'operator' => 'mtnrwanda',
                 );
                $this->palm = new Palmkash();
             //   $response= $this->palm->ProcessGetOriginByName($params);
-               $response= $this->palm->HomeGasCheckRegistration($params);
+               $response= $this->palm->HomeGaSProcessGetProducts($params);
 
               print_r($response);
                die();
