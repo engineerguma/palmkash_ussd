@@ -162,18 +162,14 @@ class Model {
     }
 
     function SessionCleanUp($request,$params) {
-        $res = $this->db->SelectData("SELECT * FROM palm_log_session_data WHERE telephone_number=:tn AND session_id=:sid",
-                array('tn' => $params['msisdn'], 'sid' => $params['sessionId']));
-       if(empty($res)==false){
-        $postCS = array();
-        $postCS['session_status'] = 'closed';
-        $postCS['session_close_date'] = date('Y-m-d G:i:s');
-        $this->db->UpdateData('palm_log_session_data', $postCS, "record_id = {$res[0]['record_id']}");
-      }
+        $postData = array();
+        $postData['session_status'] = 'closed';
+        $postData['session_close_date'] = date('Y-m-d H:i:s');
+        $this->db->UpdateData('palm_log_session_data', $postData, "session_id = {$params['sessionId']}");
     }
 
     function StoreInputValues($params, $curr_state) {
-        $this->log->ExeLog($params, "Model::StoreInputValues Called With Data " . var_export($params, true) . ' And ' . var_export($curr_state, true), 2);
+      //  $this->log->ExeLog($params, "Model::StoreInputValues Called With Data " . var_export($params, true) . ' And ' . var_export($curr_state, true), 2);
         $postData = array(
             'date' => date('Y-m-d G:i:s'),
             'session_id' => $params['sessionId'],

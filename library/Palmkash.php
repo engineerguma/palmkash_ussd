@@ -336,6 +336,7 @@ function getRouteReference($msisdn,$map_id){
       $xml=null;
       $menu=null;
       $i=1;
+      $price = 0;
   	foreach($array['types'] as $key=>$value){
       $postData[$i]['ref_id'] =$i;
     	$postData[$i]['order_type'] = $order_type;
@@ -343,12 +344,18 @@ function getRouteReference($msisdn,$map_id){
    	  $postData[$i]['size_id'] =$array['id'];
    	  $postData[$i]['gas_id'] =$value['id'];
    	  $postData[$i]['gas_name'] =$value['name'];
-   	  $postData[$i]['gas_price'] =$value['price'];
+      if($order_type=='refill'){
+        $postData[$i]['gas_price'] =$value['price'];
+        $price = $value['price'];
+      }else{
+        $postData[$i]['gas_price'] =$value['purchase_price'];
+        $price = $value['purchase_price'];
+      }
    	  $postData[$i]['gas_currency'] =$value['currency'];
       $postData[$i]['msisdn'] =$params['msisdn'];
       $postData[$i]['session_id'] =$params['sessionId'];
 
-   	$xml .=$i.') '.$value['name']."-".$value['currency']." ".number_format($value['price']).PHP_EOL;
+   	$xml .=$i.') '.$value['name']."-".$value['currency']." ".number_format($price).PHP_EOL;
       $i++;
   		}
      $this->StoreGasProductsReferences($params,$postData);
