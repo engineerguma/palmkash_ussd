@@ -186,7 +186,7 @@ function getRouteReference($msisdn,$map_id){
       $request = file_get_contents('conf/config_data.json');
       $cylinder_sizes = json_decode($request,true);
       $xml = null;
-      foreach ($cylinder_sizes['gas']['cylinders']['sizes'] as $key => $value) {
+      foreach ($cylinder_sizes['configs']['cylinders']['sizes'] as $key => $value) {
          	$xml .=$value['id'].') '.$value['size'].$value['unit'].PHP_EOL;
       }
       $menu['options'] = $xml;
