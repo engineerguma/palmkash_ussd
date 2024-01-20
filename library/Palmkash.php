@@ -38,8 +38,6 @@ return $res[0]['record_id'];
 }
 
 
-
-
 function getPaymentTextMsg($params){
 
   $ln = $this->GetSessionLanguage($params);
@@ -127,7 +125,7 @@ function getRouteReference($msisdn,$map_id){
          $menu=null;
          $menu['error_code'] = $this->GetResponseMsg(113);
          $this->OperationWatch($params,15);
-         $return_response=$menu;
+         $response=$menu;
 
        }
         return $response;
@@ -303,6 +301,7 @@ function getRouteReference($msisdn,$map_id){
           $gas_ref= $this->getGasTyypeReference($params['msisdn'],$chosen_gas[0]['input_value']);
 
           $menu=null;
+          $return_response=null;
           //$response['total_amount'] = $gas_ref[0]['gas_price'];
           $params['size_id'] =  $gas_ref[0]['size_id'];
           $params['order_type'] =  $gas_ref[0]['order_type'];
@@ -946,7 +945,7 @@ function getRouteReference($msisdn,$map_id){
       //invalid Entry
 
    }
-   return $return_response;
+   return $menu;
   }
 
 
