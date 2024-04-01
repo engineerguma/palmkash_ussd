@@ -675,7 +675,10 @@ function getRouteReference($msisdn,$map_id){
     $response = $this->kash->CompleteSchoolfeesTransportPayment($params);
       $return_response = '';
     if(isset($response['status'])&&strtolower($response['status'])=='pending'){
-     $return_response=$response;
+     // $return_response=$response; //was there before
+      $menu=null;
+      $menu['error_code'] = $this->getPaymentTextMsg($params);
+      $return_response=$menu;     
     }else{
         $menu=null;
         $menu['error_code'] = $this->GetResponseMsg(107);
@@ -737,7 +740,10 @@ function getRouteReference($msisdn,$map_id){
     $response = $this->kash->CompleteSchoolfeesTransportPayment($params);
       $return_response = '';
     if(isset($response['status'])&&strtolower($response['status'])=='pending'){
-     $return_response=$response;
+     //$return_response=$response;
+     $menu=null;
+     $menu['error_code'] = $this->getPaymentTextMsg($params);
+     $return_response=$menu;      
     }else{
         $menu=null;
         $menu['error_code'] = $this->GetResponseMsg(107);
