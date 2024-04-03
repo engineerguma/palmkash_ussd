@@ -203,11 +203,11 @@ function getRouteReference($msisdn,$map_id){
       $request = file_get_contents('conf/config_data.json');
       $cylinder_sizes = json_decode($request,true);
       $xml = null;
-      $search_key = array_search($sizes[0]['input_value'], array_column($cylinder_sizes['gas']['cylinders']['sizes'], 'id'));
+      $search_key = array_search($sizes[0]['input_value'], array_column($cylinder_sizes['configs']['cylinders']['sizes'], 'id'));
       $response = array();
       if($search_key!== false){
         $params['order_type'] = $order_type[0]['input_value'];
-        $params['cylinder_size'] = $cylinder_sizes['gas']['cylinders']['sizes'][$search_key]['size'];
+        $params['cylinder_size'] = $cylinder_sizes['configs']['cylinders']['sizes'][$search_key]['size'];
         $response_array = $this->kash->HomegasCompleteGetProducts($params);
       //  $this->log->ExeLog($params, "Palmkash::HomeGaSProcessGetProducts HomegasCompleteGetProducts response " .var_export($response_array,true), 2);
         if(isset($response_array['status'])&&$response_array['status']=='success'){
