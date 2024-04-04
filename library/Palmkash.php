@@ -516,11 +516,14 @@ function getRouteReference($msisdn,$map_id){
          $response = $this->kash->CompleteBookingRequest($params);
          if(isset($response['status'])&&strtolower($response['status'])=='success'){
            $menu=null;
-            $menu['state']='FB';
+           /* $menu['state']='FB';
           	$msg_text ='Your Request has been successful'.PHP_EOL;
             $msg_text .='Approve the payment on mobile money'.PHP_EOL;
             $menu['msg_response'] = $msg_text;
+            $return_response=$menu; */
+            $menu['error_code'] = $this->getPaymentTextMsg($params);
             $return_response=$menu;
+
           }else if(isset($response['error'])){
              $menu=null;
              $menu['error_code'] = $this->GetResponseMsg(101);
@@ -803,13 +806,16 @@ function getRouteReference($msisdn,$map_id){
        $params['language']=$language;
          $return_response = '';
         $response = $this->kash->CompletePocketMoneyPayment($params);
-
         if(isset($response['status'])&&strtolower($response['status'])=='success'){
-         $return_response=$response;
+          
+         //$return_response=$response;
+         $menu=null;
+         $menu['error_code'] = $this->getPaymentTextMsg($params);
+         $return_response=$menu;        
         }else{
-            $menu=null;
-            $menu['error_code'] = $this->GetResponseMsg(107);
-           $return_response=$menu;
+          $menu=null;
+          $menu['error_code'] = $this->GetResponseMsg(107);
+          $return_response=$menu;
          }
 
        return $return_response;
