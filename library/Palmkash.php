@@ -288,7 +288,6 @@ function getRouteReference($msisdn,$map_id){
       }else{
       //Wrong input
 
-
       }
 
      return   $response;
