@@ -120,6 +120,7 @@ function getRouteReference($msisdn,$map_id){
          $lang= $res[0]['input_value'];
          if($lang==1||$lang==2){
         $this->kash->mod->SetLanguagePref($params,$lang);
+        //$this->kash->mod->UpdateLanguagePref($params,$lang);
          $response=1;
        }else{
          $menu=null;
