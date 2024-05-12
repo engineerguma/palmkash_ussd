@@ -103,12 +103,13 @@ function getRouteReference($msisdn,$map_id){
         $response = $this->kash->mod->getRegistration($params);
         if(empty($response)){
     	 $this->OperationWatch($params,15);
-        $response['language']=1;
+       $response['error_code'] = $this->GetStateFull(15);
         }else{
           //save languege
           $language['language']=$response[0]['language'];
-         $this->kash->mod->SetLanguagePref($params,$language);
-         $response =1;
+          $lang = $this->kash->mod->SetLanguagePref($params,$language);
+          $params['session_language_pref'] = $lang;
+          $response['language']=$lang;
         }
         return $response;
     }
@@ -138,7 +139,8 @@ function getRouteReference($msisdn,$map_id){
         $res = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'laguange_select')."' ");
         $lang= $res[0]['input_value'];
          if($lang==1||$lang==2){
-        $this->kash->mod->SetLanguagePref($params,$lang);
+       $lang= $this->kash->mod->SetLanguagePref($params,$lang);
+       $params['session_language_pref'] = $lang;
         $this->kash->mod->UpdateLanguagePref($params,$lang);
         $response=1;
       }else{
@@ -277,15 +279,34 @@ function getRouteReference($msisdn,$map_id){
     return $return_response;
     }
 
-    Function ProcessOrderGasConfirmationSummary($params){
+
+    Function ValidateGasTypeEntry($params){
       $chosen_gas = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'gas_type')."' ");
       $gas_ref= $this->getGasTyypeReference($params['msisdn'],$chosen_gas[0]['input_value']);
       $response = array();
       if(!empty($gas_ref)){
         $response['total_amount'] = $gas_ref[0]['gas_price'];
         $response['size'] =  $gas_ref[0]['gas_size'];
-        $response['name'] =  $gas_ref[0]['gas_name'];
+      }else{
+      //Wrong input
+       
+      }
 
+     return   $response;
+    }
+
+
+    Function ProcessOrderGasConfirmationSummary($params){
+      $chosen_gas = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'gas_type')."' ");
+      $gas_ref= $this->getGasTyypeReference($params['msisdn'],$chosen_gas[0]['input_value']);
+      $gas_quantity = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'gas_quantity')."' ");
+
+      $response = array();
+      if(!empty($gas_quantity)&&is_numeric($gas_quantity[0]['input_value'])){
+        $response['quantity'] =  $gas_quantity[0]['input_value'];
+        $response['total_amount'] = number_format($gas_ref[0]['gas_price']*$gas_quantity[0]['input_value']);
+        $response['size'] =  $gas_ref[0]['gas_size'];
+        $response['name'] =  $gas_ref[0]['gas_name'];
       }else{
       //Wrong input
 
@@ -299,6 +320,7 @@ function getRouteReference($msisdn,$map_id){
         Function HomeGasCompleteorderRequest($params){
           $chosen_gas = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'gas_type')."' ");
           $gas_ref= $this->getGasTyypeReference($params['msisdn'],$chosen_gas[0]['input_value']);
+          $gas_quantity = $this->db->SelectData("SELECT * FROM palm_log_session_input_values WHERE record_id='".$this->getUserInput($params,'gas_quantity')."' ");
 
           $menu=null;
           $return_response=null;
@@ -306,6 +328,8 @@ function getRouteReference($msisdn,$map_id){
           $params['size_id'] =  $gas_ref[0]['size_id'];
           $params['order_type'] =  $gas_ref[0]['order_type'];
           $params['actualgas_id'] =  $gas_ref[0]['gas_id'];
+          $params['quantity'] =  $gas_quantity[0]['input_value'];
+
           $response_array = $this->kash->HomegasCompleteOrder($params);
           if(isset($response_array['status'])&&strtolower($response_array['status'])=='successfull'){
              //$return_response=$response;

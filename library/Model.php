@@ -7,6 +7,7 @@ class Model {
         $this->format = new Formatclass();
         $this->log = new Logs();
         $this->db = new Database();
+        $this->redis =  new Redisclass();       
         Session::start();
     }
 
@@ -19,7 +20,35 @@ class Model {
         return $this->db->SelectData("SELECT * FROM palm_log_session_data WHERE session_status='active'
                 AND session_id =:ssn ", array('ssn' => $params['sessionId']));
     }
+###############REDIS ##############
+    function SessionExists($req_params){
 
+        return $this->redis->KeyExists($req_params['session_key']);
+    }   
+
+    function GetSessionRecords($sessionId){
+        $route_data = $this->redis->GetKeyRecords($sessionId);
+     return $route_data;
+      }
+  
+      function SetLanguagePref($params,$lang){ //re used existing
+        $postLang = array();
+         if(isset($lang['language'])){
+       $postLang['session_language_pref']  = $lang['language'];
+         }else{
+
+         if($lang == '1'){
+             $postLang['session_language_pref']  = 'kin';
+         }elseif($lang == '2'){
+             $postLang['session_language_pref']  = 'en';
+         }
+
+         }
+     $this->redis->StoreNameWitValue($params['session_key'],'session_language_pref', $postLang['session_language_pref']);    
+       //$this->db->UpdateData('palm_log_session_data', $postLang, "session_id = {$params['sessionId']}");
+      return $postLang['session_language_pref'];
+    }
+#############END of redis
     function GetSession($params){
         return $this->db->SelectData("SELECT * FROM palm_log_session_data WHERE session_status='active'
                 AND session_id =:ssn AND telephone_number=:tn", array('ssn' => $params['sessionId'], 'tn' => $params['msisdn']));
@@ -113,21 +142,6 @@ class Model {
 
     }
 
-    function SetLanguagePref($params,$lang){
-         $postLang = array();
-          if(isset($lang['language'])){
-        $postLang['session_language_pref']  = $lang['language'];
-          }else{
-
-          if($lang == '1'){
-              $postLang['session_language_pref']  = 'kin';
-          }elseif($lang == '2'){
-              $postLang['session_language_pref']  = 'en';
-          }
-
-          }
-        $this->db->UpdateData('palm_log_session_data', $postLang, "session_id = {$params['sessionId']}");
-      }
 
     function UpdateLanguagePref($params,$lang){
          $postLang = array();

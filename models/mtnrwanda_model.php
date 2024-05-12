@@ -8,18 +8,18 @@ class Mtnrwanda_Model extends COREUSSD {
 
     function RequestHandler($xml_post, $params) {
 
-       $status = $this->ManageRequestSession($params);
+         $status = $this->ManageRequestSession($params);
       //  $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler ManageRequestSession Returning Status ' . $status, 2);
-
-      $param_array = explode("*", $params['subscriberInput']);
+            if(isset($status['session_language_pref'])){ $params['session_language_pref']= $status['session_language_pref']; }
+            $param_array = explode("*", $params['subscriberInput']);
             $registered = $this->IsRegistered($params);   // Added temporariry
             if(count($param_array)>1&&$registered==1){
-          $this->CheckRegistration($params);   // Added temporariry
-          $response = $this->BreakDownCodes($params,$param_array,$status);
+          //$this->CheckRegistration($params);   // Added temporariry
+          $response = $this->BreakDownCodes($params,$param_array,$status['status']);
          //print_r(count($return));die();
             }else{
             //   print_r("No long code");die();
-              $response = $this->MenuOptionHandler($params, $status);
+              $response = $this->MenuOptionHandler($params, $status['status']);
 
             }
 		    //$response['sessionId']=$params['sessionId'];

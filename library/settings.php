@@ -10,8 +10,15 @@ define('DB_USER'  ,$conf['datastore']['duser']);
 define('DB_PASS'  ,$conf['datastore']['dpass']);
 define('DB_NAME'  ,$conf['datastore']['dname']);
 
+##REDIS
 define('CL_USER'  ,$conf['datastore']['cld_user']);
 define('CL_PASS'  ,$conf['datastore']['cld_pass']);
+
+define('REDIS_HOST'  ,$conf['PK_REDIS']['host']);
+define('REDIS_PORT'  ,$conf['PK_REDIS']['port']);
+define('REDIS_PASSWORD'  ,$conf['PK_REDIS']['password']);
+define('SESSION_ID_EXP'  ,$conf['PK_REDIS']['session_id_expiry']);
+
 
 define('ENVIRONMENT'  ,$conf['datastore']['env']);
 

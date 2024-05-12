@@ -31,6 +31,7 @@ class RWAirtel extends Controller {
         } else {
             $standard_array = $this->model->FormatRequest($decodeddata);
 		      	$standard_array['operator'] = 'Airtel';
+            $standard_array['session_key'] = $standard_array['msisdn'].'_'.$standard_array['sessionId'];
 
       $this->model->log->ExeLog($standard_array, 'Airtel::Index Function decoded '.$decodeddata.' and Standard Array ' . var_export($standard_array, true), 1);
            $response_xml = $this->model->RequestHandler($mytransdata, $standard_array);

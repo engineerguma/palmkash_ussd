@@ -18,6 +18,7 @@ class Mtnrwanda extends Controller {
                 $standard_array = $this->model->InterpreteRequest($request);
                 $standard_array['operator'] = 'mtnrwanda';
                 if ($standard_array['requesttype'] == 'pull') {
+                    $standard_array['session_key'] = $standard_array['msisdn'].'_'.$standard_array['sessionId'];
                     $response_xml = $this->model->RequestHandler($request, $standard_array);
                     header('Content-Type: application/xml; charset=UTF-8');
                     echo $response_xml;

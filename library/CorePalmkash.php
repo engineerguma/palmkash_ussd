@@ -286,6 +286,7 @@ function HomegasCompleteOrder($params){
        'order_type' => $params['order_type'],
        'cylinder_type' => $params['actualgas_id'], //cylinder type ID
        'product_id' => $params['size_id'], //Gas size ID
+       'quantity' => $params['quantity'], //Gas Quantity
        'msisdn' => $params['msisdn']);
       $url_data = array(
      "url"=>$routing[0]['merchant_url'],
@@ -408,7 +409,8 @@ function HomegasCompleteOrder($params){
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15); 
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15); 
         $content = curl_exec($ch);
         if (!curl_errno($ch)) {
             $info = curl_getinfo($ch);

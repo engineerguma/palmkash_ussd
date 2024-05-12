@@ -10,16 +10,16 @@ class RWAirtel_Model extends COREUSSD {
 
         $status = $this->ManageRequestSession($params);
         $this->log->ExeLog($params, 'RWAirtel_Model::Handler ManageRequestSession Returning Status ' . $status, 2);
-
+        if(isset($status['session_language_pref'])){ $params['session_language_pref']= $status['session_language_pref']; }
             $param_array = explode("*", $params['subscriberInput']);
           $registered = $this->IsRegistered($params);   // Added temporariry
             if(count($param_array)>1&&$registered==1){
-            $this->CheckRegistration($params);   // Added temporariry
-                  $response = $this->BreakDownCodes($params,$param_array,$status);
+            //$this->CheckRegistration($params);   // Added temporariry
+             $response = $this->BreakDownCodes($params,$param_array,$status['status']);
                  //print_r(count($return));die();
           }else{
                     //   print_r("No long code");die();
-         $response = $this->MenuOptionHandler($params, $status);
+         $response = $this->MenuOptionHandler($params, $status['status']);
 
           }
 

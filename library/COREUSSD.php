@@ -13,17 +13,29 @@ class COREUSSD extends Palmkash {
 
     function ManageRequestSession($params) {
         //Check If Session Already Exists:
-        $res = $this->GetSession($params);
-        if (count($res) > 0) {
-            return 1;
+        //$res = $this->SessionExists($params);
+        $response =array();
+        $res = $this->GetSessionRecords($params['session_key']);
+        $this->log->ExeLog($params, "COREUSSD::ManageRequestSession retrieved session records ...".var_export($res,true), 2);
+       
+        if(empty($res)){
+                   //Register Session On DB.
+               $postData['session_date'] = date('Y-m-d G:i:s');
+               $postData['session_id'] = $params['sessionId'];
+               $postData['telephone_number'] = $params['msisdn'];
+                  // $this->db->InsertData("palm_log_session_data", $postData);
+                     //print_r($postData);die();
+       $this->log->ExeLog($params, "COREUSSD::ManageRequestSession records to store records ...".var_export($postData,true), 2);
+                 
+               $this->redis->StoreArrayRecords($params['session_key'], $postData);
+          $response['status']=0; 
+          return $response;  
         } else {
-            //Register Session On DB.
-            $postData['session_date'] = date('Y-m-d G:i:s');
-            $postData['session_id'] = $params['sessionId'];
-            $postData['telephone_number'] = $params['msisdn'];
-          //  $postData['session_execution_log_file'] = $params['execlogfile'];
-            $this->db->InsertData("palm_log_session_data", $postData);
-            return 0;
+          $response['status']=1; 
+          if(isset($res['session_language_pref'])){
+          $response['session_language_pref']= $res['session_language_pref']; 
+          }
+          return $response;
         }
     }
 
@@ -95,10 +107,10 @@ class COREUSSD extends Palmkash {
             $this->log->ExeLog($params, "COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to " . $menu[0]['call_fxn_name'], 2);
             $result = $this->{$menu[0]['call_fxn_name']}($params);
 
-   $this->log->ExeLog($params, "COREUSSD::External function call Call Result " . var_export($result, true), 2);
+   //$this->log->ExeLog($params, "COREUSSD::External function call Call Result " . var_export($result, true), 2);
            if(isset($result['language'])){
-            $menu = $this->GetStateFull(15);
-            // $this->log->ExeLog($params, "COREUSSD::GetStateFull Normal Member language ".$ln_text." and Menu text " . var_export($menu, true), 2);
+            $params['session_language_pref']  = $result['language'];  
+             $this->log->ExeLog($params, "COREUSSD::GetStateFull Normal Member language ".$ln_text." and Menu text " . var_export($menu, true), 2);
           }else if(isset($result['error_code'])){
             $menu = $result['error_code'];
 
@@ -107,14 +119,16 @@ class COREUSSD extends Palmkash {
           //  $resp['state'] = $menu[0]['state_indicator'];
           //  $resp['msg_response'] = $prepared_response;
         }else{
+         // $this->log->ExeLog($params, "COREUSSD::PrepareMenu else params check language " . var_export($params, true), 2);
 
           $result=$params;
         }
-        $ln = $this->GetSessionLanguage($params);
-        if ($ln[0]['session_language_pref'] == '') {
-            $ln_text = 'text_en';
+        
+        //$ln = $this->GetSessionLanguage($params);
+        if (isset($params['session_language_pref'])) {
+          $ln_text = 'text_' . $params['session_language_pref'];          
         } else {
-            $ln_text = 'text_' . $ln[0]['session_language_pref'];
+          $ln_text = 'text_en';
         }
       //  $this->log->ExeLog($params, "COREUSSD::MenuArray Session Language Is " . $ln_text, 2);
 
@@ -205,13 +219,16 @@ class COREUSSD extends Palmkash {
 			if(isset($array['charge'])){
 	          $new_text = str_replace("[CHARGE]", $array['charge'], $new_text);
 			}
-      if(isset($array['options'])){
+               if(isset($array['options'])){
 	          $new_text = str_replace("[OPTIONS]", $array['options'], $new_text);
 			}
-      if(isset($array['name'])){
-	          $new_text = str_replace("[NAME]", $array['name'], $new_text);
+                if(isset($array['quantity'])){
+	          $new_text = str_replace("[QUANTITY]", $array['quantity'], $new_text);
 			}
-      if(isset($array['size'])){
+               if(isset($array['name'])){
+                    $new_text = str_replace("[NAME]", $array['name'], $new_text);
+               }              
+                if(isset($array['size'])){
 	          $new_text = str_replace("[SIZE]", $array['size'], $new_text);
 			}
 
