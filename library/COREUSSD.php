@@ -110,7 +110,7 @@ class COREUSSD extends Palmkash {
    //$this->log->ExeLog($params, "COREUSSD::External function call Call Result " . var_export($result, true), 2);
            if(isset($result['language'])){
             $params['session_language_pref']  = $result['language'];  
-             $this->log->ExeLog($params, "COREUSSD::GetStateFull Normal Member language ".$ln_text." and Menu text " . var_export($menu, true), 2);
+ //            $this->log->ExeLog($params, "COREUSSD::GetStateFull Normal Member language ".$params['session_language_pref']." and Menu text " . var_export($menu, true), 2);
           }else if(isset($result['error_code'])){
             $menu = $result['error_code'];
 

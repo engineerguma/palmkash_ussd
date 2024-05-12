@@ -9,7 +9,7 @@ class RWAirtel_Model extends COREUSSD {
     function RequestHandler($xml_post, $params) {
 
         $status = $this->ManageRequestSession($params);
-        $this->log->ExeLog($params, 'RWAirtel_Model::Handler ManageRequestSession Returning Status ' . $status, 2);
+  //      $this->log->ExeLog($params, 'RWAirtel_Model::Handler ManageRequestSession Returning Status ' . var_export($status,true), 2);
         if(isset($status['session_language_pref'])){ $params['session_language_pref']= $status['session_language_pref']; }
             $param_array = explode("*", $params['subscriberInput']);
           $registered = $this->IsRegistered($params);   // Added temporariry
@@ -83,13 +83,12 @@ class RWAirtel_Model extends COREUSSD {
               }else{
                 $menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);
               }
-              $ln = $this->GetSessionLanguage($params);
-              if ($ln[0]['session_language_pref'] == '') {
-                  $ln_text = 'text_en';
+              if (isset($params['session_language_pref'])) {
+                $ln_text = 'text_' . $params['session_language_pref'];          
               } else {
-                  $ln_text = 'text_' . $ln[0]['session_language_pref'];
-               }
-              $this->log->ExeLog($params, 'RWAirtel_Model::Inside Option 3 categories ' . var_export($result, true), 2);
+                $ln_text = 'text_en';
+              }
+//              $this->log->ExeLog($params, 'RWAirtel_Model::Inside Option 3 categories ' . var_export($result, true), 2);
               $prepared_response = $this->ReplacePlaceHolders($params, $menu[0][$ln_text], $result);
               $resp['state'] = $menu[0]['state_indicator'];
               $resp['msg_response'] = $prepared_response;
@@ -102,12 +101,11 @@ class RWAirtel_Model extends COREUSSD {
           ///////////////////////////////////////////////////////
            }else if(isset($result['events'])){
               $menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);
-              $ln = $this->GetSessionLanguage($params);
-              if ($ln[0]['session_language_pref'] == '') {
-                  $ln_text = 'text_en';
+              if (isset($params['session_language_pref'])) {
+                $ln_text = 'text_' . $params['session_language_pref'];          
               } else {
-                  $ln_text = 'text_' . $ln[0]['session_language_pref'];
-               }
+                $ln_text = 'text_en';
+              }
             $this->log->ExeLog($params, 'RWAirtel_Model::Inside Option 3 categories ' . var_export($result, true), 2);
             $prepared_response = $this->ReplacePlaceHolders($params, $menu[0][$ln_text], $result);
             $resp['state'] = $menu[0]['state_indicator'];
@@ -118,7 +116,65 @@ class RWAirtel_Model extends COREUSSD {
              return  $response;
             }
 
-
+          } else if($inputString[1]==4){ //Home Gas
+            $fxn_array[0]['ussd_new_state']=1;
+            $this->OperationWatch($params, 1);
+            $params['subscriberInput'] = '4';
+             $state = $this->GetCurrentState($params);
+             //   print_r($state);die();
+             $this->StoreInputValues($params, $state[0]);
+             $call_fxn = $this->GetNextState($state[0]['current_state'], $params['subscriberInput']);
+             // print_r($call_fxn);die();
+             $this->OperationWatch($params, $call_fxn[0]['ussd_new_state']);
+                       //$params['subscriberInput'] = 'event_category';
+         $this->log->ExeLog($params, 'RWAirtel_Model::Inside Option 4', 2);
+    
+             // print_r($menu);die();
+           $result = $this->HomeGasCheckRegistration($params);
+  //         $this->log->ExeLog($params, 'RWAirtel_Model::HomeGasCheckRegistration response ' . var_export($result, true), 2);
+          
+           if(isset($result['status'])&&strtolower($result['status'])=='success'){
+             $menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);
+             if (isset($params['session_language_pref'])) {
+              $ln_text = 'text_' . $params['session_language_pref'];          
+            } else {
+              $ln_text = 'text_en';
+            }
+ //          $this->log->ExeLog($params, 'RWAirtel_Model::Inside Option 3 categories ' . var_export($result, true), 2);
+           $prepared_response = $this->ReplacePlaceHolders($params, $menu[0][$ln_text], $result);
+           $resp['state'] = $menu[0]['state_indicator'];
+           $resp['msg_response'] = $prepared_response;
+            $response = $this->MenuArray($params, $resp);
+    
+         //print_r($response);die();
+            return  $response;
+          }else if(isset($result['status'])&&strtolower($result['status'])=='failed'&&isset($result['error_code'])){
+             
+            $menu=null;
+            $menu = $result['error_code'];      
+            //$menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);
+              if (isset($params['session_language_pref'])) {
+               $ln_text = 'text_' . $params['session_language_pref'];          
+             } else {
+               $ln_text = 'text_en';
+             }
+    //        $this->log->ExeLog($params, 'RWAirtel_Model::Inside Option 3 categories ' . var_export($result, true), 2);
+            $prepared_response = $this->ReplacePlaceHolders($params, $menu[0][$ln_text], $result);
+            $resp['state'] = $menu[0]['state_indicator'];
+            $resp['msg_response'] = $prepared_response;
+             $response = $this->MenuArray($params, $resp);
+     
+          //print_r($response);die();
+             return  $response;
+            }
+           
+           else{
+    
+            $response = $this->MenuOptionHandler($params, $status);     
+           }
+        
+    
+    
           }else{
 
             $response = $this->MenuOptionHandler($params, $status);

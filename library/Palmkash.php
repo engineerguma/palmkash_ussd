@@ -246,6 +246,9 @@ function getRouteReference($msisdn,$map_id){
        //46
        $menu=null;
        $menu['error_code'] = $this->GetResponseMsg(111);
+       $menu['status'] = $response['status'];
+       $menu['result'] = $response['result'];
+   
        $this->OperationWatch($params,46);
        $return_response=$menu;
      }else{
