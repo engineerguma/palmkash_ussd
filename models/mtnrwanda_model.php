@@ -9,7 +9,7 @@ class Mtnrwanda_Model extends COREUSSD {
     function RequestHandler($xml_post, $params) {
 
          $status = $this->ManageRequestSession($params);
-      //  $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler ManageRequestSession Returning Status ' . $status, 2);
+   //     $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler ManageRequestSession Returning Status ' .var_export($status, true), 2);
             if(isset($status['session_language_pref'])){ $params['session_language_pref']= $status['session_language_pref']; }
             $param_array = explode("*", $params['subscriberInput']);
             $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler ManageRequestSession input string ' . var_export($param_array, true), 2);    
