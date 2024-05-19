@@ -56,25 +56,28 @@ class COREUSSD extends Palmkash {
 
             $this->log->ExeLog($params, "COREUSSD::MenuOptionHandler Initial Session Call. Returned New State ..." . $call_fxn[0]['ussd_new_state'], 2);
         } else {
+          $res =  $this->GetCurrentLogstate($params);         
             $state = $this->GetCurrentState($params);
+            $state  = $state[0];
+            $state['current_state']  = $res['current_state'];
             $this->log->ExeLog($params, "COREUSSD::MenuOptionHandler GetCurrentState. Returned New State ...".var_export($state,true), 2);
 
-            if ($state[0]['state_type'] == 'input') {
-                $this->StoreInputValues($params, $state[0]);
+            if ($state['state_type'] == 'input') {
+                $this->StoreInputValues($params, $state);
                 $choice = '-1';
             } else {
-              $this->StoreInputValues($params, $state[0]);
+              $this->StoreInputValues($params, $state);
                 $choice = $params['subscriberInput'];
             }
             $this->log->ExeLog($params, "COREUSSD::MenuOptionHandler Serching For Option From " .
-                    $state[0]['current_state'] . ' When User Choice Is ' . $choice, 2);
-            $call_fxn = $this->GetNextState($state[0]['current_state'], $choice);
+                    $res['current_state'] . ' When User Choice Is ' . $choice, 2);
+            $call_fxn = $this->GetNextState($res['current_state'], $choice);
             $this->log->ExeLog($params, "COREUSSD::MenuOptionHandler::GetNextState Returned state " . var_export($call_fxn,true), 2);
 
             if(count($call_fxn)==0){
             //set it to previous state previous_state
-      			$prev_state=$state[0]['current_state'];
-      			if($state[0]['call_fxn_name']==''){
+      			$prev_state=$res['current_state'];
+      			if($state['call_fxn_name']==''){
                    $call_fxn[0]['ussd_new_state'] =  $prev_state;
       			}else{ //if called prev, refer to main
                    $call_fxn[0]['ussd_new_state'] =  1;
@@ -91,6 +94,9 @@ class COREUSSD extends Palmkash {
     }
 
     function DisplayMenu($params, $fxn_array) {
+
+     $this->log->ExeLog($params, "COREUSSD::DisplayMenu next state " . var_export($fxn_array, true), 2);
+    
         $this->OperationWatch($params, $fxn_array[0]['ussd_new_state']);
 
         $menu = $this->GetStateFull($fxn_array[0]['ussd_new_state']);

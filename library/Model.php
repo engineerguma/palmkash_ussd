@@ -26,8 +26,8 @@ class Model {
         return $this->redis->KeyExists($req_params['session_key']);
     }   
 
-    function GetSessionRecords($sessionId){
-        $route_data = $this->redis->GetKeyRecords($sessionId);
+    function GetSessionRecords($sessionkey){
+        $route_data = $this->redis->GetKeyRecords($sessionkey);
      return $route_data;
       }
   
@@ -48,16 +48,102 @@ class Model {
        //$this->db->UpdateData('palm_log_session_data', $postLang, "session_id = {$params['sessionId']}");
       return $postLang['session_language_pref'];
     }
+
+    function OperationWatch($params, $stateid = false) {
+        //Check If this is the first Request
+    //$this->log->ExeLog($params, "Model::OperationWatch NEXT state." . $stateid, 2);
+         $res =  $this->GetCurrentLogstate($params);
+         $this->log->ExeLog($params, "Model::OperationWatch GetCurrentLogstate  response " . var_export($res, true), 2);
+         
+        $this->SetCurrentState($res, $params, $stateid);
+        //$this->LogPickedOptions($res, $params);
+    }
+
+    function SetCurrentState($res, $params, $stateid = false){
+   
+  $this->log->ExeLog($params, "Model::SetCurrentState in state ID is ".$stateid." AND  res is " . var_export($res, true), 2);
+       
+         if(empty($res)){
+            $postCS['session_id'] = $params['sessionId'];
+            $postCS['telephone_number'] = $params['msisdn'];
+            $postCS['current_state'] = 1;
+    $this->redis->StoreArrayRecords($params['session_key'].'_current_state', $postCS);    
+        } else {
+          //  if($res[0]['current_state'] == 1){
+          //      $this->SetLanguagePref($params);
+          //  }
+            //Already Exists, Do Determination Of Next State
+
+         //   $prev=$this->GetCurrentState($params,$res['current_state']);
+            $postCS['previous_state'] = $res['current_state'];
+            $postCS['current_state'] = $stateid;
+    $this->log->ExeLog($params, "Model::SetCurrentState Post Data." . var_export($postCS, true), 2);
+
+       //$this->redis->StoreNameWitValue($params['session_key'].'_current_state','previous_state', $postLang['session_language_pref']);    
+       $this->redis->StoreArrayRecords($params['session_key'].'_current_state',$postCS);    
+     
+        }       
+
+    }
+
+    function GetCurrentLogstate($params){
+        $curr_log_state = $this->redis->GetKeyRecords($params['session_key'].'_current_state');
+     return $curr_log_state;
+      }
+
+    function GetCurrentState($params,$state_id=false){
+         if($state_id ==false){
+            $res =  $this->GetCurrentLogstate($params);
+            $state_id = $res['current_state'];
+         }
+        return $this->db->SelectData("SELECT * FROM palm_ussd_states WHERE state_id=:st_id", array('st_id' => $state_id));
+    }
+
+    function StoreInputValues($params, $curr_state) {
+        //  $this->log->ExeLog($params, "Model::StoreInputValues Called With Data " . var_export($params, true) . ' And ' . var_export($curr_state, true), 2);
+           $mult = array();
+
+          $current_values = $this->redis->GetKeyRecord($params['session_key'].'_input_values');
+   $this->log->ExeLog($params, "Model::StoreInputValues existing data " . var_export($current_values, true), 2);
+      
+        $postData = array(  
+              'date' => date('Y-m-d G:i:s'),
+              'state_id' => $curr_state['current_state'],
+              'input_name' => $curr_state['input_field_name'],
+              'input_value' => $params['subscriberInput']
+          );
+    $this->log->ExeLog($params, "Model::StoreInputValues post data " . var_export($postData, true), 2);
+        
+        if(empty($current_values)){
+            array_push($mult,$postData);
+
+        }else{
+          $unserialized = unserialize($current_values);
+          array_push($unserialized,$postData);
+          $mult = $unserialized;
+        }
+          $this->log->ExeLog($params, "Model::StoreInputValues preparing to store " . var_export($mult, true), 2);
+         
+          $serialized = serialize($mult);
+          $this->log->ExeLog($params, "Model::StoreInputValues preparing serialized data " . var_export($serialized, true), 2);
+         
+          //$this->db->InsertData("palm_log_session_input_values", $postData);
+         $this->redis->StoreKeyData($params['session_key'].'_input_values',$serialized);    
+
+ 
+      }
+
+
 #############END of redis
     function GetSession($params){
         return $this->db->SelectData("SELECT * FROM palm_log_session_data WHERE session_status='active'
                 AND session_id =:ssn AND telephone_number=:tn", array('ssn' => $params['sessionId'], 'tn' => $params['msisdn']));
     }
 
-    function GetCurrentState($params){
+    /* function GetCurrentState($params){
         return $this->db->SelectData("SELECT * FROM palm_log_current_state c JOIN palm_ussd_states s
                 ON c.current_state=s.state_id WHERE session_id=:sid AND telephone_number=:tn", array('sid' => $params['sessionId'],'tn' => $params['msisdn']));
-    }
+    }*/
 
     function GetSessionLanguage($params){
         return $this->db->SelectData("SELECT * FROM palm_log_session_data WHERE session_id=:sid",
@@ -90,7 +176,7 @@ class Model {
     }
 
 
-    function OperationWatch($params, $stateid = false) {
+   /* function OperationWatch($params, $stateid = false) {
         //Check If this is the first Request
 
     //$this->log->ExeLog($params, "Model::OperationWatch NEXT state." . $stateid, 2);
@@ -99,9 +185,9 @@ class Model {
                 array('sid' => $params['sessionId'], 'tn' => $params['msisdn']));
         $this->SetCurrentState($res, $params, $stateid);
         $this->LogPickedOptions($res, $params);
-    }
+    } */
 
-    function SetCurrentState($res, $params, $stateid = false) {
+   /* function SetCurrentState($res, $params, $stateid = false) {
 
 
 
@@ -112,9 +198,9 @@ class Model {
             $postCS['current_state'] = 1;
             $this->db->InsertData('palm_log_current_state', $postCS);
         } else {
-          /*  if($res[0]['current_state'] == 1){
-                $this->SetLanguagePref($params);
-            }*/
+          //  if($res[0]['current_state'] == 1){
+          //      $this->SetLanguagePref($params);
+          //  }
             //Already Exists, Do Determination Of Next State
            $prev=$this->GetCurrentState($params);
 
@@ -124,7 +210,7 @@ class Model {
 
             $this->db->UpdateData('palm_log_current_state', $postCS, "record_id = {$res[0]['record_id']}");
         }
-    }
+    } */
 
     function SaveUserRegistration($params) {
 
@@ -182,7 +268,7 @@ class Model {
         $this->db->UpdateData('palm_log_session_data', $postData, "session_id = {$params['sessionId']}");
     }
 
-    function StoreInputValues($params, $curr_state) {
+   /* function StoreInputValues($params, $curr_state) {
       //  $this->log->ExeLog($params, "Model::StoreInputValues Called With Data " . var_export($params, true) . ' And ' . var_export($curr_state, true), 2);
         $postData = array(
             'date' => date('Y-m-d G:i:s'),
@@ -195,7 +281,7 @@ class Model {
         $this->log->ExeLog($params, "Model::StoreInputValues preparing to post " . var_export($postData, true), 2);
         $this->db->InsertData("palm_log_session_input_values", $postData);
 
-    }
+    } */
 
 
     function WriteResponseXML($array) {
