@@ -15,8 +15,12 @@ class RWAirtel_Model extends COREUSSD {
         }
             $param_array = explode("*", $params['subscriberInput']);
           $registered = $this->IsRegistered($params);   // Added temporariry
-            if(count($param_array)>1&&$registered==1){
-            //$this->CheckRegistration($params);   // Added temporariry
+          if(count($param_array)>1&&$registered['code']==1){
+            // Register Language
+            $language['language']=$registered['language'];
+            $lang = $this->kash->mod->SetLanguagePref($params,$language);
+            $params['session_language_pref'] = $lang;
+             //end of language registration
              $response = $this->BreakDownCodes($params,$param_array,$status['status']);
                  //print_r(count($return));die();
           }else{

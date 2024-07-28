@@ -104,7 +104,7 @@ class Model {
            $mult = array();
 
           $current_values = $this->redis->GetKeyRecord($params['session_key'].'_input_values');
-   $this->log->ExeLog($params, "Model::StoreInputValues existing data " . var_export($current_values, true), 2);
+  // $this->log->ExeLog($params, "Model::StoreInputValues existing data " . var_export(unserialize($current_values), true), 2);
       
         $postData = array(  
               'date' => date('Y-m-d G:i:s'),

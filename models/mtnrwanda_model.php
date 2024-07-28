@@ -16,8 +16,13 @@ class Mtnrwanda_Model extends COREUSSD {
             $param_array = explode("*", $params['subscriberInput']);
             $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler ManageRequestSession input string ' . var_export($param_array, true), 2);    
             $registered = $this->IsRegistered($params);   // Added temporariry
-            if(count($param_array)>1&&$registered==1){
-          //$this->CheckRegistration($params);   // Added temporariry
+
+            if(count($param_array)>1&&$registered['code']==1){
+           // Register Language
+           $language['language']=$registered['language'];
+           $lang = $this->kash->mod->SetLanguagePref($params,$language);
+           $params['session_language_pref'] = $lang;
+            //end of language registration
           $response = $this->BreakDownCodes($params,$param_array,$status['status']);
          //print_r(count($return));die();
             }else{
@@ -54,19 +59,32 @@ class Mtnrwanda_Model extends COREUSSD {
          $this->OperationWatch($params, 1);
          $params['subscriberInput'] = '3';
           $state = $this->GetCurrentState($params);
-          //   print_r($state);die();
+          $res =  $this->GetCurrentLogstate($params);  
+            //print_r($state);die();
+ // $this->log->ExeLog($params, 'Mtnrwanda_Model::Inside BreakDownCodes GetCurrentState ' . var_export($state, true), 2);
+  
+  //$this->log->ExeLog($params, 'Mtnrwanda_Model::Inside BreakDownCodes GetCGetCurrentLogstateurrentState ' . var_export($res, true), 2);
+           $state[0]['current_state']  = $res['current_state'];
+
           $this->StoreInputValues($params, $state[0]);
-          $call_fxn = $this->GetNextState($state[0]['current_state'], $params['subscriberInput']);
+           $call_fxn = $this->GetNextState($state[0]['current_state'], $params['subscriberInput']);
+          //$call_fxn = $this->GetNextState($state[0]['current_state'], -1);
           // print_r($call_fxn);die();
+          $this->log->ExeLog($params, 'Mtnrwanda_Model::Inside BreakDownCodes GetNextState ' . var_export($call_fxn, true), 2);
+         
           $this->OperationWatch($params, $call_fxn[0]['ussd_new_state']);
                     //$params['subscriberInput'] = 'event_category';
       $this->log->ExeLog($params, 'Mtnrwanda_Model::Inside Option 3', 2);
 
           // print_r($menu);die();
         $result = $this->ProcessGetEventsCategories($params);
+        $this->log->ExeLog($params, 'Mtnrwanda_Model::Inside BreakDownCodes ProcessGetEventsCategories ' . var_export($result, true), 2);
+
        if(isset($result['events'])&&isset($inputString[2])){ //
            $params['subscriberInput'] = $inputString[2];
            $state = $this->GetCurrentState($params);
+           $res =  $this->GetCurrentLogstate($params);  
+           $state[0]['current_state']  = $res['current_state'];
              //print_r($state);die();
            $this->StoreInputValues($params, $state[0]);
         $call_fxn = $this->GetNextState($state[0]['current_state'], -1);
@@ -121,6 +139,8 @@ class Mtnrwanda_Model extends COREUSSD {
         $this->OperationWatch($params, 1);
         $params['subscriberInput'] = '4';
          $state = $this->GetCurrentState($params);
+         $res =  $this->GetCurrentLogstate($params);  
+         $state[0]['current_state']  = $res['current_state'];
          //   print_r($state);die();
          $this->StoreInputValues($params, $state[0]);
          $call_fxn = $this->GetNextState($state[0]['current_state'], $params['subscriberInput']);
