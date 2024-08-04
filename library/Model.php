@@ -122,7 +122,7 @@ class Model {
           array_push($unserialized,$postData);
           $mult = $unserialized;
         }
-          $this->log->ExeLog($params, "Model::StoreInputValues preparing to store " . var_export($mult, true), 2);
+       //  $this->log->ExeLog($params, "Model::StoreInputValues preparing to store " . var_export($mult, true), 2);
          
           $serialized = serialize($mult);
           $this->log->ExeLog($params, "Model::StoreInputValues preparing serialized data " . var_export($serialized, true), 2);
@@ -224,19 +224,24 @@ class Model {
     function SaveAddress($params, $stateid) {
 
             $postCS['address'] = $params['address'];
-            $this->db->UpdateData('palm_user_account', $postCS, "account_id = {$stateid}");
+            $this->db->UpdateData('palm_user_account', $postCS, " account_id = {$stateid}");
 
     }
 
 
     function UpdateLanguagePref($params,$lang){
          $postLang = array();
+         if(isset($params['session_language_pref'])){
+            $postLang['language']  = $params['session_language_pref'];
+          }else{
           if($lang == '1'){
               $postLang['language']  = 'kin';
           }elseif($lang == '2'){
               $postLang['language']  = 'en';
           }
-        $this->db->UpdateData('palm_user_account', $postLang, "msisdn = {$params['msisdn']}");
+        }
+        //print_r($postLang);die();
+        $this->db->UpdateData('palm_user_account', $postLang, " msisdn = {$params['msisdn']}");
     }
 
 

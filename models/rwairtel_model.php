@@ -60,7 +60,9 @@ class RWAirtel_Model extends COREUSSD {
              $this->OperationWatch($params, 1);
              $params['subscriberInput'] = '3';
               $state = $this->GetCurrentState($params);
+              $res =  $this->GetCurrentLogstate($params); 
               //   print_r($state);die();
+              $state[0]['current_state']  = $res['current_state'];
               $this->StoreInputValues($params, $state[0]);
               $call_fxn = $this->GetNextState($state[0]['current_state'], $params['subscriberInput']);
               // print_r($call_fxn);die();
@@ -74,6 +76,8 @@ class RWAirtel_Model extends COREUSSD {
            if(isset($result['events'])&&isset($inputString[2])){ //
                $params['subscriberInput'] = $inputString[2];
                $state = $this->GetCurrentState($params);
+               $res =  $this->GetCurrentLogstate($params);  
+               $state[0]['current_state']  = $res['current_state'];               
                  //print_r($state);die();
                $this->StoreInputValues($params, $state[0]);
            $call_fxn = $this->GetNextState($state[0]['current_state'], -1);
@@ -127,6 +131,8 @@ class RWAirtel_Model extends COREUSSD {
             $this->OperationWatch($params, 1);
             $params['subscriberInput'] = '4';
              $state = $this->GetCurrentState($params);
+             $res =  $this->GetCurrentLogstate($params);  
+             $state[0]['current_state']  = $res['current_state'];            
              //   print_r($state);die();
              $this->StoreInputValues($params, $state[0]);
              $call_fxn = $this->GetNextState($state[0]['current_state'], $params['subscriberInput']);
