@@ -37,6 +37,7 @@ class Redisclass {
         function StoreKeyData($key,$value){
           $this->connect();
           $response = $this->redis->SET($key,$value);
+          $this->redis->expire($key,SESSION_ID_EXP);
           $this->DisConnect();
            return  $response;
         }

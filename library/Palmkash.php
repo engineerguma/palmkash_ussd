@@ -31,6 +31,14 @@ class Palmkash extends Model {
     }
 
 
+  function FieldvalidateNames($name){
+
+    if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+      $nameError = 1;
+    }else{
+      $nameError = 0;
+    }
+  }
 /* 
 function getUserInput($params,$inputvalue){
 
@@ -187,7 +195,9 @@ function getRouteReference($msisdn,$map_id){
        }
       $params['language']=$lang;
       $params['first_name']=$fname['input_value'];
+     // $validate = $this->FieldvalidateNames($fname['input_value']);  //1 means error foudn
       $params['last_name']=$onames['input_value'];
+     // $validate = $this->FieldvalidateNames($onames['input_value']);  //1 means error foudn
      $this->kash->mod->SaveUserRegistration($params);
       $response =1;
       return $response;
