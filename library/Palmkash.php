@@ -167,7 +167,7 @@ function getRouteReference($msisdn,$map_id){
     function ProcessLanguageChange($params) {
 
         $res = $this->getUserInput($params,'laguange_select');
-        $lang= $res['input_value'];
+        $lang = $res['input_value'];
          if($lang==1||$lang==2){
        $lang_change= $this->kash->mod->SetLanguagePref($params,$lang);
        $params['session_language_pref'] = $lang_change;

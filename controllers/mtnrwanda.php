@@ -26,7 +26,7 @@ class Mtnrwanda extends Controller {
                 }
                 if (strtolower($standard_array['requesttype']) == 'cleanup') {
               $this->model->log->ExeLog($standard_array, " Mtnrwanda::Session Cleanup request for session ID ".$standard_array['sessionId']." for msisdn ".$standard_array['msisdn'] ,3);
-                    $this->model->SessionCleanUp($request,$standard_array);
+                    $this->model->SessionCleanUp($standard_array);
                     exit();
                 }
             }

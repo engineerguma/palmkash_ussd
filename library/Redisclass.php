@@ -13,6 +13,10 @@ class Redisclass {
     }
 
 
+    public function DeleteforMultiple($key) {
+      $reponse =$this->redis->del($key);
+       return $reponse;
+       }
         public function DisConnect() {
 
           return $this->redis->close();
@@ -53,6 +57,7 @@ class Redisclass {
        function StoreNameWitValue($key,$name,$value){
          $this->connect();
          $response = $this->redis->HSET($key,$name,$value);
+         $this->redis->expire($key,SESSION_ID_EXP);
          $this->DisConnect();
           return  $response;
        }
@@ -92,9 +97,17 @@ class Redisclass {
           return  $response;
        }
 
-       function ExpireRecords($key,$seconds=190){
+       function ExpireRecords($key,$seconds=200){
 
          return $this->redis->expire($key,$seconds);
+       }
+
+
+       function GetMatchingKeys($key_prefix){
+        $this->connect();
+        $response =  $this->redis->keys('*'.$key_prefix.'*');
+         $this->DisConnect();
+         return  $response;
        }
 
 

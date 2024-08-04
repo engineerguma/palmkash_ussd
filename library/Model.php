@@ -21,6 +21,17 @@ class Model {
                 AND session_id =:ssn ", array('ssn' => $params['sessionId']));
     }
 ###############REDIS ##############
+function SessionCleanUp($params) {
+     
+    $return = $this->redis->GetMatchingKeys($params['sessionId']);
+     $this->redis->connect();
+    foreach ($return as $key) {
+        $this->redis->DeleteforMultiple($key);
+     }
+   $this->redis->DisConnect();
+}
+
+
     function SessionExists($req_params){
 
         return $this->redis->KeyExists($req_params['session_key']);
@@ -266,6 +277,7 @@ class Model {
         }
     }
 
+      /*
     function SessionCleanUp($request,$params) {
         $postData = array();
         $postData['session_status'] = 'closed';
@@ -273,7 +285,7 @@ class Model {
         $this->db->UpdateData('palm_log_session_data', $postData, "session_id = {$params['sessionId']}");
     }
 
-   /* function StoreInputValues($params, $curr_state) {
+  function StoreInputValues($params, $curr_state) {
       //  $this->log->ExeLog($params, "Model::StoreInputValues Called With Data " . var_export($params, true) . ' And ' . var_export($curr_state, true), 2);
         $postData = array(
             'date' => date('Y-m-d G:i:s'),
