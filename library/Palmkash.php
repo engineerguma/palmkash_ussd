@@ -52,9 +52,10 @@ function getUserInput($params,$inputvalue){
 
   $res = $this->redis->GetKeyRecord($params['session_key'].'_input_values');
   $input_array = unserialize($res);
-  foreach($input_array as $key_val => $value){     
+  $reversed = array_reverse($input_array);
+  foreach($reversed as $key_val => $value){     
      if($value['input_name']==$inputvalue){
-       return $input_array[$key_val];
+       return $reversed[$key_val];
      }
   }
 }
