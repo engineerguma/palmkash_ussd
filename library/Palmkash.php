@@ -332,7 +332,9 @@ function getRouteReference($msisdn,$map_id){
         $response['size'] =  $gas_ref[0]['gas_size'];
       }else{
       //Wrong input
-       
+      $menu=null;
+      $menu['error_code'] = $this->GetResponseMsg(115);
+     $response=$menu;     
       }
 
      return   $response;
@@ -935,6 +937,7 @@ function getRouteReference($msisdn,$map_id){
           $ticket_ref = $this->getUserInput($params,'ticket_class');
           //print_r($ticket_ref);die();
           $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref['input_value']."' AND  event_ref='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
+   
           $menu['ticket_class']=$ticket_class[0]['name'];
           $menu['amount']=number_format($ticket_class[0]['amount']);
          //This Needs Validation.
@@ -946,6 +949,7 @@ function getRouteReference($msisdn,$map_id){
             //Invalid Entry
             $menu['error_code'] = $this->GetResponseMsg(115);
           }
+
      return $menu;
   }
 
@@ -1018,6 +1022,23 @@ function getRouteReference($msisdn,$map_id){
     return $menu;
     }else{
       //invalid Entry
+      $menu['error_code'] = $this->GetResponseMsg(115);
+   }
+   return $menu;
+  }
+
+  function ValidateTicketClass($params){
+
+    $menu=null;
+    $event_ref = $this->getUserInput($params,'single_event');
+    $ticket_ref = $this->getUserInput($params,'ticket_class');
+  
+    //print_r($ticket_ref);die();
+    $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref['input_value']."' AND  event_ref='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
+     if(!empty($ticket_class)&&is_numeric($ticket_ref['input_value'])){ 
+ 
+    }else{
+      //invalid ticket Class
       $menu['error_code'] = $this->GetResponseMsg(115);
    }
    return $menu;
