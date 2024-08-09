@@ -236,6 +236,10 @@ class COREUSSD extends Palmkash {
                }              
                 if(isset($array['size'])){
 	          $new_text = str_replace("[SIZE]", $array['size'], $new_text);
+			}             
+               if(isset($array['names_error'])){
+	          $new_text = str_replace("[NAMES_MINSIZE]", NAMES_MINSIZE, $new_text);
+	          $new_text = str_replace("[NAMES_MAXSIZE]", NAMES_MAXSIZE, $new_text);
 			}
 
 

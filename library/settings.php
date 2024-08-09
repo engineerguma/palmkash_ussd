@@ -10,6 +10,9 @@ define('DB_USER'  ,$conf['datastore']['duser']);
 define('DB_PASS'  ,$conf['datastore']['dpass']);
 define('DB_NAME'  ,$conf['datastore']['dname']);
 
+define('NAMES_MAXSIZE'  ,$conf['datastore']['names_maxlength']);
+define('NAMES_MINSIZE'  ,$conf['datastore']['names_maxlength']);
+
 ##REDIS
 define('CL_USER'  ,$conf['datastore']['cld_user']);
 define('CL_PASS'  ,$conf['datastore']['cld_pass']);

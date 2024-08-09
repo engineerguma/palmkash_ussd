@@ -32,12 +32,20 @@ class Palmkash extends Model {
 
 
   function FieldvalidateNames($name){
+    $nameError = array();
 
     if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-      $nameError = 1;
+      $nameError['names_error'] = 1;
     }else{
-      $nameError = 0;
+     
+      if(strlen($name)>NAMES_MAXSIZE || strlen($name)<NAMES_MINSIZE){
+        $nameError['names_error'] = 1;
+      }else{
+
+      }
+
     }
+    return $nameError;
   }
 /* 
 function getUserInput($params,$inputvalue){
@@ -196,11 +204,20 @@ function getRouteReference($msisdn,$map_id){
        }
       $params['language']=$lang;
       $params['first_name']=$fname['input_value'];
-     // $validate = $this->FieldvalidateNames($fname['input_value']);  //1 means error foudn
+      $response =1;
+      $validate = $this->FieldvalidateNames($fname['input_value']);  //1 means error found
       $params['last_name']=$onames['input_value'];
-     // $validate = $this->FieldvalidateNames($onames['input_value']);  //1 means error foudn
+      $validate = $this->FieldvalidateNames($onames['input_value']);  //1 means error found
+      if(isset($validate['names_error'])){
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(116);
+        $menu['names_error'] = 1;
+        $response=$menu;
+        
+      }else{
      $this->kash->mod->SaveUserRegistration($params);
       $response =1;
+      }
       return $response;
     }
  ##################Home Gas #############################
