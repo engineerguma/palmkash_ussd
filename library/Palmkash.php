@@ -351,7 +351,10 @@ function getRouteReference($msisdn,$map_id){
         $response['size'] =  $gas_ref[0]['gas_size'];
         $response['name'] =  $gas_ref[0]['gas_name'];
       }else{
-      //Wrong input
+       // Invalid entry
+        $menu=null;
+        $menu['error_code'] = $this->GetResponseMsg(115);
+       $response=$menu;
 
       }
 
@@ -936,9 +939,13 @@ function getRouteReference($msisdn,$map_id){
           $menu['amount']=number_format($ticket_class[0]['amount']);
          //This Needs Validation.
           $no_tickets = $this->getUserInput($params,'tickets_number');
+          if(!empty($no_tickets)&&is_numeric($no_tickets['input_value'])){
           $menu['no_tickets']=$no_tickets['input_value'];
           $menu['total_amount']=number_format($no_tickets['input_value']*$ticket_class[0]['amount']);
-
+          }else{
+            //Invalid Entry
+            $menu['error_code'] = $this->GetResponseMsg(115);
+          }
      return $menu;
   }
 
