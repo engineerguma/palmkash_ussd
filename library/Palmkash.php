@@ -69,6 +69,75 @@ function getUserInput($params,$inputvalue){
 }
 
 
+function getCategoryEvents($params,$category){
+
+  $this->log->ExeLog($params, "Palmkash::getCategoryEvents input value " . $category, 2);
+
+  $res = $this->redis->GetKeyRecord($params['session_key'].'_event_categories');
+  $events_array = unserialize($res);
+  $i = 0;
+  foreach($events_array as $key_val => $value){     
+    $i++;
+  $this->log->ExeLog($params, "Palmkash::getCategoryEvents looped values for index ".$i." " . var_export($value, true), 2);
+
+     if($value['ref_id']==$category){
+       return $value;
+     }
+  
+  }
+}
+
+function getEventReference($params,$inputvalue){
+
+  $this->log->ExeLog($params, "Palmkash::getEventReference input value " . $inputvalue, 2);
+
+  $res = $this->redis->GetKeyRecord($params['session_key'].'_events');
+  $events_array = unserialize($res);
+  $i = 0;
+  foreach($events_array as $key_val => $value){     
+    $i++;
+  $this->log->ExeLog($params, "Palmkash::getEventReference looped values for index ".$i." " . var_export($value, true), 2);
+
+     if($value['ref_id']==$inputvalue){
+       return $value;
+     }
+  
+  }
+}
+
+function getEventTicketsReference($params,$inputvalue){
+  $multi_array = array();
+  $res = $this->redis->GetKeyRecord($params['session_key'].'_event_tickets');
+  $event_tickets_array = unserialize($res);
+  foreach($event_tickets_array as $key_val => $value){     
+
+    $this->log->ExeLog($params, "Palmkash::getEventTicketsReference  values  ". var_export($value, true), 2);
+     if($value['event_ref']==$inputvalue){
+      array_push($multi_array,$value);
+ 
+     }
+  }
+
+  return $multi_array;
+ }
+  function getEventTicketDetails($params,$event_ref,$ticket_ref){
+
+    $this->log->ExeLog($params, "Palmkash::getEventTicketDetails  event ref ".$event_ref." and ticekt ref ".$ticket_ref , 2);
+
+    $res = $this->redis->GetKeyRecord($params['session_key'].'_event_tickets');
+    $event_tickets_array = unserialize($res);
+    foreach($event_tickets_array as $key_val => $value){     
+  
+      $this->log->ExeLog($params, "Palmkash::getEventTicketDetails  values   ". var_export($value, true), 2);
+       if($value['ref_id']==$ticket_ref && $value['event_ref']==$event_ref){
+        return $value;
+    
+       }
+    }
+
+}
+
+
 function getPaymentTextMsg($params){
 
   //$ln = $this->GetSessionLanguage($params);
@@ -906,13 +975,15 @@ function getRouteReference($msisdn,$map_id){
         $event_ref = $this->getUserInput($params,'single_event');
         $ticket_ref = $this->getUserInput($params,'ticket_class');
         //print_r($ticket_ref);die();
-        $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref['input_value']."' AND  event_ref='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
+        //$ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref['input_value']."' AND  event_ref='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
+        $ticket_class = $this->getEventTicketDetails($params,$event_ref['input_value'],$ticket_ref['input_value']);
+     
         $no_tickets = $this->getUserInput($params,'tickets_number');
        
         $user = $this->getRegistration($params);
          $params['names']=$user[0]['first_name'];
-         $params['price_id']=$ticket_class[0]['api_id'];
-         $params['amount']=$ticket_class[0]['amount'];
+         $params['price_id']=$ticket_class['api_id'];
+         $params['amount']=$ticket_class['amount'];
          $params['number_of_tickets']=$no_tickets['input_value'];
            $language ='kinyarwanda';
            if($user[0]['language']=='en'){
@@ -948,20 +1019,22 @@ function getRouteReference($msisdn,$map_id){
 
           $menu=null;
           $event_ref = $this->getUserInput($params,'single_event');
-          $event = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
-          $menu['event']=$event[0]['name'];
-          $menu['venue']=$event[0]['venue'];
+          $event = $this->getEventReference($params,$event_ref['input_value']);
+          //$event = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
+          $menu['event']=$event['name'];
+          $menu['venue']=$event['venue'];
           $ticket_ref = $this->getUserInput($params,'ticket_class');
           //print_r($ticket_ref);die();
-          $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref['input_value']."' AND  event_ref='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
-   
-          $menu['ticket_class']=$ticket_class[0]['name'];
-          $menu['amount']=number_format($ticket_class[0]['amount']);
+          //$ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref['input_value']."' AND  event_ref='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
+          $ticket_class = $this->getEventTicketDetails($params,$event_ref['input_value'],$ticket_ref['input_value']);
+
+          $menu['ticket_class']=$ticket_class['name'];
+          $menu['amount']=number_format($ticket_class['amount']);
          //This Needs Validation.
           $no_tickets = $this->getUserInput($params,'tickets_number');
           if(!empty($no_tickets)&&is_numeric($no_tickets['input_value'])){
           $menu['no_tickets']=$no_tickets['input_value'];
-          $menu['total_amount']=number_format($no_tickets['input_value']*$ticket_class[0]['amount']);
+          $menu['total_amount']=number_format($no_tickets['input_value']*$ticket_class['amount']);
           }else{
             //Invalid Entry
             $menu['error_code'] = $this->GetResponseMsg(115);
@@ -974,7 +1047,7 @@ function getRouteReference($msisdn,$map_id){
     $response = $this->kash->GetEventCategories($params);
        $return_response = '';
     if(isset($response['status'])&&strtolower($response['status'])=='success'){
-         $ret =$this->SaveProductsReference($params,$response['result']);
+         $ret =$this->SaveEventsCategoriesReferences($params,$response['result']);
         $return_response=$ret;
     }else if(isset($response['error'])){
         $menu=null;
@@ -994,11 +1067,11 @@ function getRouteReference($msisdn,$map_id){
   function ProcessCategoryEvents($params){
 
     $category = $this->getUserInput($params,'event_category');
-    $category_id = $this->db->SelectData("SELECT * FROM event_categories WHERE ref_id='".$category['input_value']."' AND session_id='".$params['sessionId']."' ");
-     $params['category_id']=$category_id[0]['api_id'];
-     //$tickets = $this->db->SelectData("SELECT * FROM event_tickets WHERE event_ref='".$event_id[0]['ref_id']."' ");
+    //$category_id = $this->db->SelectData("SELECT * FROM event_categories WHERE ref_id='".$category['input_value']."' AND session_id='".$params['sessionId']."' ");
+    $category_id = $this->getCategoryEvents($params,$category['input_value']);
+    
      if(empty($category_id)==false){
-    $params['category_id']=$category_id[0]['api_id'];
+    $params['category_id']=$category_id['api_id'];
       //print_r($category_id);die();
         $return_response = '';
         $response = $this->kash->GetEventsByCategory($params);
@@ -1025,11 +1098,19 @@ function getRouteReference($msisdn,$map_id){
   function ProcessGetEventTicketClasses($params){
 
     $event = $this->getUserInput($params,'single_event');
-     $event_id = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event['input_value']."' AND session_id='".$params['sessionId']."' ");
+    
+    $event_id = $this->getEventReference($params,$event['input_value']);
+    $this->log->ExeLog($params, "Palmkash::ProcessGetEventTicketClasses  getEventReference returned event data  ". var_export($event_id, true), 2);
+
+    //$event_id = $this->db->SelectData("SELECT * FROM events WHERE ref_id='".$event['input_value']."' AND session_id='".$params['sessionId']."' ");
      $xml=null;
      $menu=null;
      if(empty($event_id)==false){
-       $tickets = $this->db->SelectData("SELECT * FROM event_tickets WHERE event_ref='".$event_id[0]['ref_id']."' AND session_id='".$params['sessionId']."' ");
+
+      $tickets = $this->getEventTicketsReference($params,$event_id['ref_id']);
+      $this->log->ExeLog($params, "Palmkash::ProcessGetEventTicketClasses  getEventTicketsReference returned tickets data  ". var_export($tickets, true), 2);
+
+      //$tickets = $this->db->SelectData("SELECT * FROM event_tickets WHERE event_ref='".$event_id[0]['ref_id']."' AND session_id='".$params['sessionId']."' ");
         $i=1;
        foreach($tickets as $key=>$value){
        $xml .=$value['ref_id'].') '.$value['name']." ".number_format($value['amount']).PHP_EOL;
@@ -1051,8 +1132,13 @@ function getRouteReference($msisdn,$map_id){
     $ticket_ref = $this->getUserInput($params,'ticket_class');
   
     //print_r($ticket_ref);die();
-    $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref['input_value']."' AND  event_ref='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
-     if(!empty($ticket_class)&&is_numeric($ticket_ref['input_value'])){ 
+   // $ticket_class = $this->db->SelectData("SELECT * FROM event_tickets WHERE ref_id='".$ticket_ref['input_value']."' AND  event_ref='".$event_ref['input_value']."' AND session_id='".$params['sessionId']."' ");
+ 
+      $ticket_class = $this->getEventTicketDetails($params,$event_ref['input_value'],$ticket_ref['input_value']);
+      $this->log->ExeLog($params, "Palmkash::ValidateTicketClass  getEventTicketDetails returned event data  ". var_export($event_id, true), 2);
+
+   
+    if(!empty($ticket_class)&&is_numeric($ticket_ref['input_value'])){ 
  
     }else{
       //invalid ticket Class
@@ -1064,26 +1150,33 @@ function getRouteReference($msisdn,$map_id){
 
 
 
-      function SaveProductsReference($params,$array){
+      function SaveEventsCategoriesReferences($params,$array){
 
-        $sth = $this->db->prepare("DELETE FROM event_categories where msisdn='".$params['msisdn']."'");
-  		  $sth->execute();
+       /* $sth = $this->db->prepare("DELETE FROM event_categories where msisdn='".$params['msisdn']."'");
+  		  $sth->execute(); */
+        $this->redis->DeleteKey($params['session_key'].'_event_categories');
         $xml=null;
         $menu=null;
+        $mult_event_categories=array();
         $i=1;
     	foreach($array as $key=>$value){
-        $postData[$i]['ref_id'] =$i;
-      	$postData[$i]['api_id'] =$value['id'];
-     	  $postData[$i]['name'] =$value['name'];
-        $postData[$i]['msisdn'] =$params['msisdn'];
-        $postData[$i]['session_id'] =$params['sessionId'];
+        $postData['ref_id'] =$i;
+      	$postData['api_id'] =$value['id'];
+     	  $postData['name'] =$value['name'];
+        $postData['msisdn'] =$params['msisdn'];
+        $postData['session_id'] =$params['sessionId'];
 
-      $this->db->InsertData("event_categories", $postData[$i]);
-
+      //$this->db->InsertData("event_categories", $postData[$i]);
+      array_push($mult_event_categories,$postData);
+      $postData  = null;
      	//$xml .=$i.') '.$value['name']." ".number_format($value['price']).PHP_EOL;
      	$xml .=$i.') '.$value['name'].PHP_EOL;
         $i++;
     		}
+        $this->log->ExeLog($params, "Palmkash::SaveEventsCategoriesReferences mult_events " . var_export($mult_event_categories, true), 2);
+
+        $serialized_categories = serialize($mult_event_categories);
+        $this->redis->StoreKeyData($params['session_key'].'_event_categories',$serialized_categories);        
         $menu['events'] = $xml;
         //  print_r($menu);die();
     	 return $menu;
@@ -1091,22 +1184,35 @@ function getRouteReference($msisdn,$map_id){
 
       function SaveEventsReferences($params,$array){
 
-        $sth = $this->db->prepare("DELETE FROM events where msisdn='".$params['msisdn']."'");
+       /* $sth = $this->db->prepare("DELETE FROM events where msisdn='".$params['msisdn']."'");
         $sth1 = $this->db->prepare("DELETE FROM event_tickets where msisdn='".$params['msisdn']."'");
   		  $sth->execute();
-  		  $sth1->execute();
+  		  $sth1->execute(); */
+        $this->redis->DeleteKey($params['session_key'].'_events');
+        $this->redis->DeleteKey($params['session_key'].'_event_tickets');
+
         $xml=null;
         $menu=null;
         $i=1;
+        $mult_events = array();
+        $mult_tickets = array();
     	foreach($array as $key=>$value){
-        $postData[$i]['ref_id'] =$i;
+       /* $postData[$i]['ref_id'] =$i;
      	  $postData[$i]['name'] =$value[$i-1]['name'];
      	  $postData[$i]['venue'] =$value[$i-1]['venue'];
      	  $postData[$i]['time'] =$value[$i-1]['time'];
         $postData[$i]['msisdn'] =$params['msisdn'];
-        $postData[$i]['session_id'] =$params['sessionId'];
-
-      $this->db->InsertData("events", $postData[$i]);
+        $postData[$i]['session_id'] =$params['sessionId']; */
+        $postData['ref_id'] =$i;
+        $postData['name'] =$value[$i-1]['name'];
+        $postData['venue'] =$value[$i-1]['venue'];
+        $postData['time'] =$value[$i-1]['time'];
+        $postData['msisdn'] =$params['msisdn'];
+        $postData['session_id'] =$params['sessionId'];
+     
+        array_push($mult_events,$postData);
+        $postData  = null;
+     // $this->db->InsertData("events", $postData[$i]);
          $j=1;
       	foreach($value[$i-1]['prices'] as $key1=>$prices){
        $TicketData['event_ref'] =$i;
@@ -1116,14 +1222,26 @@ function getRouteReference($msisdn,$map_id){
        $TicketData['amount'] =$prices['ticket_price'];
        $TicketData['msisdn'] =$params['msisdn'];
        $TicketData['session_id'] =$params['sessionId'];
-      $this->db->InsertData("event_tickets", $TicketData);
+       array_push($mult_tickets,$TicketData);
+       $TicketData  = null;
+      //$this->db->InsertData("event_tickets", $TicketData);
         $j++;
           }
      //	$xml .=$i.') '.$value[$i-1]['name']." - ".$value[$i-1]['venue'].PHP_EOL;
      	$xml .=$i.') '.$value[$i-1]['name'].PHP_EOL;
         $i++;
     		}
+      $this->log->ExeLog($params, "Palmkash::SaveEventsReferences mult_events " . var_export($mult_events, true), 2);
+
+        $serialized_events = serialize($mult_events);
+        $this->log->ExeLog($params, "Palmkash::SaveEventsReferences mult_tickets " . var_export($mult_tickets, true), 2);
+
+        $serialized_eventtickets = serialize($mult_tickets);
+        $this->redis->StoreKeyData($params['session_key'].'_events',$serialized_events);    
+        $this->redis->StoreKeyData($params['session_key'].'_event_tickets',$serialized_eventtickets);         
         $menu['events'] = $xml;
+  
+
         //  print_r($menu);die();
     	 return $menu;
       }
