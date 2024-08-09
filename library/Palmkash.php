@@ -541,7 +541,7 @@ function getRouteReference($msisdn,$map_id){
       //  $this->log->ExeLog($params, "Palmkash::ProcessGetConfirmationSummary getEndStationReference ".var_export($end_id,true), 2);
 
         $route_time= $this->getRouteReference($params['msisdn'],$route['input_value']);
-        //$this->log->ExeLog($params, "Palmkash::ProcessGetConfirmationSummary getRouteReference ".var_export($route_time,true), 2);
+        $this->log->ExeLog($params, "Palmkash::ProcessGetConfirmationSummary getRouteReference ".var_export($route_time,true), 2);
 		     $response=array();
          $response['route_name']=$start_id[0]['station_name'].'-'.$end_id[0]['station_name'];
          $response['route_time']=$route_time[0]['time'];
@@ -559,7 +559,7 @@ function getRouteReference($msisdn,$map_id){
         $route = $this->getUserInput($params,'departure_time');
         $tickets = $this->getUserInput($params,'number_of_tickets');
         $route_time= $this->getRouteReference($params['msisdn'],$route['input_value']);
-        //$this->log->ExeLog($params, "Palmkash::ProcessGetConfirmationSummary getRouteReference ".var_export($route_time,true), 2);
+        $this->log->ExeLog($params, "Palmkash::ProcessGetConfirmationSummary getRouteReference ".var_export($route_time,true), 2);
 
          $user = $this->getRegistration($params);
          $params['names']=$user[0]['first_name'];
@@ -985,7 +985,9 @@ function getRouteReference($msisdn,$map_id){
      }
    }else{
       //invalid Entry
-
+      $menu=null;
+      $menu['error_code'] = $this->GetResponseMsg(115);
+     $return_response=$menu;
    }
    return $return_response;
   }
@@ -1009,7 +1011,7 @@ function getRouteReference($msisdn,$map_id){
     return $menu;
     }else{
       //invalid Entry
-
+      $menu['error_code'] = $this->GetResponseMsg(115);
    }
    return $menu;
   }

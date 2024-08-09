@@ -110,7 +110,7 @@ class COREUSSD extends Palmkash {
 
           $result = array();
         if ($menu[0]['fxn_call_flag'] == 1) {
-            $this->log->ExeLog($params, "COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to " . $menu[0]['call_fxn_name'], 2);
+            $this->log->ExeLog($params, "COREUSSD::DisplayMenu PrepareMenu Required to make remote function call to " . $menu[0]['call_fxn_name']. " and input value =".$params['subscriberInput'], 2);
             $result = $this->{$menu[0]['call_fxn_name']}($params);
 
    //$this->log->ExeLog($params, "COREUSSD::External function call Call Result " . var_export($result, true), 2);
