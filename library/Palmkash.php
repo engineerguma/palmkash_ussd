@@ -214,7 +214,7 @@ function getRouteReference($msisdn,$map_id){
        $response['error_code'] = $this->GetStateFull(15);
         }else{
           //save languege
-          $language['language']=$response[0]['language'];
+          $language['language']= $response[0]['language'];
           $lang = $this->kash->mod->SetLanguagePref($params,$language);
           $params['session_language_pref'] = $lang;
           $response['language']=$lang;

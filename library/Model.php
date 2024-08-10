@@ -90,7 +90,6 @@ function SessionCleanUp($params) {
             $postCS['current_state'] = $stateid;
     $this->log->ExeLog($params, "Model::SetCurrentState Post Data." . var_export($postCS, true), 2);
 
-       //$this->redis->StoreNameWitValue($params['session_key'].'_current_state','previous_state', $postLang['session_language_pref']);    
        $this->redis->StoreArrayRecords($params['session_key'].'_current_state',$postCS);    
      
         }       
