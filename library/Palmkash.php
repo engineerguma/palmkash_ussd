@@ -228,9 +228,9 @@ function getRouteReference($msisdn,$map_id){
         $res = $this->getUserInput($params,'reg_language');
         $lang= $res['input_value'];
          if($lang==1||$lang==2){
-        $this->kash->mod->SetLanguagePref($params,$lang);
+        $language = $this->kash->mod->SetLanguagePref($params,$lang);
         //$this->kash->mod->UpdateLanguagePref($params,$lang);
-         $response=1;
+         $response['language'] = $language;
        }else{
          $menu=null;
          $menu['error_code'] = $this->GetResponseMsg(113);
