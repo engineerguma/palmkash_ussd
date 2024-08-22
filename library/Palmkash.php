@@ -36,15 +36,15 @@ class Palmkash extends Model {
 
     if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
       $nameError['names_error'] = 1;
-    }else{
+    }
      
-      if(strlen($name)>NAMES_MAXSIZE || strlen($name)<NAMES_MINSIZE){
+    if(strlen($name)>NAMES_MAXSIZE || strlen($name)<NAMES_MINSIZE){
         $nameError['names_error'] = 1;
-      }else{
+    }else{
 
       }
 
-    }
+    
     return $nameError;
   }
 /* 
