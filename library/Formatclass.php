@@ -84,7 +84,7 @@ class Formatclass {
         'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y','Ğ'=>'G', 'İ'=>'I', 'Ş'=>'S', 'ğ'=>'g', 'ı'=>'i', 'ş'=>'s', 'ü'=>'u','ă'=>'a', 'Ă'=>'A', 'ș'=>'s', 'Ș'=>'S', 'ț'=>'t', 'Ț'=>'T' );
          $xmln = strtr($xmln, $unwanted_array);
         $xmlp = simplexml_load_string($xmln);
-        //print_r($xmlp);die();
+    //    print_r($xmlp);die();
         $p_array = $this->ObjectToArray($xmlp);
 
         $request_array = $this->ArrayFlattener($p_array);

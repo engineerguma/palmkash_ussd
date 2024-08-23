@@ -161,6 +161,11 @@ class COREUSSD extends Palmkash {
         return $response_array;
     }
 
+
+    function ValidateAllowedCharacters($str) {
+     return !preg_match(ALLOWED_CHARS, $str) > 0;
+     }
+
     function ReplacePlaceHolders($request, $text, $array) {
         $this->log->ExeLog($request, 'COREUSSD::ReplacePlaceHolders Fired for ' . $text . ' With Data '
                 . var_export($array, true), 2);

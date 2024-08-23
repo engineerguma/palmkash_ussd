@@ -10,6 +10,8 @@ define('DB_USER'  ,$conf['datastore']['duser']);
 define('DB_PASS'  ,$conf['datastore']['dpass']);
 define('DB_NAME'  ,$conf['datastore']['dname']);
 
+define('ALLOWED_CHARS'  ,$conf['datastore']['allowed_input']);
+
 define('NAMES_MAXSIZE'  ,$conf['datastore']['names_maxlength']);
 define('NAMES_MINSIZE'  ,$conf['datastore']['names_minlength']);
 

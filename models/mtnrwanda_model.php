@@ -7,12 +7,14 @@ class Mtnrwanda_Model extends COREUSSD {
     }
 
     function RequestHandler($xml_post, $params) {
-
+      $response = array();
+     if($this->ValidateAllowedCharacters($params['subscriberInput'])){
          $status = $this->ManageRequestSession($params);
    //     $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler ManageRequestSession Returning Status ' .var_export($status, true), 2);
             if(isset($status['session_language_pref'])){ 
               $params['session_language_pref'] = $status['session_language_pref']; 
             }
+
             $param_array = explode("*", $params['subscriberInput']);
             $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler ManageRequestSession input string ' . var_export($param_array, true), 2);    
             $registered = $this->IsRegistered($params);   // Added temporariry
@@ -33,13 +35,20 @@ class Mtnrwanda_Model extends COREUSSD {
 		    //$response['sessionId']=$params['sessionId'];
         //   print_r($response);die();
     		if(empty($response['applicationResponse'])){
-    		$response['applicationResponse']='Dear Customer, Request due to communication Problem, try again Later';
+    		$response['msg_response']='Dear Customer, Request failed, try again Later.'.PHP_EOL.'Nshuti Mukiriya, Gusaba byarananiye, gerageza nanone Nyuma';
+        $response['state']= 'FB';
+        $response = $this->MenuArray($params,$response);
     		}
 
-          $response = $this->WriteResponseXML($response);
-        $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler Returning XML Response ' . $response, 3);
+      }else{
+    		$response['msg_response']='Dear customer, What you entered is not allowed.'.PHP_EOL.'Nshuti mukiriya,Ibyo winjiye ntibyemewe.';
+        $response['state']= 'FB';
+        $response = $this->MenuArray($params,$response);
+      }
+      $response = $this->WriteResponseXML($response);
+      $this->log->ExeLog($params, 'Mtnrwanda_Model::Handler Returning XML Response ' . $response, 3);
 
-        return $response;
+      return $response;
     }
 
 
@@ -232,6 +241,7 @@ class Mtnrwanda_Model extends COREUSSD {
             return $standard_array;
       }
 
-
+    
+  
 
 }

@@ -39,12 +39,8 @@ class Palmkash extends Model {
     }
      
     if(strlen($name)>NAMES_MAXSIZE || strlen($name)<NAMES_MINSIZE){
-        $nameError['names_error'] = 1;
-    }else{
-
-      }
-
-    
+      $nameError['names_error'] = 1;
+    }
     return $nameError;
   }
 /* 
@@ -274,10 +270,17 @@ function getRouteReference($msisdn,$map_id){
       $params['language']=$lang;
       $params['first_name']=$fname['input_value'];
       $response =1;
+      $errors = 0;
       $validate = $this->FieldvalidateNames($fname['input_value']);  //1 means error found
-      $params['last_name']=$onames['input_value'];
-      $validate = $this->FieldvalidateNames($onames['input_value']);  //1 means error found
       if(isset($validate['names_error'])){
+        $errors = $errors + 1;  
+      }
+      $params['last_name']=$onames['input_value'];
+      $validate = $this->FieldvalidateNames($onames['input_value']);  //1 means error found 
+      if(isset($validate['names_error'])){
+        $errors = $errors + 1;  
+      }
+      if($errors>0){
         $menu=null;
         $menu['error_code'] = $this->GetResponseMsg(116);
         $menu['names_error'] = 1;
