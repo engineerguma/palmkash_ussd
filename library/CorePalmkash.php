@@ -327,7 +327,7 @@ function HomegasCompleteOrder($params){
           "account_number" => $params['account_number'],
           "transaction_account" => $params['msisdn'],
           "merchant_account" => $routing[0]['gateway_account'],
-          "transaction_source" => 'ussd',
+          "transaction_source" => 'ussd_app',
           "transaction_reference_number" => 'ussd'.$this->genRandStr(),
           "transaction_reason" => $params['reason'],
           "currency" => 'RWF',
