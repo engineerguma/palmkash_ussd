@@ -995,7 +995,7 @@ function getRouteReference($msisdn,$map_id){
          $params['language']=$language;
           $return_response = '';
          $response = $this->kash->CompleteEventsBookingRequest($params);
-         if(isset($response['status'])&&strtolower($response['status'])=='success'){
+         if(isset($response['status'])&&strtolower($response['status'])=='pending'){
             //$return_response=$response;
             //added these below to change message
             $menu=null;
