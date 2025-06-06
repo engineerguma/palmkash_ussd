@@ -187,7 +187,81 @@ class RWAirtel_Model extends COREUSSD {
         
     
     
-          }else{
+          } else if($inputString[1]==5){ //Amahoro
+            // print_r($inputString[1]);die();
+             //go to get events
+             $fxn_array[0]['ussd_new_state']=1;
+             $this->OperationWatch($params, 1);
+             $params['subscriberInput'] = '5';
+              $state = $this->GetCurrentState($params);
+              $res =  $this->GetCurrentLogstate($params); 
+              //   print_r($state);die();
+              $state[0]['current_state']  = $res['current_state'];
+              $this->StoreInputValues($params, $state[0]);
+              $call_fxn = $this->GetNextState($state[0]['current_state'], $params['subscriberInput']);
+              // print_r($call_fxn);die();
+              $this->OperationWatch($params, $call_fxn[0]['ussd_new_state']);
+                        //$params['subscriberInput'] = 'event_category';
+          $this->log->ExeLog($params, 'RWAirtel_Model::Inside Option 3', 2);
+
+              // print_r($menu);die();
+            $result = $this->ProcessGetEventsCategories($params);
+          //  print_r($result);die();
+           if(isset($result['events'])&&isset($inputString[2])){ //
+               $params['subscriberInput'] = $inputString[2];
+               $state = $this->GetCurrentState($params);
+               $res =  $this->GetCurrentLogstate($params);  
+               $state[0]['current_state']  = $res['current_state'];               
+                 //print_r($state);die();
+               $this->StoreInputValues($params, $state[0]);
+           $call_fxn = $this->GetNextState($state[0]['current_state'], -1);
+           //print_r($call_fxn);die();
+            $result = $this->ProcessCategoryEvents($params);
+            //print_r($result);die();
+          $this->log->ExeLog($params, 'RWAirtel_Model::ProcessCategoryEvents Inside Option 3 categories ' . var_export($result, true), 2);
+    //////////////////////////////////////////////////////////////////////////////////////////
+              $this->OperationWatch($params, $call_fxn[0]['ussd_new_state']);
+              if(isset($result['error_code'])){
+                $menu = $result['error_code'];
+
+              }else{
+                $menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);
+              }
+              if (isset($params['session_language_pref'])) {
+                $ln_text = 'text_' . $params['session_language_pref'];          
+              } else {
+                $ln_text = 'text_en';
+              }
+//              $this->log->ExeLog($params, 'RWAirtel_Model::Inside Option 3 categories ' . var_export($result, true), 2);
+              $prepared_response = $this->ReplacePlaceHolders($params, $menu[0][$ln_text], $result);
+              $resp['state'] = $menu[0]['state_indicator'];
+              $resp['msg_response'] = $prepared_response;
+              $response = $this->MenuArray($params, $resp);
+
+              //print_r($response);die();
+              return  $response;
+
+
+          ///////////////////////////////////////////////////////
+           }else if(isset($result['events'])){
+              $menu = $this->GetStateFull($call_fxn[0]['ussd_new_state']);
+              if (isset($params['session_language_pref'])) {
+                $ln_text = 'text_' . $params['session_language_pref'];          
+              } else {
+                $ln_text = 'text_en';
+              }
+            $this->log->ExeLog($params, 'RWAirtel_Model::Inside Option 3 categories ' . var_export($result, true), 2);
+            $prepared_response = $this->ReplacePlaceHolders($params, $menu[0][$ln_text], $result);
+            $resp['state'] = $menu[0]['state_indicator'];
+            $resp['msg_response'] = $prepared_response;
+             $response = $this->MenuArray($params, $resp);
+
+          //print_r($response);die();
+             return  $response;
+            }
+
+          }
+          else{
 
             $response = $this->MenuOptionHandler($params, $status);
 
