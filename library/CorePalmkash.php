@@ -130,12 +130,17 @@ class CorePalmkash {
         return $response;
     }
 
-///Events
+///All Events
 
 
       function GetEventCategories($params=false){
-        $routing =$this->mod->getMerchantRouting('events');
-        $req = array(
+        $route_key = $this->mod->GetSessionRecords($params['session_key']);
+        if(isset($route_key['routing_key'])&&$route_key['routing_key']!=''){
+          $routing =$this->mod->getMerchantRouting($route_key['routing_key']);
+        }else{
+          $routing =$this->mod->getMerchantRouting('events');
+        } 
+               $req = array(
               'request_method' => 'GetEventCategories',
               'token' => $routing[0]['merchant_token'],
               'msisdn' => $params['msisdn'],
@@ -149,7 +154,12 @@ class CorePalmkash {
       }
 
       function GetEventsByCategory($params){
+      $route_key = $this->mod->GetSessionRecords($params['session_key']);
+      if(isset($route_key['routing_key'])&&$route_key['routing_key']!=''){
+        $routing =$this->mod->getMerchantRouting($route_key['routing_key']);
+      }else{
         $routing =$this->mod->getMerchantRouting('events');
+      }
         $req = array(
             'request_method' => 'GetEventsByCategory',
             'event_category_id' => $params['category_id'],
@@ -165,7 +175,12 @@ class CorePalmkash {
         }
 
      function CompleteEventsBookingRequest($params){
-       $routing =$this->mod->getMerchantRouting('events');
+      $route_key = $this->mod->GetSessionRecords($params['session_key']);
+      if(isset($route_key['routing_key'])&&$route_key['routing_key']!=''){
+        $routing =$this->mod->getMerchantRouting($route_key['routing_key']);
+      }else{
+        $routing =$this->mod->getMerchantRouting('events');
+      }
        $req = array(
           "request_method"=>"MakeBooking",
           "amount" => $params['amount'],

@@ -1006,7 +1006,12 @@ function getRouteReference($msisdn,$map_id){
              $menu['error_code'] = $this->GetResponseMsg(101);
               $this->OperationWatch($params,1);
             $return_response=$menu;
-          }else{
+          }else if(isset($response['status'])&&strtolower($response['status']=='failed')){
+            $menu=null;
+            $menu['error_code'] = $this->GetResponseMsg(104);
+             $this->OperationWatch($params,1);
+           $return_response=$menu;
+         }else{
              $menu=null;
              $code = $this->GetBookingErrorCode($response['result']);
              $menu['error_code'] = $this->GetResponseMsg($code);
@@ -1046,7 +1051,21 @@ function getRouteReference($msisdn,$map_id){
      return $menu;
   }
 
+  function SaveRouteKey(){
+
+    $this->redis->StoreNameWitValue($params['session_key'],'session_language_pref', $postLang['session_language_pref']);    
+  
+  }
   function ProcessGetEventsCategories($params){
+
+    ###fetch the key
+   $current_state = $this->GetCurrentLogstate($params);
+  $this->log->ExeLog($params, "Palmkash::ProcessGetEventsCategories  Current State details  ". var_export($current_state, true), 2);
+
+   $state_info = $this->GetCurrentState($params,$current_state['current_state']);
+    if(isset($state_info[0]['search_key'])&&$state_info[0]['search_key']!=''){
+    $this->redis->StoreNameWitValue($params['session_key'],'routing_key',$state_info[0]['search_key']);    
+    } 
     $response = $this->kash->GetEventCategories($params);
        $return_response = '';
     if(isset($response['status'])&&strtolower($response['status'])=='success'){

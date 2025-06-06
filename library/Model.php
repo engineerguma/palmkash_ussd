@@ -85,7 +85,7 @@ function SessionCleanUp($params) {
           //  }
             //Already Exists, Do Determination Of Next State
 
-         //   $prev=$this->GetCurrentState($params,$res['current_state']);
+         //   $prev=$this->GetCurrentStateOld($params,$res['current_state']);
             $postCS['previous_state'] = $res['current_state'];
             $postCS['current_state'] = $stateid;
     $this->log->ExeLog($params, "Model::SetCurrentState Post Data." . var_export($postCS, true), 2);
@@ -150,7 +150,7 @@ function SessionCleanUp($params) {
                 AND session_id =:ssn AND telephone_number=:tn", array('ssn' => $params['sessionId'], 'tn' => $params['msisdn']));
     }
 
-    /* function GetCurrentState($params){
+    /* function GetCurrentStateOld($params){
         return $this->db->SelectData("SELECT * FROM palm_log_current_state c JOIN palm_ussd_states s
                 ON c.current_state=s.state_id WHERE session_id=:sid AND telephone_number=:tn", array('sid' => $params['sessionId'],'tn' => $params['msisdn']));
     }*/
