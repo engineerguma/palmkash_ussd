@@ -146,7 +146,7 @@ class CorePalmkash {
               'msisdn' => $params['msisdn'],
         );
            $url_data = array(
-          "url"=>$routing[0]['merchant_url'],
+          "url"=>$routing[0]['merchant_url'].'/ussd',
           "method" => 'POST',
         );
         $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
@@ -154,6 +154,27 @@ class CorePalmkash {
       }
 
       function GetEventsByCategory($params){
+        $route_key = $this->mod->GetSessionRecords($params['session_key']);
+        if(isset($route_key['routing_key'])&&$route_key['routing_key']!=''){
+          $routing =$this->mod->getMerchantRouting($route_key['routing_key']);
+        }else{
+          $routing =$this->mod->getMerchantRouting('events');
+        }
+          $req = array(
+              'request_method' => 'GetEventsByCategory',
+              'event_category_id' => $params['category_id'],
+              'token' => $routing[0]['merchant_token'],
+              'msisdn' => $params['msisdn'],
+          );
+             $url_data = array(
+            "url"=>$routing[0]['merchant_url'].'/ussd',
+            "method" => 'POST',
+          );
+      $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+          return $response;
+          }
+
+      function GetAllActiveEvents($params){
       $route_key = $this->mod->GetSessionRecords($params['session_key']);
       if(isset($route_key['routing_key'])&&$route_key['routing_key']!=''){
         $routing =$this->mod->getMerchantRouting($route_key['routing_key']);
@@ -161,16 +182,31 @@ class CorePalmkash {
         $routing =$this->mod->getMerchantRouting('events');
       }
         $req = array(
-            'request_method' => 'GetEventsByCategory',
-            'event_category_id' => $params['category_id'],
+            'request_method' => 'GetEventAllActiveEvents',
             'token' => $routing[0]['merchant_token'],
             'msisdn' => $params['msisdn'],
         );
            $url_data = array(
-          "url"=>$routing[0]['merchant_url'],
+          "url"=>$routing[0]['merchant_url'].'/ussd',
           "method" => 'POST',
         );
-        $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+      $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
+        return $response;
+        }
+
+      function CheckGamesOnCard($params){
+      $route_key = $this->mod->GetSessionRecords($params['session_key']);
+      if(isset($route_key['routing_key'])&&$route_key['routing_key']!=''){
+        $routing =$this->mod->getMerchantRouting($route_key['routing_key']);
+      }else{
+        $routing =$this->mod->getMerchantRouting('events');
+      }
+      $req = array();
+           $url_data = array(
+          "url"=>$routing[0]['merchant_url'].'/api/cards/get-tickets-for-card?serial_number='.$params['cardnumber'],
+          "method" => 'GET',
+        );
+      $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
         return $response;
         }
 
@@ -192,7 +228,7 @@ class CorePalmkash {
           "price_id"=>$params['price_id']
         );
         $url_data = array(
-          "url"=>$routing[0]['merchant_url'],
+          "url"=>$routing[0]['merchant_url'].'/ussd',
           "method" => 'POST',
         );
         $response = $this->CompleteRequest($params, $req, $url_data,$header_extras=array());
@@ -322,7 +358,7 @@ function HomegasCompleteOrder($params){
      $routing =$this->mod->getMerchantRouting($params['merchant']);
        //print_r($routing);die();
         $url_data = array(
-          "url"=>$routing[0]['merchant_url'].'api/v1/student/'.$params['account_number'].'/'.$routing[0]['search_key'],
+          "url"=>$routing[0]['merchant_url'].'/api/v1/student/'.$params['account_number'].'/'.$routing[0]['search_key'],
           "method" => 'GET',
         );
 
@@ -438,6 +474,39 @@ function HomegasCompleteOrder($params){
 	  $this->log->ExeLog($params,'CorePalmKash::SendJSONByCURL response content '. var_export($content, true), 2);
         return $content;
     }
+
+    function SendGetByCURL($url,$params,$post_,$extra_headers) {
+      $this->log->ExeLog($params,'CorePalmKash::SendGetByCURL Sending ' . $post_ . ' To ' . $url, 2);
+      $cont_len = strlen($post_);
+
+        $header=['Content-Type: application/json',
+        'cache-control: no-cache',
+        'Content-Length: ' . $cont_len];
+        if(!empty($extra_headers)){
+        $header = array_merge($header,$extra_headers);
+        }
+
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_HEADER, 0);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+      curl_setopt($ch, CURLOPT_TIMEOUT, 15); 
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15); 
+      $content = curl_exec($ch);
+      if (!curl_errno($ch)) {
+          $info = curl_getinfo($ch);
+          $log = 'Took ' . $info['total_time'] . ' seconds to send a request to ' . $info['url'];
+      } else {
+          $log = 'Curl error: ' . curl_error($ch);
+      }
+      $this->log->ExeLog($params,'CorePalmKash::SendGetByCURL Returning ' . $log, 2);
+
+  $this->log->ExeLog($params,'CorePalmKash::SendGetByCURL response content '. var_export($content, true), 2);
+      return $content;
+  }
 
     function ParseRequest($params, $json) {
 		//print_r($xml);die();

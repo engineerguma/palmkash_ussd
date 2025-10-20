@@ -45,6 +45,7 @@ class Formatclass {
         'error' => 'error',
         'transaction_status' => 'status',
         'result' => 'result',
+        'data' => 'result',
         'id' => 'id',
         'station' => 'station',
         'time' => 'time',
