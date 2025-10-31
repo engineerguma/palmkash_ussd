@@ -39,6 +39,7 @@ results ////
 "date_of_travel" : "2020-04-20" // we have been using currentdate 
 }
 
+//Test  data sample below
 
 curl -X POST http://{HOST_URL}/{MNO_URI} \
   -H "Content-Type: application/xml" \
