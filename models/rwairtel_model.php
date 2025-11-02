@@ -79,7 +79,7 @@ class RWAirtel_Model extends COREUSSD {
                $res =  $this->GetCurrentLogstate($params);  
                $state[0]['current_state']  = $res['current_state'];               
                  //print_r($state);die();
-                 if ($state['state_type'] == 'input') {
+                 if ($state[0]['state_type'] == 'input') {
                   $this->StoreInputValues($params, $state[0]);
                   $choice = '-1';
                  } else {

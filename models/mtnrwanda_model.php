@@ -94,7 +94,7 @@ class Mtnrwanda_Model extends COREUSSD {
            $state = $this->GetCurrentState($params);
            $res =  $this->GetCurrentLogstate($params);  
            $state[0]['current_state']  = $res['current_state'];
-           if ($state['state_type'] == 'input') {
+           if ($state[0]['state_type'] == 'input') {
             $this->StoreInputValues($params, $state[0]);
             $choice = '-1';
            } else {
