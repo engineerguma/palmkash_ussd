@@ -1,7 +1,9 @@
 <?php
 
 $conf = parse_ini_file("conf/config.ini",true);
+$logging = parse_ini_file("conf/logging.ini",true);
 
+define('APP_LOG'  ,$logging['application_log']);
 define('DOMAIN', $conf['urconnect']['ussd_domain']);
 define('DB_TYPE', $conf['datastore']['dtype']);
 /* PDN  */

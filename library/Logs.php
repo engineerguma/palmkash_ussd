@@ -8,6 +8,8 @@ class Logs {
 
 
         function LogXML($sp, $sv,$xml) {
+
+            if(strtolower(APP_LOG)=='trace'){
             $file_ext = microtime();
             $todays_folder = 'systemlog/xml_depo/'. date('Y_m_d');
             $sv_folder = $todays_folder.'/'.$sp;
@@ -26,9 +28,29 @@ class Logs {
                 file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
             }
             return $file_name;
+
+        }
+
         }
 
     function ExeLog($sa, $log, $id = false) {
+		//print_r($log);die();
+        if(strtolower(APP_LOG)=='trace'){
+        $todays_folder = 'systemlog/tmp/' . date('Y_m_d');
+        $file_name = $todays_folder . '/execution_log_file_' . $sa['operator'] .'_' . $sa['msisdn'] .'.txt';
+
+        if (is_dir($todays_folder)) {
+            $this->PrepareLog($file_name, $log, $id);
+        } else {
+            mkdir($todays_folder);
+            $this->PrepareLog($file_name, $log, $id);
+        }
+
+        return $file_name;
+    }
+    }
+    
+    function InfoLog($sa, $log, $id = false) {
 		//print_r($log);die();
         $todays_folder = 'systemlog/tmp/' . date('Y_m_d');
         $file_name = $todays_folder . '/execution_log_file_' . $sa['operator'] .'_' . $sa['msisdn'] .'.txt';
