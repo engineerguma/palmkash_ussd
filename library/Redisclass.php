@@ -9,7 +9,7 @@ class Redisclass {
 
     function connect() {
     $this->redis->connect(REDIS_HOST, REDIS_PORT);
-    $this->redis->auth(REDIS_PASSWORD);
+   // $this->redis->auth(REDIS_PASSWORD);
     }
 
 
