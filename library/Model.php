@@ -6,9 +6,8 @@ class Model {
 
         $this->format = new Formatclass();
         $this->log = new Logs();
-        $this->db = new Database();
+        $this->db = Database::getInstance();
         $this->redis =  new Redisclass();       
-        Session::start();
     }
 
         function getMerchantRouting($key){

@@ -4,7 +4,6 @@ class Formatclass {
 
     function __construct() {
            $this->log = new Logs();
-           $this->db = new Database();
     }
 
     public $_match_up_array = array(

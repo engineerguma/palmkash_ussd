@@ -3,8 +3,7 @@
 class View {
 
     function __construct() {
-        Session::start();
-        $this->db = new Database();
+        $this->db = Database::getInstance();
     }
 
     public function render($name, $noInclude = false) {
