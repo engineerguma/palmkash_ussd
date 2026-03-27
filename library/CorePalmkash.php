@@ -460,8 +460,8 @@ function HomegasCompleteOrder($params){
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30); 
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30); 
+        curl_setopt($ch, CURLOPT_TIMEOUT, 120); 
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120); 
         $content = curl_exec($ch);
         if (!curl_errno($ch)) {
             $info = curl_getinfo($ch);
@@ -493,8 +493,8 @@ function HomegasCompleteOrder($params){
       curl_setopt($ch, CURLOPT_URL, $url);
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-      curl_setopt($ch, CURLOPT_TIMEOUT, 15); 
-      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15); 
+      curl_setopt($ch, CURLOPT_TIMEOUT, 120); 
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120); 
       $content = curl_exec($ch);
       if (!curl_errno($ch)) {
           $info = curl_getinfo($ch);
