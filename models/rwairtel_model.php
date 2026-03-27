@@ -88,7 +88,7 @@ class RWAirtel_Model extends COREUSSD {
                   }
               $call_fxn = $this->GetNextState($state[0]['current_state'], $choice);
             //print_r($result);die();
-          $this->log->ExeLog($params, 'RWAirtel_Model::ProcessCategoryEvents Inside Option 3 categories ' . var_export($result, true), 2);
+          //$this->log->ExeLog($params, 'RWAirtel_Model::ProcessCategoryEvents Inside Option 3 categories ' . var_export($result, true), 2);
     //////////////////////////////////////////////////////////////////////////////////////////
               $this->OperationWatch($params, $call_fxn[0]['ussd_new_state']);
  
