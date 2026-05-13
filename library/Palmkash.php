@@ -135,16 +135,15 @@ function getEventTicketsReference($params,$inputvalue){
 
 
 function getPaymentTextMsg($params){
-
   //$ln = $this->GetSessionLanguage($params);
-  $ln = $this->GetSessionRecords($params['session_key']);
+ // $ln = $this->GetSessionRecords($params['session_key']);
     $this->log->ExeLog($params, 'Palmkash::getPaymentTextMsg GetSessionRecords  ' . var_export($ln, true), 2);
 
   $network = $params['operator'];
-  $message_param= strtoupper($params['operator']).'_PAYMENT_MESSAGE_'.strtoupper($ln['session_language_pref']);
+  $message_param= strtoupper($params['operator']).'_PAYMENT_MESSAGE_'.strtoupper($params['lang']);
   $message =PAYMENT_SUBMITTED_MSG[$message_param];
   $msg_array =array();
-  $msg_array[0]['text_'.$ln['session_language_pref']]=$message;
+  $msg_array[0]['text_'.$params['lang']]=$message;
   $msg_array[0]['state_indicator']='FB';
 
   return $msg_array;
@@ -470,6 +469,11 @@ function getRouteReference($msisdn,$map_id){
           if(isset($response_array['status'])&&strtolower($response_array['status'])=='successfull'){
              //$return_response=$response;
              //added these below to change message
+            $user = $this->getRegistration($params);
+            $params['lang']= 'kin';
+            if($user[0]['language']=='en'){
+              $params['lang']= 'en';
+            }            
              $menu['error_code'] = $this->getPaymentTextMsg($params);
              $return_response=$menu;
            }else if(isset($response['error'])){
@@ -662,8 +666,10 @@ function getRouteReference($msisdn,$map_id){
          $params['amount']=$route_time[0]['price'];
          $params['number_of_tickets']=$tickets['input_value'];
            $language ='kinyarwanda';
+           $params['lang']= 'kin';
          if($user[0]['language']=='en'){
              $language ='english';
+             $params['lang']= 'en';
           }
          $params['language']=$language;
          $params['date_of_travel']=date('Y-m-d') ;
@@ -833,6 +839,11 @@ function getRouteReference($msisdn,$map_id){
     if(isset($response['status'])&&strtolower($response['status'])=='pending'){
      // $return_response=$response; //was there before
       $menu=null;
+      $user = $this->getRegistration($params);
+      $params['lang']= 'kin';
+      if($user[0]['language']=='en'){
+        $params['lang']= 'en';
+      }     
       $menu['error_code'] = $this->getPaymentTextMsg($params);
       $return_response=$menu;     
     }else{
@@ -896,6 +907,11 @@ function getRouteReference($msisdn,$map_id){
     if(isset($response['status'])&&strtolower($response['status'])=='pending'){
      //$return_response=$response;
      $menu=null;
+     $user = $this->getRegistration($params);
+     $params['lang']= 'kin';
+     if($user[0]['language']=='en'){
+       $params['lang']= 'en';
+     }
      $menu['error_code'] = $this->getPaymentTextMsg($params);
      $return_response=$menu;      
     }else{
@@ -950,8 +966,10 @@ function getRouteReference($msisdn,$map_id){
         $params['reason']= 'Pocket Money Payment';
         $user = $this->getRegistration($params);
         $language ='kinyarwanda';
+        $params['lang']= 'kin';
         if($user[0]['language']=='en'){
           $language ='english';
+          $params['lang']= 'en';
         }
        $params['language']=$language;
          $return_response = '';
@@ -989,8 +1007,10 @@ function getRouteReference($msisdn,$map_id){
          $params['amount']=$ticket_class['amount'];
          $params['number_of_tickets']=$no_tickets['input_value'];
            $language ='kinyarwanda';
+           $params['lang']= 'kin';          
            if($user[0]['language']=='en'){
              $language ='english';
+             $params['lang']= 'en';             
            }
          $params['language']=$language;
           $return_response = '';
