@@ -137,7 +137,7 @@ function getEventTicketsReference($params,$inputvalue){
 function getPaymentTextMsg($params){
   //$ln = $this->GetSessionLanguage($params);
  // $ln = $this->GetSessionRecords($params['session_key']);
-    $this->log->ExeLog($params, 'Palmkash::getPaymentTextMsg GetSessionRecords  ' . var_export($ln, true), 2);
+  //  $this->log->ExeLog($params, 'Palmkash::getPaymentTextMsg GetSessionRecords  ' . var_export($ln, true), 2);
 
   $network = $params['operator'];
   $message_param= strtoupper($params['operator']).'_PAYMENT_MESSAGE_'.strtoupper($params['lang']);
