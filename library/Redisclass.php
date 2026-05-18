@@ -4,12 +4,17 @@ class Redisclass {
 
     function __construct() {
      $this->redis = new Redis();
+     try {
+         $this->redis->pconnect(REDIS_HOST, REDIS_PORT);
+         // $this->redis->auth(REDIS_PASSWORD);
+     } catch (Exception $e) {
+         // handle error silently
+     }
     }
 
 
     function connect() {
-    $this->redis->connect(REDIS_HOST, REDIS_PORT);
-   // $this->redis->auth(REDIS_PASSWORD);
+        // No-op
     }
 
 
@@ -18,82 +23,63 @@ class Redisclass {
        return $reponse;
        }
         public function DisConnect() {
-
-          return $this->redis->close();
+            // No-op
         }
 
         public function DeleteKey($key) {
-       $this->connect();
        $reponse =$this->redis->del($key);
-       $this->DisConnect();
         return $reponse;
         }
 
 
         function KeyExists($key){
-         $this->connect();
          $response = $this->redis->exists($key);
-       $this->DisConnect();
         return  $response;
         }
 
  
         function StoreKeyData($key,$value){
-          $this->connect();
           $response = $this->redis->SET($key,$value);
           $this->redis->expire($key,SESSION_ID_EXP);
-          $this->DisConnect();
            return  $response;
         }
 
  
         function GetKeyRecord($key){
-          $this->connect();
           $response = $this->redis->GET($key);
-          $this->DisConnect();
            return  $response;
         }       
 
        function StoreNameWitValue($key,$name,$value){
-         $this->connect();
          $response = $this->redis->HSET($key,$name,$value);
          $this->redis->expire($key,SESSION_ID_EXP);
-         $this->DisConnect();
           return  $response;
        }
 
        function GetRecordByValue($key,$value){
-        $this->connect();
         $response = $this->redis->HGET($key,$value);
-        $this->DisConnect();
          return  $response;
       }
 
        function GetKeyRecords($key){
-         $this->connect();
          $response = $this->redis->HGETALL($key);
-         $this->DisConnect();
           return  $response;
        }
 
        function StoreArrayRecords($key,$array=array()){
          //print_r($array);die();
-                  $this->connect();
          $response =  $this->redis->HMSET($key,$array);
              $this->redis->expire($key,SESSION_ID_EXP);
-                $this->DisConnect();
           return  $response;
        }
 
        function StoreCommonInputRecords($key,$array=array()){
          //print_r($array);die();
-                  $this->connect();
                   foreach($array as $key_val => $value){      
            $response = $this->redis->HSET($key,$key_val,$value);                   
            // $response =  $this->redis->ZADD($key,$key_val,$value);
                   }
              $this->redis->expire($key,SESSION_ID_EXP);
-                $this->DisConnect();
           return  $response;
        }
 
@@ -104,9 +90,7 @@ class Redisclass {
 
 
        function GetMatchingKeys($key_prefix){
-        $this->connect();
         $response =  $this->redis->keys('*'.$key_prefix.'*');
-         $this->DisConnect();
          return  $response;
        }
 

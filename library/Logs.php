@@ -15,18 +15,10 @@ class Logs {
             $sv_folder = $todays_folder.'/'.$sp;
             $file_name = $sv_folder . '/' . $sp . '_' . $file_ext . '.xml';
            //print_r($file_name);die();
-            if (is_dir($todays_folder)) {
-                if (is_dir($sv_folder)) {
-                    file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
-                } else {
-                    mkdir($sv_folder);
-                    file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
-                }
-            } else {
-                mkdir($todays_folder);
-                mkdir($sv_folder);
-                file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
+            if (!is_dir($sv_folder)) {
+                @mkdir($sv_folder, 0777, true);
             }
+            file_put_contents($file_name, $xml . "\n", FILE_APPEND | LOCK_EX);
             return $file_name;
 
         }
@@ -36,15 +28,17 @@ class Logs {
     function ExeLog($sa, $log, $id = false) {
 		//print_r($log);die();
         if(strtolower(APP_LOG)=='trace'){
-        $todays_folder = 'systemlog/tmp/' . date('Y_m_d');
-        $file_name = $todays_folder . '/execution_log_file_' . $sa['operator'] .'_' . $sa['msisdn'] .'.txt';
+        $todays_folder = 'systemlog/tmp';
+        $file_name = $todays_folder . '/palmkash_log_' . date('Y_m_d') .'.txt';
 
-        if (is_dir($todays_folder)) {
-            $this->PrepareLog($file_name, $log, $id);
-        } else {
-            mkdir($todays_folder);
-            $this->PrepareLog($file_name, $log, $id);
+        if (!is_dir($todays_folder)) {
+            @mkdir($todays_folder, 0777, true);
         }
+
+        $trace_info = '[' . (isset($sa['operator']) ? $sa['operator'] : 'UNKNOWN') . '|' . (isset($sa['msisdn']) ? $sa['msisdn'] : 'UNKNOWN') . '|' . (isset($sa['sessionId']) ? $sa['sessionId'] : 'UNKNOWN') . '] ';
+        $full_log = $trace_info . $log;
+
+        $this->PrepareLog($file_name, $full_log, $id);
 
         return $file_name;
     }
@@ -52,15 +46,17 @@ class Logs {
     
     function InfoLog($sa, $log, $id = false) {
 		//print_r($log);die();
-        $todays_folder = 'systemlog/tmp/' . date('Y_m_d');
-        $file_name = $todays_folder . '/execution_log_file_' . $sa['operator'] .'_' . $sa['msisdn'] .'.txt';
+        $todays_folder = 'systemlog/tmp';
+        $file_name = $todays_folder . '/palmkash_info_' . date('Y_m_d') .'.txt';
 
-        if (is_dir($todays_folder)) {
-            $this->PrepareLog($file_name, $log, $id);
-        } else {
-            mkdir($todays_folder);
-            $this->PrepareLog($file_name, $log, $id);
+        if (!is_dir($todays_folder)) {
+            @mkdir($todays_folder, 0777, true);
         }
+
+        $trace_info = '[' . (isset($sa['operator']) ? $sa['operator'] : 'UNKNOWN') . '|' . (isset($sa['msisdn']) ? $sa['msisdn'] : 'UNKNOWN') . '|' . (isset($sa['sessionId']) ? $sa['sessionId'] : 'UNKNOWN') . '] ';
+        $full_log = $trace_info . $log;
+
+        $this->PrepareLog($file_name, $full_log, $id);
 
         return $file_name;
     }
