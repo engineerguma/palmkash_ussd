@@ -33,8 +33,9 @@ class Ktrwanda extends Controller {
 		      	$standard_array['operator'] = 'ktrwanda';
             $standard_array['session_key'] = $standard_array['msisdn'].'_'.$standard_array['sessionId'];
 
-      $this->model->log->ExeLog($standard_array, 'Ktrwanda::Index Function decoded '.$decodeddata.' and Standard Array ' . var_export($standard_array, true), 1);
-           $response_xml = $this->model->RequestHandler($mytransdata, $standard_array);
+            $log = new Logs();
+            $log->ExeLog($standard_array, 'Ktrwanda::Index Function decoded '.$decodeddata.' and Standard Array ' . var_export($standard_array, true), 1);
+            $response_xml = $this->model->RequestHandler($mytransdata, $standard_array);
             $response =  $response_xml['applicationResponse'];
                       echo $response;
                       $size = ob_get_length();
