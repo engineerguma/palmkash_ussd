@@ -2,10 +2,10 @@
 
 class Model
 {
-    protected Formatclass $format;
-    protected Logs $log;
-    protected $db;
-    protected Redisclass $redis;
+    public Formatclass $format;
+    public Logs $log;
+    public $db;
+    public Redisclass $redis;
 
     public function __construct()
     {
